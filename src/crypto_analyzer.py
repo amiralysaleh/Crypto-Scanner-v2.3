@@ -193,12 +193,12 @@ def prepare_dataframe(df, timeframe=PRIMARY_TIMEFRAME):
                                         window1=SCALPING_SETTINGS['ichi_conv_period'],
                                         window2=SCALPING_SETTINGS['ichi_base_period'],
                                         window3=SCALPING_SETTINGS['ichi_span_b_period'],
-                                        visual=True) # visual=True includes lagging span
+                                        visual=True) # visual=True shifts A and B forward
         df['ichi_conv'] = ichi.ichimoku_conversion_line()
         df['ichi_base'] = ichi.ichimoku_base_line()
         df['ichi_a'] = ichi.ichimoku_a()
         df['ichi_b'] = ichi.ichimoku_b()
-        df['ichi_lag'] = ichi.ichimoku_lagging_span() # Note: This lags by default
+        # df['ichi_lag'] = ichi.ichimoku_lagging_span() # <--- THIS LINE IS REMOVED
 
         # Price Action & Trend
         df['volume_change'] = df['volume'].pct_change()
@@ -264,7 +264,7 @@ def main():
                 try:
                     created_at_str = active_signals[crypto]['created_at']
                     # Handle both ISO format and older format robustly
-                    if 'T' in created_at_str and '+' in created_at_str:
+                    if 'T' in created_at_str and ('+' in created_at_str or 'Z' in created_at_str):
                          created_at = datetime.fromisoformat(created_at_str)
                     else:
                          created_at = tehran_tz.localize(datetime.strptime(created_at_str, "%Y-%m-%d %H:%M:%S"))
