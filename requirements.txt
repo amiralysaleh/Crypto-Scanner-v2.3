@@ -6,3 +6,4 @@ ta
 pytz
 openpyxl
 filelock
+scipy
