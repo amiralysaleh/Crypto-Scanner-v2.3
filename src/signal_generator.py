@@ -21,14 +21,21 @@ def calculate_score(factors, atr, current_price):
 
 def generate_signals(df_primary, df_higher, symbol):
     """Generate buy and sell signals with enhanced filters and scoring."""
-    if df_primary is None or len(df_primary) < 2:
+    # Ensure enough data for Ichimoku Chikou Span check
+    ichi_base_period = SCALPING_SETTINGS['ichi_base_period']
+    if df_primary is None or len(df_primary) < ichi_base_period + 2:
+        print(f"Skipping {symbol}: Not enough primary data for Ichimoku ({len(df_primary)} candles)")
         return []
     if df_higher is None or len(df_higher) < 2:
+        print(f"Skipping {symbol}: Not enough higher TF data ({len(df_higher)} candles)")
         return []
 
     signals = []
     latest = df_primary.iloc[-1]
     prev = df_primary.iloc[-2]
+    # Get the price 26 periods ago for Chikou check
+    price_26_ago = df_primary['close'].iloc[-1 - ichi_base_period]
+
     higher_tf_trend = df_higher.iloc[-1]['trend_confirmed']
     current_price = latest['close']
     atr = latest['atr']
@@ -77,13 +84,13 @@ def generate_signals(df_primary, df_higher, symbol):
         buy_factors.add('volume')
         buy_reasons.append(f"Volume surge ({latest['volume_change']:.2f}X)")
 
-    # Ichimoku Cloud (Bullish Signals)
+    # Ichimoku Cloud (Bullish Signals) - CORRECTED CHIKOU CHECK
     ichi_bullish = False
     if (latest['close'] > latest['ichi_a'] and latest['close'] > latest['ichi_b'] and # Price above cloud
         latest['ichi_conv'] > latest['ichi_base'] and # Tenkan > Kijun
-        latest['ichi_lag'] > latest['close']): # Chikou > Price (adjust for lag)
+        latest['close'] > price_26_ago): # Chikou (Current Price) > Price 26 periods ago
         buy_factors.add('ichi')
-        buy_reasons.append("Strong Ichimoku bullish setup")
+        buy_reasons.append("Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)")
         ichi_bullish = True
     elif (latest['close'] > latest['ichi_a'] and latest['close'] > latest['ichi_b'] and
           prev['ichi_conv'] <= prev['ichi_base'] and latest['ichi_conv'] > latest['ichi_base']):
@@ -169,13 +176,13 @@ def generate_signals(df_primary, df_higher, symbol):
         sell_factors.add('resistance')
         sell_reasons.append(f"Price near resistance ({latest['resistance']:.4f})")
         
-    # Ichimoku Cloud (Bearish Signals)
+    # Ichimoku Cloud (Bearish Signals) - CORRECTED CHIKOU CHECK
     ichi_bearish = False
     if (latest['close'] < latest['ichi_a'] and latest['close'] < latest['ichi_b'] and # Price below cloud
         latest['ichi_conv'] < latest['ichi_base'] and # Tenkan < Kijun
-        latest['ichi_lag'] < latest['close']): # Chikou < Price (adjust for lag)
+        latest['close'] < price_26_ago): # Chikou (Current Price) < Price 26 periods ago
         sell_factors.add('ichi')
-        sell_reasons.append("Strong Ichimoku bearish setup")
+        sell_reasons.append("Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)")
         ichi_bearish = True
     elif (latest['close'] < latest['ichi_a'] and latest['close'] < latest['ichi_b'] and
           prev['ichi_conv'] >= prev['ichi_base'] and latest['ichi_conv'] < latest['ichi_base']):
