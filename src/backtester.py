@@ -8,22 +8,22 @@ from datetime import datetime, timedelta
 import pytz
 import argparse
 import traceback
-import os  # <<<--- اطمینان از وجود import os
+import os
 import sys
 
 # --- CHANGED IMPORTS ---
 # Use simple imports, relying on PYTHONPATH to find them in 'src'
 try:
     from config import *
-    from crypto_analyzer import prepare_dataframe
-    # Note: We are NOT importing generate_signals anymore
+    from crypto_analyzer import prepare_dataframe # Assuming this has new indicators
+    from signal_generator import calculate_score # <<<--- Import calculate_score
 except ImportError as e:
     print(f"Fatal Error: Cannot import project modules: {e}")
-    print("Ensure 'src' is in PYTHONPATH or this script is run correctly.")
+    print("Ensure 'src' is in PYTHONPATH and files are in 'src'.")
     sys.exit(1)
 # --- END CHANGED IMPORTS ---
 
-# --- Data Fetching (Copied here for simplicity) ---
+# --- Data Fetching ---
 def fetch_historical_kline(symbol, start_dt, end_dt, interval="30min"):
     """Fetch historical kline data from KuCoin in chunks."""
     url = f"{KUCOIN_BASE_URL}{KUCOIN_KLINE_ENDPOINT}"
@@ -77,11 +77,10 @@ def fetch_historical_kline(symbol, start_dt, end_dt, interval="30min"):
     print(f"Fetched a total of {len(full_df)} unique candles.")
     return full_df
 
-
 # --- Backtester Core ---
 def apply_signal_logic(latest, prev, higher_tf_trend, df_primary, symbol):
     """
-    Applies the signal generation logic based on 'latest' and 'prev' rows.
+    Applies the signal generation logic (including scoring) based on 'latest' and 'prev' rows.
     Returns a signal dictionary or None.
     """
     current_price = latest['close']
@@ -94,6 +93,7 @@ def apply_signal_logic(latest, prev, higher_tf_trend, df_primary, symbol):
     if latest['adx'] < SCALPING_SETTINGS['adx_threshold']: return None
 
     buy_factors = set()
+    # --- Collect Buy Factors (using new logic) ---
     if latest['rsi'] < SCALPING_SETTINGS['rsi_oversold'] + 5: buy_factors.add('rsi')
     if latest['stoch_k'] < SCALPING_SETTINGS['stoch_oversold'] and latest['stoch_k'] > latest['stoch_d']: buy_factors.add('stoch')
     if prev['ema_short'] <= prev['ema_medium'] and latest['ema_short'] > latest['ema_medium']: buy_factors.add('ema')
@@ -105,16 +105,22 @@ def apply_signal_logic(latest, prev, higher_tf_trend, df_primary, symbol):
     if latest['rsi_divergence'] == 'bullish' or latest['macd_divergence'] == 'bullish': buy_factors.add('divergence')
     if higher_tf_trend == 'up': buy_factors.add('higher_tf')
     if latest['adx_pos'] > latest['adx_neg']: buy_factors.add('adx')
+    if abs(latest['close'] - latest['support']) / latest['close'] < 0.01: buy_factors.add('support')
+    if latest['volume_change'] > SCALPING_SETTINGS['volume_change_threshold']: buy_factors.add('volume')
 
-    if len(buy_factors) >= 3:
-        target_price = current_price + (atr * SCALPING_SETTINGS['profit_target_multiplier'])
-        stop_loss = current_price - (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
-        if (current_price - stop_loss) > 0:
-            risk_reward_ratio = (target_price - current_price) / (current_price - stop_loss)
-            if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
-                return {'type': 'BUY', 'price': current_price, 'tp': target_price, 'sl': stop_loss}
+    # --- Check Buy Signal ---
+    if len(buy_factors) >= 3: # Keep minimum reasons check
+        score = calculate_score(buy_factors, atr, current_price) # <<<--- CALCULATE SCORE
+        if score >= SCALPING_SETTINGS['min_score_threshold']: # <<<--- CHECK SCORE THRESHOLD
+            target_price = current_price + (atr * SCALPING_SETTINGS['profit_target_multiplier'])
+            stop_loss = current_price - (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
+            if (current_price - stop_loss) > 0:
+                risk_reward_ratio = (target_price - current_price) / (current_price - stop_loss)
+                if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
+                    return {'type': 'BUY', 'price': current_price, 'tp': target_price, 'sl': stop_loss, 'score': score}
 
     sell_factors = set()
+    # --- Collect Sell Factors (using new logic) ---
     if latest['rsi'] > SCALPING_SETTINGS['rsi_overbought'] - 5: sell_factors.add('rsi')
     if latest['stoch_k'] > SCALPING_SETTINGS['stoch_oversold'] and latest['stoch_k'] < latest['stoch_d']: sell_factors.add('stoch')
     if prev['ema_short'] >= prev['ema_medium'] and latest['ema_short'] < latest['ema_medium']: sell_factors.add('ema')
@@ -126,16 +132,22 @@ def apply_signal_logic(latest, prev, higher_tf_trend, df_primary, symbol):
     if latest['rsi_divergence'] == 'bearish' or latest['macd_divergence'] == 'bearish': sell_factors.add('divergence')
     if higher_tf_trend == 'down': sell_factors.add('higher_tf')
     if latest['adx_neg'] > latest['adx_pos']: sell_factors.add('adx')
+    if abs(latest['close'] - latest['resistance']) / latest['close'] < 0.01: sell_factors.add('resistance')
+    # Note: Sell volume factor is usually less critical, so omitted for simplicity
 
-    if len(sell_factors) >= 3:
-        target_price = current_price - (atr * SCALPING_SETTINGS['profit_target_multiplier'])
-        stop_loss = current_price + (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
-        if (stop_loss - current_price) > 0:
-            risk_reward_ratio = (current_price - target_price) / (stop_loss - current_price)
-            if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
-                return {'type': 'SELL', 'price': current_price, 'tp': target_price, 'sl': stop_loss}
+    # --- Check Sell Signal ---
+    if len(sell_factors) >= 3: # Keep minimum reasons check
+        score = calculate_score(sell_factors, atr, current_price) # <<<--- CALCULATE SCORE
+        if score >= SCALPING_SETTINGS['min_score_threshold']: # <<<--- CHECK SCORE THRESHOLD
+            target_price = current_price - (atr * SCALPING_SETTINGS['profit_target_multiplier'])
+            stop_loss = current_price + (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
+            if (stop_loss - current_price) > 0:
+                risk_reward_ratio = (current_price - target_price) / (stop_loss - current_price)
+                if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
+                    return {'type': 'SELL', 'price': current_price, 'tp': target_price, 'sl': stop_loss, 'score': score}
 
-    return None
+    return None # No signal
+
 
 def run_backtest(symbol, start_date_str, end_date_str, initial_capital, trade_size):
     tehran_tz = pytz.timezone('Asia/Tehran')
@@ -149,6 +161,9 @@ def run_backtest(symbol, start_date_str, end_date_str, initial_capital, trade_si
     print("\n--- Starting Backtest ---")
     print(f"Symbol: {symbol}")
     print(f"Period: {start_date_str} to {end_date_str}")
+    print(f"Initial Capital: ${initial_capital:,.2f}")
+    print(f"Trade Size: ${trade_size:,.2f}")
+    print(f"Min Score Threshold: {SCALPING_SETTINGS['min_score_threshold']}")
     print("-------------------------\n")
 
     df_primary_raw = fetch_historical_kline(symbol, start_dt, end_dt, PRIMARY_TIMEFRAME)
@@ -157,11 +172,14 @@ def run_backtest(symbol, start_date_str, end_date_str, initial_capital, trade_si
     if df_primary_raw is None or df_higher_raw is None: return
 
     print("Preparing primary timeframe data...")
-    df_primary = prepare_dataframe(df_primary_raw, PRIMARY_TIMEFRAME)
+    # Use the prepare_dataframe that includes all new indicators
+    df_primary = prepare_dataframe(df_primary_raw.copy(), PRIMARY_TIMEFRAME)
     print("Preparing higher timeframe data...")
-    df_higher = prepare_dataframe(df_higher_raw, HIGHER_TIMEFRAME)
+    df_higher = prepare_dataframe(df_higher_raw.copy(), HIGHER_TIMEFRAME)
 
-    if df_primary is None or df_higher is None or df_primary.empty or df_higher.empty: return
+    if df_primary is None or df_higher is None or df_primary.empty or df_higher.empty:
+        print("Failed to prepare dataframes (ensure they have enough data after NaN drop).")
+        return
 
     df_higher = df_higher.set_index('timestamp')
     df_primary = df_primary.set_index('timestamp')
@@ -180,6 +198,7 @@ def run_backtest(symbol, start_date_str, end_date_str, initial_capital, trade_si
         prev = df_primary.iloc[i-1]
         higher_tf_trend = df_higher_aligned.iloc[i]['trend_confirmed']
 
+        # --- Check for closing positions ---
         if position:
             hit, pnl, close_price, status = False, 0, 0, ""
             if position == 'BUY' and latest['high'] >= target_price: close_price, status, hit = target_price, 'Target Reached', True
@@ -194,12 +213,14 @@ def run_backtest(symbol, start_date_str, end_date_str, initial_capital, trade_si
                 position = None
                 equity_curve.append(capital)
 
+        # --- Check for opening new positions ---
         if not position:
             signal = apply_signal_logic(latest, prev, higher_tf_trend, df_primary, symbol)
             if signal:
                 position, entry_price, target_price, stop_loss, entry_time = signal['type'], signal['price'], signal['tp'], signal['sl'], latest['timestamp']
-                print(f"[{latest['timestamp']}] OPENED {position} at {entry_price:.4f}. TP: {target_price:.4f}, SL: {stop_loss:.4f}")
+                print(f"[{latest['timestamp']}] OPENED {position} (Score: {signal['score']}) at {entry_price:.4f}. TP: {target_price:.4f}, SL: {stop_loss:.4f}")
 
+    # --- Calculate and Print Metrics ---
     print("\n--- Backtest Results ---")
     if not trades: print("No trades were executed."); return
 
@@ -221,7 +242,7 @@ def run_backtest(symbol, start_date_str, end_date_str, initial_capital, trade_si
     print(f"Final Capital: ${final_capital:,.2f}"); print(f"Max Drawdown: ${max_drawdown:,.2f} ({max_drawdown_pct:.2f}%)")
     print("------------------------\n")
 
-    os.makedirs('data', exist_ok=True) # <<<--- os.makedirs now works
+    os.makedirs('data', exist_ok=True)
     result_filename = f"data/backtest_results_{symbol}_{start_date_str}_to_{end_date_str}.csv"
     trades_df.to_csv(result_filename, index=False)
     print(f"Results saved to {result_filename}")
