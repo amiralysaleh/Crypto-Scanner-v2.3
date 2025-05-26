@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import os
+import os # Ensure os is imported
 import sys
 import glob
 
@@ -19,7 +19,7 @@ def send_telegram_file(file_path, caption=""):
         return False
 
     url = f"https://api.telegram.org/bot{bot_token}/sendDocument"
-    
+
     if not caption:
         caption = f"📊 Backtest Report: {os.path.basename(file_path)}"
 
@@ -29,7 +29,7 @@ def send_telegram_file(file_path, caption=""):
         with open(file_path, 'rb') as f:
             files = {'document': (os.path.basename(file_path), f)}
             data = {'chat_id': chat_id, 'caption': caption}
-            response = requests.post(url, files=files, data=data, timeout=60) # Increased timeout for uploads
+            response = requests.post(url, files=files, data=data, timeout=60)
 
             if response.status_code == 200:
                 print(f"File {file_path} sent successfully to Telegram.")
@@ -43,17 +43,16 @@ def send_telegram_file(file_path, caption=""):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python telegram_file_sender.py <file_path_or_pattern>")
+        print("Usage: python -m src.telegram_file_sender <file_path_or_pattern>")
         sys.exit(1)
 
     file_pattern = sys.argv[1]
-    # Use glob to find files matching the pattern (handles wildcard if needed, but works for specific paths too)
     file_list = glob.glob(file_pattern)
 
     if not file_list:
         print(f"No files found matching pattern: {file_pattern}")
         sys.exit(1)
-        
+
     print(f"Found {len(file_list)} file(s) to send.")
 
     all_sent = True
