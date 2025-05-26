@@ -48,9 +48,10 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: 🏃 Run Backtester
-        id: backtest_run # Give this step an ID
+        id: backtest_run
         run: |
-          python backtester.py \
+          # *** Corrected Path ***
+          python src/backtester.py \
             --symbol ${{ github.event.inputs.symbol }} \
             --start ${{ github.event.inputs.start_date }} \
             --end ${{ github.event.inputs.end_date }} \
@@ -63,18 +64,18 @@ jobs:
           echo "file_path=data/backtest_results_${{ github.event.inputs.symbol }}.csv" >> $GITHUB_OUTPUT
 
       - name: 📤 Send Results to Telegram
-        # Only run if backtest step was successful (or change to 'always()' if needed)
         if: success()
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          python telegram_file_sender.py ${{ steps.file_info.outputs.file_path }}
+          # *** Corrected Path ***
+          python src/telegram_file_sender.py ${{ steps.file_info.outputs.file_path }}
 
       - name: 📤 Upload Artifact (Optional)
-        if: always() # Run even if sending fails
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: backtest-results-${{ github.event.inputs.symbol }}
           path: ${{ steps.file_info.outputs.file_path }}
-          if-no-files-found: warn # Don't fail the workflow if file isn't there
+          if-no-files-found: warn
