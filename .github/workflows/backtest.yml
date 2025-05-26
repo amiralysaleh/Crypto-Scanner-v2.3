@@ -1,0 +1,80 @@
+name: 📈 Manual Backtest Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      symbol:
+        description: 'Trading Symbol (e.g., BTC-USDT)'
+        required: true
+        default: 'BTC-USDT'
+        type: string
+      start_date:
+        description: 'Start Date (YYYY-MM-DD)'
+        required: true
+        default: '2025-03-01'
+        type: string
+      end_date:
+        description: 'End Date (YYYY-MM-DD)'
+        required: true
+        default: '2025-05-26'
+        type: string
+      capital:
+        description: 'Initial Capital'
+        required: false
+        default: '10000'
+        type: string
+      size:
+        description: 'Trade Size'
+        required: false
+        default: '1000'
+        type: string
+
+jobs:
+  run-backtest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: ⚙️ Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: 🏃 Run Backtester
+        id: backtest_run # Give this step an ID
+        run: |
+          python backtester.py \
+            --symbol ${{ github.event.inputs.symbol }} \
+            --start ${{ github.event.inputs.start_date }} \
+            --end ${{ github.event.inputs.end_date }} \
+            --capital ${{ github.event.inputs.capital }} \
+            --size ${{ github.event.inputs.size }}
+
+      - name: 📄 Prepare Result File Path
+        id: file_info
+        run: |
+          echo "file_path=data/backtest_results_${{ github.event.inputs.symbol }}.csv" >> $GITHUB_OUTPUT
+
+      - name: 📤 Send Results to Telegram
+        # Only run if backtest step was successful (or change to 'always()' if needed)
+        if: success()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python telegram_file_sender.py ${{ steps.file_info.outputs.file_path }}
+
+      - name: 📤 Upload Artifact (Optional)
+        if: always() # Run even if sending fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: backtest-results-${{ github.event.inputs.symbol }}
+          path: ${{ steps.file_info.outputs.file_path }}
+          if-no-files-found: warn # Don't fail the workflow if file isn't there
