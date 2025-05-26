@@ -11,7 +11,7 @@ on:
       start_date:
         description: 'Start Date (YYYY-MM-DD)'
         required: true
-        default: '2025-03-01'
+        default: '2025-04-01'
         type: string
       end_date:
         description: 'End Date (YYYY-MM-DD)'
@@ -42,8 +42,7 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: 📄 Create __init__.py
-        run: touch src/__init__.py
+      # No need for __init__.py if not using -m or relative imports
 
       - name: ⚙️ Install Dependencies
         run: |
@@ -52,9 +51,10 @@ jobs:
 
       - name: 🏃 Run Backtester
         id: backtest_run
+        env:
+          PYTHONPATH: 'src' # <<<--- Set PYTHONPATH to 'src'
         run: |
-          # Run as module - Python handles path
-          python -m src.backtester \
+          python src/backtester.py \
             --symbol ${{ github.event.inputs.symbol }} \
             --start ${{ github.event.inputs.start_date }} \
             --end ${{ github.event.inputs.end_date }} \
@@ -64,20 +64,18 @@ jobs:
       - name: 📄 Prepare Result File Path
         id: file_info
         run: |
-          # Construct the filename as saved by backtester.py
           FILE_NAME="data/backtest_results_${{ github.event.inputs.symbol }}_${{ github.event.inputs.start_date }}_to_${{ github.event.inputs.end_date }}.csv"
           echo "file_path=${FILE_NAME}" >> $GITHUB_OUTPUT
           echo "Constructed file path: ${FILE_NAME}"
-
 
       - name: 📤 Send Results to Telegram
         if: success()
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PYTHONPATH: 'src' # <<<--- Set PYTHONPATH here too
         run: |
-          # Run as module - Python handles path
-          python -m src.telegram_file_sender ${{ steps.file_info.outputs.file_path }}
+          python src/telegram_file_sender.py ${{ steps.file_info.outputs.file_path }}
 
       - name: 📤 Upload Artifact (Optional)
         if: always()
