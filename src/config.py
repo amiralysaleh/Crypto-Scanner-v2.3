@@ -65,7 +65,7 @@ SCALPING_SETTINGS = {
     'stoch_oversold': 20,
     # ADX
     'adx_period': 14,
-    'adx_threshold': 20,  # Minimum trend strength
+    'adx_threshold': 23,  # Minimum trend strength
     # Ichimoku
     'ichi_conv_period': 9,
     'ichi_base_period': 26,
