@@ -16,6 +16,8 @@ from signal_generator import generate_signals
 from telegram_sender import send_telegram_message
 from signal_tracker import save_signal, load_signals
 
+# ... (تمام توابع دیگر بدون تغییر باقی می‌مانند) ...
+
 def fetch_kline_data(symbol, size=100, interval="30min"):
     """Fetch kline data from KuCoin with retry"""
     url = f"{KUCOIN_BASE_URL}{KUCOIN_KLINE_ENDPOINT}"
@@ -198,7 +200,6 @@ def prepare_dataframe(df, timeframe=PRIMARY_TIMEFRAME):
         df['ichi_base'] = ichi.ichimoku_base_line()
         df['ichi_a'] = ichi.ichimoku_a()
         df['ichi_b'] = ichi.ichimoku_b()
-        # df['ichi_lag'] = ichi.ichimoku_lagging_span() # <--- THIS LINE IS REMOVED
 
         # Price Action & Trend
         df['volume_change'] = df['volume'].pct_change()
@@ -295,17 +296,21 @@ def main():
             signals = generate_signals(prepared_df_primary, prepared_df_higher, crypto)
             for signal in signals:
                 tradingview_link = generate_tradingview_link(signal['symbol'])
+                # *** THIS IS THE CHANGED PART ***
+                # Using <code> for prices and <b> for titles for better HTML.
+                # Added <a href> for the link.
                 message = (
-                    f"🚨 **Signal {signal['type']} for {signal['symbol']}** 🚨\n\n"
-                    f"💰 **Current Price:** {signal['current_price']}\n"
-                    f"🎯 **Target Price:** {signal['target_price']}\n"
-                    f"🛑 **Stop Loss:** {signal['stop_loss']}\n"
-                    f"🏆 **Score:** {signal['score']}/100\n"
-                    f"📈 **Risk/Reward:** {signal['risk_reward_ratio']:.2f}\n\n"
-                    f"**📝 Reasons:**\n{signal['reasons']}\n\n"
-                    f"📊 **View Chart:** {tradingview_link}\n"
-                    f"⏱️ **Time (Tehran):** {signal['time']}"
+                    f"<b>🚨 Signal {signal['type']} for {signal['symbol']} 🚨</b>\n\n"
+                    f"💰 <b>Current Price:</b> <code>{signal['current_price']}</code>\n"
+                    f"🎯 <b>Target Price:</b> <code>{signal['target_price']}</code>\n"
+                    f"🛑 <b>Stop Loss:</b> <code>{signal['stop_loss']}</code>\n"
+                    f"🏆 <b>Score:</b> {signal['score']}/100\n"
+                    f"📈 <b>Risk/Reward:</b> {signal['risk_reward_ratio']:.2f}\n\n"
+                    f"<b>📝 Reasons:</b>\n{signal['reasons']}\n\n"
+                    f"📊 <b>View Chart:</b> <a href=\"{tradingview_link}\">TradingView Link</a>\n"
+                    f"⏱️ <b>Time (Tehran):</b> {signal['time']}"
                 )
+                # *** END OF CHANGED PART ***
                 if send_telegram_message(message):
                     signals_sent += 1
                     save_signal(signal)
@@ -328,3 +333,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Fatal error: {e}")
         send_telegram_message(f"❌ System error: {e}")
+
