@@ -10,13 +10,12 @@ import pandas as pd
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from filelock import FileLock
-import time  # اضافه کردن ماژول time برای استفاده از time.sleep()
+import time
 
 from config import SIGNALS_FILE, KUCOIN_BASE_URL, KUCOIN_KLINE_ENDPOINT, KUCOIN_TICKER_ENDPOINT
 from telegram_sender import send_telegram_message
 
 def load_signals():
-    """Load signals from JSON file with proper timezone handling and validation."""
     lock = FileLock(f"{SIGNALS_FILE}.lock")
     try:
         with lock:
@@ -86,7 +85,6 @@ def load_signals():
         return []
 
 def save_signals(signals):
-    """Save signals to JSON file with proper timezone handling and file lock."""
     lock = FileLock(f"{SIGNALS_FILE}.lock")
     try:
         with lock:
@@ -99,7 +97,6 @@ def save_signals(signals):
         send_telegram_message(f"❌ Error saving signals to {SIGNALS_FILE}: {e}")
 
 def save_signal(signal):
-    """Save a single signal with proper timezone handling."""
     tehran_tz = pytz.timezone('Asia/Tehran')
     if 'entry_price' not in signal or not signal['entry_price']:
         signal['entry_price'] = signal.get('current_price')
@@ -119,7 +116,6 @@ def save_signal(signal):
     print(f"Signal saved: {signal['symbol']} {signal['type']}")
 
 def fetch_kline_data(symbol, start_time, end_time, interval="30min"):
-    """Fetch kline data from KuCoin for a specific time range with retry logic."""
     url = f"{KUCOIN_BASE_URL}{KUCOIN_KLINE_ENDPOINT}"
     params = {
         "symbol": symbol,
@@ -151,7 +147,6 @@ def fetch_kline_data(symbol, start_time, end_time, interval="30min"):
     return None
 
 def get_current_price(symbol):
-    """Fetch current price from KuCoin with retry logic."""
     url = f"{KUCOIN_BASE_URL}{KUCOIN_TICKER_ENDPOINT}"
     params = {"symbol": symbol}
     for attempt in range(3):
@@ -171,7 +166,6 @@ def get_current_price(symbol):
     return None
 
 def calculate_profit_loss(signal, close_price):
-    """Calculate profit/loss percentage."""
     try:
         entry_price = float(signal.get('entry_price', signal['current_price']))
         close_price = float(close_price)
@@ -186,7 +180,6 @@ def calculate_profit_loss(signal, close_price):
         return None
 
 def calculate_duration(created_at_str, closed_at_str):
-    """Calculate signal duration in hours."""
     tehran_tz = pytz.timezone('Asia/Tehran')
     try:
         created = datetime.fromisoformat(created_at_str).astimezone(tehran_tz)
@@ -198,7 +191,6 @@ def calculate_duration(created_at_str, closed_at_str):
         return None
 
 def check_signal_hit(signal, df):
-    """Check if signal hit target or stop-loss based on kline data."""
     try:
         target_price = float(signal['target_price'])
         stop_loss = float(signal['stop_loss'])
@@ -227,7 +219,6 @@ def check_signal_hit(signal, df):
         return None, None, None
 
 def update_signal_status():
-    """Update signal statuses by checking historical kline data."""
     signals = load_signals()
     if not signals:
         print("No signals to update")
@@ -243,7 +234,6 @@ def update_signal_status():
 
         try:
             created_at = datetime.fromisoformat(signal['created_at']).astimezone(tehran_tz)
-            # Fetch data from signal creation time with a 30-minute buffer
             df = fetch_kline_data(signal['symbol'], created_at - timedelta(minutes=30), now + timedelta(minutes=30), interval="30min")
             if df is None or df.empty:
                 print(f"Skipping update for {signal['symbol']} due to missing kline data")
@@ -262,7 +252,6 @@ def update_signal_status():
                     f"**Closed Price:** {closed_price}\n"
                     f"**Time:** {datetime.fromisoformat(closed_at_iso).strftime('%Y-%m-%d %H:%M:%S')}"
                 )
-            # Optional: Timeout check for signals older than 7 days
             elif (now - created_at).days > 7:
                 signal['status'] = 'timed_out'
                 signal['closed_price'] = str(get_current_price(signal['symbol']))
@@ -280,7 +269,6 @@ def update_signal_status():
         print("No signals were updated")
 
 def send_telegram_file(file_path):
-    """Send file to Telegram with retry logic."""
     bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
     chat_id = os.environ.get('TELEGRAM_CHAT_ID')
 
@@ -312,8 +300,7 @@ def send_telegram_file(file_path):
     return False
 
 def generate_excel_report():
-    """Generate Excel report with multiple sheets."""
-    update_signal_status()  # Ensure statuses are up-to-date
+    update_signal_status()
     signals = load_signals()
     tehran_tz = pytz.timezone('Asia/Tehran')
     now_str = datetime.now(tehran_tz).strftime("%Y%m%d_%H%M%S")
@@ -323,16 +310,19 @@ def generate_excel_report():
     all_signals_data = []
     active_signals_data = []
 
+    print(f"Processing {len(signals)} signals for report...")
     for signal in signals:
+        print(f"Processing signal for {signal.get('symbol', 'N/A')}")
         current_price = get_current_price(signal['symbol']) if signal['status'] == 'active' else None
         if current_price and signal['status'] == 'active':
-            time.sleep(0.3)  # Avoid hitting API rate limits
+            time.sleep(0.3)
 
         close_price = float(signal.get('closed_price')) if signal.get('closed_price') else current_price
         profit_loss = calculate_profit_loss(signal, close_price) if close_price is not None else None
         duration = calculate_duration(signal['created_at'], signal.get('closed_at'))
 
         entry_price = float(signal.get('entry_price', signal['current_price'])) if signal.get('entry_price') else None
+        print(f"Entry Price: {entry_price}, Close Price: {close_price}, Profit/Loss: {profit_loss}")
 
         signal_row = {
             'Symbol': signal['symbol'],
@@ -349,6 +339,7 @@ def generate_excel_report():
             'Reasons': signal.get('reasons', '').replace('✅ ', '').replace('\n', '; ')
         }
         all_signals_data.append(signal_row)
+        print(f"Added to all_signals_data: {signal_row}")
 
         if signal['status'] == 'active' and current_price is not None and entry_price is not None:
             price_change = ((current_price - entry_price) / entry_price) * 100 if entry_price != 0 else 0
@@ -361,8 +352,10 @@ def generate_excel_report():
                 'Created_At': signal_row['Created_At'],
                 'Reasons': signal_row['Reasons']
             })
+            print(f"Added to active_signals_data: {active_signals_data[-1]}")
 
-    # Calculate statistics
+    print(f"Total all_signals_data: {len(all_signals_data)}, Total active_signals_data: {len(active_signals_data)}")
+
     closed_signals = [s for s in all_signals_data if s['Status'] in ['target_reached', 'stop_loss', 'timed_out']]
     total_signals = len(all_signals_data)
     active_count = len(active_signals_data)
@@ -390,10 +383,7 @@ def generate_excel_report():
         {'Metric': 'Average Duration (Hours)', 'Value': round(avg_duration, 2) if pd.notna(avg_duration) else None}
     ]
 
-    # Create Excel file
     wb = Workbook()
-
-    # Sheet 1: All Signals
     ws1 = wb.active
     ws1.title = "All Signals"
     headers = ['Symbol', 'Type', 'Entry Price', 'Target Price', 'Stop Loss', 'Created At',
@@ -402,20 +392,17 @@ def generate_excel_report():
     for row in all_signals_data:
         ws1.append([row.get(h) for h in headers])
 
-    # Sheet 2: Active Signals
     ws2 = wb.create_sheet("Active Signals")
     headers_active = ['Symbol', 'Type', 'Entry Price', 'Current Price', 'Price Change %', 'Created At', 'Reasons']
     ws2.append(headers_active)
     for row in active_signals_data:
         ws2.append([row.get(h) for h in headers_active])
 
-    # Sheet 3: Statistics
     ws3 = wb.create_sheet("Statistics")
     ws3.append(['Metric', 'Value'])
     for stat in stats_data:
         ws3.append([stat['Metric'], stat['Value']])
 
-    # Apply styles
     header_font = Font(bold=True)
     header_fill = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
     center_align = Alignment(horizontal='center', vertical='center')
@@ -445,7 +432,6 @@ def generate_excel_report():
 
         ws.freeze_panes = ws['A2']
 
-    # Save file
     try:
         wb.save(output_file)
         print(f"Excel report generated: {output_file}")
@@ -454,7 +440,6 @@ def generate_excel_report():
         send_telegram_message(f"❌ Error generating Excel report: {e}")
         return
 
-    # Send notification and file to Telegram
     message = (
         f"📊 **Signals Report Generated**\n\n"
         f"🟢 Active Signals: {active_count}\n"
