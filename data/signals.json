@@ -54,9 +54,11 @@
         "time": "2025-05-28 00:06:53",
         "reasons": "\u2705 RSI near overbought (68.83)\n\u2705 Stoch K < D in overbought (83.87 < 84.63)\n\u2705 Price near resistance (3.7346)\n\u2705 Bearish candle pattern (bearish_engulfing)\n\u2705 Bearish Divergence detected (RSI: bearish, MACD: bearish)",
         "score": 41,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-05-28T00:06:53.441723+03:30",
         "risk_reward_ratio": 1.9999999999999867,
-        "entry_price": "3.70970000"
+        "entry_price": "3.70970000",
+        "closed_price": "3.64299545",
+        "closed_at": "2025-05-28T01:30:00+03:30"
     }
 ]
