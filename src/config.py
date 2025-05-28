@@ -65,7 +65,7 @@ SCALPING_SETTINGS = {
     'stoch_oversold': 20,
     # ADX
     'adx_period': 14,
-    'adx_threshold': 22,  # Minimum trend strength
+    'adx_threshold': 23,  # Minimum trend strength
     # Ichimoku
     'ichi_conv_period': 9,
     'ichi_base_period': 26,
@@ -77,8 +77,8 @@ SCALPING_SETTINGS = {
     'min_volume_threshold': 300000,
     'volume_change_threshold': 1.3,
     'profit_target_multiplier': 1.5,  # Increased R:R target
-    'stop_loss_multiplier': 1,     # Tighter stop loss
-    'min_score_threshold': 40,       # Increased threshold for higher quality
+    'stop_loss_multiplier': 1.0,     # Tighter stop loss
+    'min_score_threshold': 42,       # Increased threshold for higher quality
     'min_risk_reward_ratio': 1.5,    # Increased R:R
     'signal_cooldown_minutes': 60,
     'max_signals_per_symbol': 1,
@@ -100,24 +100,8 @@ KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
 # وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
 SIGNAL_WEIGHTS = {
-    # --- هسته اصلی (وزن متوسط رو به بالا) ---
-    'ema': 15,          # برای تشخیص روند کوتاه‌مدت و کراس‌ها
-    'macd': 15,         # برای مومنتوم و کراس‌ها
-    'rsi': 12,          # برای اشباع خرید/فروش (کمی وزن بیشتر از قبل)
-    'stoch': 12,        # برای اشباع خرید/فروش و کراس K/D (کمی وزن بیشتر از قبل)
-    'bb': 10,           # برای شکست‌ها و قرارگیری قیمت
-
-    # --- سیگنال‌های قوی‌تر (وزن بالا) ---
-    'ichi': 18,         # سیگنال‌های جامع ابر ایچیموکو
-    'divergence': 18,   # سیگنال‌های قوی واگرایی (اگر قابل اعتماد تشخیص داده شود)
-
-    # --- عوامل تأییدی و زمینه‌ای (وزن متوسط) ---
-    'adx': 12,          # برای قدرت روند (نه خیلی بالا که فیلتر شدید کند)
-    'higher_tf': 15,    # هم‌راستایی با روند اصلی اهمیت دارد
-    'candle': 12,       # الگوهای شمعی به عنوان تأیید نهایی
-
-    # --- عوامل ثانویه (وزن کم) ---
-    'volume': 8,        # تأیید حجم
-    'support': 8,       # نزدیکی به سطوح
-    'resistance': 8,    # نزدیکی به سطوح
+    'rsi': 10, 'ema': 15, 'macd': 15, 'bb': 10,
+    'stoch': 10, 'adx': 10, 'ichi': 20, 'divergence': 25,
+    'candle': 15, 'volume': 5, 'support': 5, 'resistance': 5,
+    'higher_tf': 10
 }
