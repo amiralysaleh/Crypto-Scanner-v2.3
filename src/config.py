@@ -99,18 +99,19 @@ KUCOIN_TICKER_ENDPOINT = "/api/v1/market/orderbook/level1"
 KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
 # وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
-SIGNAL_WEIGHTS = SIGNAL_WEIGHTS = {
-    'ema': 18,            # کراس EMA = مهم
-    'macd': 18,           # کراس MACD = مهم
-    'ichi': 20,           # سیگنال ایچیموکو (بالای ابر/پایین ابر) = خیلی مهم
-    'higher_tf': 13,      # تایید تایم‌فریم بالاتر = مهم
-    'divergence': 13,     # واگرایی مثبت/منفی = مهم و تاییدی
-    'bb': 6,              # بولینجر باند (لبه کانال) = نیمه‌مهم
-    'stoch': 7,           # کراس استوکستیک = مکمل
-    'rsi': 7,             # منطقه اشباع RSI = مکمل
-    'candle': 6,          # کندل مهم (Engulfing, Hammer, ...) = تاییدگر
-    'adx': 8,             # قدرت روند با ADX = مکمل روندی
-    'support': 5,         # نزدیکی به حمایت = کمک‌کننده
-    'resistance': 5,      # نزدیکی به مقاومت = کمک‌کننده
-    'volume': 4           # افزایش حجم ناگهانی = مکمل
+SIGNAL_WEIGHTS = {
+    'ichi': 22,
+    'ema': 18,
+    'macd': 16,
+    'higher_tf': 14,
+    'divergence': 12,
+    'adx': 9,
+    'stoch': 7,
+    'rsi': 6,
+    'candle': 6,
+    'bb': 6,
+    'support': 5,
+    'resistance': 5,
+    'volume': 4
 }
+
