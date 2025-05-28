@@ -89,7 +89,7 @@ SCALPING_SETTINGS = {
 # تنظیمات تایم فریم‌ها
 PRIMARY_TIMEFRAME = "30min"
 HIGHER_TIMEFRAME = "1hour"
-KLINE_SIZE = 900  # Ensure enough data for Ichimoku and lookbacks
+KLINE_SIZE = 1000  # Ensure enough data for Ichimoku and lookbacks
 SIGNALS_FILE = "data/signals.json"
 
 # تنظیمات API کوکوین
