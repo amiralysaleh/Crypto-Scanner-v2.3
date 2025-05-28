@@ -119,7 +119,7 @@ def generate_signals(df_primary, df_higher, symbol):
         buy_reasons.append(f"ADX shows bullish momentum (+DI > -DI)")
 
     # Generate Buy Signal
-    if len(buy_reasons) >= 4: # Require at least 4 factors
+    if len(buy_reasons) >= 3: # Require at least 3 factors
         score = calculate_score(buy_factors, atr, current_price)
         if score >= SCALPING_SETTINGS['min_score_threshold']:
             target_price = current_price + (atr * SCALPING_SETTINGS['profit_target_multiplier'])
@@ -211,7 +211,7 @@ def generate_signals(df_primary, df_higher, symbol):
         sell_reasons.append(f"ADX shows bearish momentum (-DI > +DI)")
 
     # Generate Sell Signal
-    if len(sell_reasons) >= 4: # Require at least 4 factors
+    if len(sell_reasons) >= 3: # Require at least 3 factors
         score = calculate_score(sell_factors, atr, current_price)
         if score >= SCALPING_SETTINGS['min_score_threshold']:
             target_price = current_price - (atr * SCALPING_SETTINGS['profit_target_multiplier'])
