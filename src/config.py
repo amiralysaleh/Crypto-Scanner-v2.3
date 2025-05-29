@@ -79,7 +79,7 @@ SCALPING_SETTINGS = {
     'profit_target_multiplier': 2.0,  # Increased R:R target
     'stop_loss_multiplier': 1.0,     # Tighter stop loss
     'min_score_threshold': 40,       # Increased threshold for higher quality
-    'min_risk_reward_ratio': 1.5,    # Increased R:R
+    'min_risk_reward_ratio': 1.8,    # Increased R:R
     'signal_cooldown_minutes': 60,
     'max_signals_per_symbol': 1,
     'trend_confirmation_window': 10,
@@ -100,8 +100,17 @@ KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
 # وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
 SIGNAL_WEIGHTS = {
-    'rsi': 10, 'ema': 15, 'macd': 15, 'bb': 10,
-    'stoch': 10, 'adx': 10, 'ichi': 20, 'divergence': 25,
-    'candle': 15, 'volume': 5, 'support': 5, 'resistance': 5,
-    'higher_tf': 10
+    'divergence': 30,  # Increased weight - most reliable signal
+    'higher_tf': 25,    # Higher timeframe trend is crucial
+    'macd': 20,         # Strong momentum indicator
+    'ichi': 18,         # Ichimoku cloud is powerful
+    'ema': 15,          # EMA crosses are reliable
+    'adx': 15,          # Trend strength is important
+    'rsi': 10,          # Good but less reliable alone
+    'stoch': 8,         # Useful in ranging markets
+    'support': 8,       # Key levels matter
+    'resistance': 8,    # Key levels matter
+    'candle': 7,        # Patterns can be subjective
+    'bb': 5,            # Least reliable in volatile markets
+    'volume': 5         # Confirmation only
 }
