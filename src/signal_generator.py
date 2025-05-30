@@ -23,24 +23,14 @@ def generate_signals(df_primary, df_higher, df_trend, symbol):
     """
     signals = []
     
-    # Get the latest data point from each timeframe
     latest_p = df_primary.iloc[-1]
     latest_h = df_higher.iloc[-1]
     latest_t = df_trend.iloc[-1]
 
     current_price = latest_p['close']
     atr = latest_p['atr']
-    if atr == 0: return [] # Avoid division by zero if ATR is zero
+    if atr == 0: return []
 
-    # --- SHARED CONDITIONS ---
-    # 1. Ranging Market Filter (Forbidden Condition)
-    if latest_p['adx'] < SCALPING_SETTINGS['adx_weak_trend']:
-        return [] # Ranging market, no trade
-
-    # 2. Volume Filter (Forbidden Condition)
-    is_low_volume = latest_p['volume_ratio'] < 1.0
-    
-    # 3. Trend Alignment (Required Factor)
     is_trend_aligned_up = latest_p['trend'] == 'up' and latest_h['trend'] == 'up' and latest_t['trend'] == 'up'
     is_trend_aligned_down = latest_p['trend'] == 'down' and latest_h['trend'] == 'down' and latest_t['trend'] == 'down'
 
@@ -49,7 +39,6 @@ def generate_signals(df_primary, df_higher, df_trend, symbol):
         buy_factors = set()
         buy_reasons_map = {}
 
-        # --- Check for REQUIRED factors ---
         buy_factors.add('trend_alignment')
         buy_reasons_map['trend_alignment'] = f"Trend Alignment (P: {latest_p['trend']}, H: {latest_h['trend']}, T: {latest_t['trend']})"
 
@@ -61,55 +50,46 @@ def generate_signals(df_primary, df_higher, df_trend, symbol):
             buy_factors.add('multi_tf_confluence')
             buy_reasons_map['multi_tf_confluence'] = "Multi-TF RSI Confirmation"
         
-        # Check if all required factors are met
         if all(factor in buy_factors for factor in ENTRY_CONDITIONS['buy']['required_factors']):
-            # --- Check for ADDITIONAL factors ---
             additional_factors = set()
-            # RSI Extreme
             if latest_p['rsi'] < SCALPING_SETTINGS['rsi_oversold']:
                 additional_factors.add('rsi_extreme')
                 buy_reasons_map['rsi_extreme'] = f"Primary RSI Oversold ({latest_p['rsi']:.2f})"
-            # MACD Momentum
             if latest_p['macd'] > latest_p['macd_signal']:
                 additional_factors.add('macd_momentum')
                 buy_reasons_map['macd_momentum'] = "MACD Bullish Momentum"
-            # Stochastic Confirmation
             if latest_p['stoch_k'] < SCALPING_SETTINGS['stoch_oversold'] and latest_p['stoch_k'] > latest_p['stoch_d']:
                 additional_factors.add('stoch_confirmation')
                 buy_reasons_map['stoch_confirmation'] = "Stochastic Bullish Cross"
-            # BB Breakout from Squeeze
             if df_primary.iloc[-2]['bb_width'] < SCALPING_SETTINGS['bb_squeeze_threshold'] and latest_p['close'] > latest_p['bb_upper']:
                  additional_factors.add('bb_breakout')
                  buy_reasons_map['bb_breakout'] = "Bollinger Bands Breakout from Squeeze"
-            # Divergence
             if latest_p['rsi_divergence'] == 'bullish' or latest_p['macd_divergence'] == 'bullish':
                 additional_factors.add('divergence')
                 buy_reasons_map['divergence'] = "Bullish Divergence Detected"
-            # Support/Resistance
             if abs(current_price - latest_p['support']) / current_price < 0.01:
                 additional_factors.add('support_resistance')
                 buy_reasons_map['support_resistance'] = "Price near key support"
-            # Candlestick Pattern
             if latest_p['candle_pattern'] in ['bullish_engulfing', 'hammer']:
                  additional_factors.add('candlestick_pattern')
                  buy_reasons_map['candlestick_pattern'] = f"Bullish Pattern ({latest_p['candle_pattern']})"
 
-            # --- FINAL VALIDATION ---
             if len(additional_factors) >= ENTRY_CONDITIONS['buy']['minimum_additional']:
                 all_factors = buy_factors.union(additional_factors)
                 score = calculate_score(all_factors)
                 if score >= SCALPING_SETTINGS['min_score_threshold']:
                     target_price = current_price + (atr * SCALPING_SETTINGS['profit_target_multiplier'])
                     stop_loss = current_price - (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
+                    if (current_price - stop_loss) == 0: return []
                     risk_reward_ratio = (target_price - current_price) / (current_price - stop_loss)
 
                     if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
                         current_time_obj = datetime.now(pytz.utc)
                         signals.append({
                             'symbol': symbol, 'type': 'BUY',
-                            'entry_price': f"{current_price:.8f}",
-                            'target_price': f"{target_price:.8f}",
-                            'stop_loss': f"{stop_loss:.8f}",
+                            'entry_price': current_price,
+                            'target_price': target_price,
+                            'stop_loss': stop_loss,
                             'time': current_time_obj.astimezone(pytz.timezone('Asia/Tehran')).strftime("%Y-%m-%d %H:%M:%S"),
                             'reasons': get_signal_reasons(all_factors, buy_reasons_map),
                             'score': score, 'status': 'active',
@@ -122,7 +102,6 @@ def generate_signals(df_primary, df_higher, df_trend, symbol):
         sell_factors = set()
         sell_reasons_map = {}
 
-        # --- Check for REQUIRED factors ---
         sell_factors.add('trend_alignment')
         sell_reasons_map['trend_alignment'] = f"Trend Alignment (P: {latest_p['trend']}, H: {latest_h['trend']}, T: {latest_t['trend']})"
 
@@ -134,55 +113,46 @@ def generate_signals(df_primary, df_higher, df_trend, symbol):
             sell_factors.add('multi_tf_confluence')
             sell_reasons_map['multi_tf_confluence'] = "Multi-TF RSI Confirmation"
 
-        # Check if all required factors are met
         if all(factor in sell_factors for factor in ENTRY_CONDITIONS['sell']['required_factors']):
-            # --- Check for ADDITIONAL factors ---
             additional_factors = set()
-            # RSI Extreme
             if latest_p['rsi'] > SCALPING_SETTINGS['rsi_overbought']:
                 additional_factors.add('rsi_extreme')
                 sell_reasons_map['rsi_extreme'] = f"Primary RSI Overbought ({latest_p['rsi']:.2f})"
-            # MACD Momentum
             if latest_p['macd'] < latest_p['macd_signal']:
                 additional_factors.add('macd_momentum')
                 sell_reasons_map['macd_momentum'] = "MACD Bearish Momentum"
-            # Stochastic Confirmation
             if latest_p['stoch_k'] > SCALPING_SETTINGS['stoch_overbought'] and latest_p['stoch_k'] < latest_p['stoch_d']:
                 additional_factors.add('stoch_confirmation')
                 sell_reasons_map['stoch_confirmation'] = "Stochastic Bearish Cross"
-            # BB Breakout from Squeeze
             if df_primary.iloc[-2]['bb_width'] < SCALPING_SETTINGS['bb_squeeze_threshold'] and latest_p['close'] < latest_p['bb_lower']:
                  additional_factors.add('bb_breakout')
                  sell_reasons_map['bb_breakout'] = "Bollinger Bands Breakout from Squeeze"
-            # Divergence
             if latest_p['rsi_divergence'] == 'bearish' or latest_p['macd_divergence'] == 'bearish':
                 additional_factors.add('divergence')
                 sell_reasons_map['divergence'] = "Bearish Divergence Detected"
-            # Support/Resistance
             if abs(current_price - latest_p['resistance']) / current_price < 0.01:
                 additional_factors.add('support_resistance')
                 sell_reasons_map['support_resistance'] = "Price near key resistance"
-            # Candlestick Pattern
             if latest_p['candle_pattern'] in ['bearish_engulfing', 'shooting_star']:
                  additional_factors.add('candlestick_pattern')
                  sell_reasons_map['candlestick_pattern'] = f"Bearish Pattern ({latest_p['candle_pattern']})"
 
-            # --- FINAL VALIDATION ---
             if len(additional_factors) >= ENTRY_CONDITIONS['sell']['minimum_additional']:
                 all_factors = sell_factors.union(additional_factors)
                 score = calculate_score(all_factors)
                 if score >= SCALPING_SETTINGS['min_score_threshold']:
                     target_price = current_price - (atr * SCALPING_SETTINGS['profit_target_multiplier'])
                     stop_loss = current_price + (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
+                    if (stop_loss - current_price) == 0: return []
                     risk_reward_ratio = (current_price - target_price) / (stop_loss - current_price)
 
                     if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
                         current_time_obj = datetime.now(pytz.utc)
                         signals.append({
                             'symbol': symbol, 'type': 'SELL',
-                            'entry_price': f"{current_price:.8f}",
-                            'target_price': f"{target_price:.8f}",
-                            'stop_loss': f"{stop_loss:.8f}",
+                            'entry_price': current_price,
+                            'target_price': target_price,
+                            'stop_loss': stop_loss,
                             'time': current_time_obj.astimezone(pytz.timezone('Asia/Tehran')).strftime("%Y-%m-%d %H:%M:%S"),
                             'reasons': get_signal_reasons(all_factors, sell_reasons_map),
                             'score': score, 'status': 'active',
