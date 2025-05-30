@@ -122,5 +122,19 @@
         "created_at": "2025-05-30T10:19:29.460919+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "0.27160000"
+    },
+    {
+        "symbol": "LTC-USDT",
+        "type": "BUY",
+        "current_price": "90.18700000",
+        "target_price": "91.67525403",
+        "stop_loss": "89.44287298",
+        "time": "2025-05-30 12:50:27",
+        "reasons": "\u2705 RSI near oversold (33.09)\n\u2705 Stoch K > D in oversold (19.02 > 16.10)\n\u2705 Price near support (89.7290)\n\u2705 Bullish candle pattern (hammer)\n\u2705 Bullish Divergence detected (RSI: bullish, MACD: bullish)",
+        "score": 41,
+        "status": "active",
+        "created_at": "2025-05-30T12:50:27.931622+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "90.18700000"
     }
 ]
