@@ -88,7 +88,9 @@ def analyze_candlestick_patterns(df):
 
         body = abs(curr['close'] - curr['open'])
         range_size = curr['high'] - curr['low']
-        if range_size == 0: continue
+        if range_size == 0:
+            patterns.append('none')
+            continue
 
         # Bullish Engulfing
         if (curr['close'] > curr['open'] and prev['close'] < prev['open'] and
@@ -181,8 +183,9 @@ def prepare_dataframe(df, timeframe=PRIMARY_TIMEFRAME):
         # Divergence (calculated on the last candle)
         df['rsi_divergence'] = 'none'
         df['macd_divergence'] = 'none'
-        df.loc[df.index[-1], 'rsi_divergence'] = find_divergence(df['close'], df['rsi'], SCALPING_SETTINGS['divergence_lookback'])
-        df.loc[df.index[-1], 'macd_divergence'] = find_divergence(df['close'], df['macd'], SCALPING_SETTINGS['divergence_lookback'])
+        if len(df) > SCALPING_SETTINGS['divergence_lookback']:
+            df.loc[df.index[-1], 'rsi_divergence'] = find_divergence(df['close'], df['rsi'], SCALPING_SETTINGS['divergence_lookback'])
+            df.loc[df.index[-1], 'macd_divergence'] = find_divergence(df['close'], df['macd'], SCALPING_SETTINGS['divergence_lookback'])
 
         df.dropna(inplace=True)
         return df.reset_index(drop=True)
@@ -255,7 +258,6 @@ def main():
                 print(f"--> Skipping {crypto}: Failed to prepare one or more dataframes.")
                 continue
 
-            # Final quality check with prepared data
             if not quality_filter(crypto, market_stats, prepared_primary):
                 continue
             
@@ -266,9 +268,9 @@ def main():
                 tradingview_link = generate_tradingview_link(signal['symbol'])
                 message = (
                     f"<b>🚨 Signal {signal['type']} for {signal['symbol']} 🚨</b>\n\n"
-                    f"💰 <b>Entry Price:</b> <code>{signal['entry_price']}</code>\n"
-                    f"🎯 <b>Target Price:</b> <code>{signal['target_price']}</code>\n"
-                    f"🛑 <b>Stop Loss:</b> <code>{signal['stop_loss']}</code>\n\n"
+                    f"💰 <b>Entry Price:</b> <code>{signal['entry_price']:.8f}</code>\n"
+                    f"🎯 <b>Target Price:</b> <code>{signal['target_price']:.8f}</code>\n"
+                    f"🛑 <b>Stop Loss:</b> <code>{signal['stop_loss']:.8f}</code>\n\n"
                     f"🏆 <b>Score:</b> {signal['score']}/100\n"
                     f"📈 <b>Risk/Reward Ratio:</b> {signal['risk_reward_ratio']:.2f}\n\n"
                     f"<b>📝 Reasons:</b>\n{signal['reasons']}\n\n"
@@ -277,7 +279,7 @@ def main():
                 )
                 if send_telegram_message(message):
                     signals_sent += 1
-                    save_signal(signal)
+                    save_signal(signal) # The signal with float prices is saved here
                     print(f"✅ Signal sent and saved for {crypto}: {signal['type']}")
                 else:
                     print(f"❌ Failed to send signal for {crypto}")
