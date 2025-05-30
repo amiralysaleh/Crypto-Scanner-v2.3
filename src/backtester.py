@@ -7,199 +7,256 @@ import time
 from datetime import datetime, timedelta
 import pytz
 import argparse
+import traceback
 import os
 import sys
 
 # --- IMPORTS ---
 try:
     from config import *
-    # Import the same data preparation function used by the live analyzer
     from crypto_analyzer import prepare_dataframe
-    # Import the live signal generator to be used in the backtest
-    from signal_generator import generate_signals
+    from signal_generator import calculate_score
 except ImportError as e:
     print(f"Fatal Error: Cannot import project modules: {e}")
+    print("Ensure 'src' is in PYTHONPATH and files are in 'src'.")
     sys.exit(1)
+# --- END IMPORTS ---
 
-def fetch_historical_kline(symbol, start_dt, end_dt, interval):
+# --- Data Fetching ---
+def fetch_historical_kline(symbol, start_dt, end_dt, interval="30min"):
+    """Fetch historical kline data from KuCoin in chunks."""
     url = f"{KUCOIN_BASE_URL}{KUCOIN_KLINE_ENDPOINT}"
     all_data = []
-    
-    interval_map = {'15min': 900, '1hour': 3600, '4hour': 14400}
-    interval_seconds = interval_map.get(interval, 900)
-    
+
+    if 'min' in interval:
+        interval_seconds = int(interval.replace('min', '')) * 60
+    elif 'hour' in interval:
+        interval_seconds = int(interval.replace('hour', '')) * 3600
+    else:
+        interval_seconds = 1800 # Default
+
     current_end_ts = int(end_dt.timestamp())
     start_ts = int(start_dt.timestamp())
 
-    print(f"Fetching data for {symbol} from {start_dt.date()} to {end_dt.date()} ({interval})...")
+    print(f"Fetching data for {symbol} from {start_dt} to {end_dt} ({interval})...")
+
     while current_end_ts > start_ts:
         current_start_ts = max(start_ts, current_end_ts - 1500 * interval_seconds)
         params = {"symbol": symbol, "type": interval, "startAt": current_start_ts, "endAt": current_end_ts}
+
         try:
             response = requests.get(url, params=params, timeout=20)
             response.raise_for_status()
             data = response.json().get('data', [])
-            if not data: break
-            
+            if not data:
+                print(f"No more data received or error. End timestamp: {datetime.fromtimestamp(current_end_ts)}. Breaking.")
+                break
+
             df_chunk = pd.DataFrame(data, columns=["timestamp", "open", "close", "high", "low", "volume", "turnover"])
             all_data.append(df_chunk)
             oldest_ts_received = int(df_chunk.iloc[-1]["timestamp"])
             current_end_ts = oldest_ts_received - 1
-            print(f"  ...fetched {len(df_chunk)} candles up to {datetime.fromtimestamp(oldest_ts_received)}")
+            print(f"Fetched {len(df_chunk)} candles up to {datetime.fromtimestamp(oldest_ts_received)}")
             time.sleep(1.5)
+
         except Exception as e:
-            print(f"  Error fetching data chunk: {e}. Retrying...")
+            print(f"Error fetching data chunk: {e}. Retrying in 5s...")
             time.sleep(5)
 
-    if not all_data: return None
-    
+    if not all_data:
+        print("No data fetched.")
+        return None
+
     full_df = pd.concat(all_data, ignore_index=True)
-    full_df = full_df[["timestamp", "open", "close", "high", "low", "volume"]].astype(float)
+    full_df = full_df[["timestamp", "open", "close", "high", "low", "volume"]]
+    full_df = full_df.astype(float)
     full_df["timestamp"] = pd.to_datetime(full_df["timestamp"], unit="s")
-    full_df = full_df.sort_values("timestamp").reset_index(drop=True).drop_duplicates(subset=["timestamp"], keep='first')
-    print(f"Fetched a total of {len(full_df)} unique candles for {interval}.")
+    full_df = full_df.sort_values("timestamp").reset_index(drop=True)
+    full_df = full_df.drop_duplicates(subset=["timestamp"], keep='first')
+    print(f"Fetched a total of {len(full_df)} unique candles.")
     return full_df
 
-def run_backtest(symbol, start_date_str, end_date_str):
-    utc_tz = pytz.utc
+# --- Backtester Core ---
+def apply_signal_logic(latest, prev, higher_tf_trend, df_primary, symbol):
+    current_price = latest['close']
+    atr = latest['atr']
+    ichi_base_period = SCALPING_SETTINGS['ichi_base_period']
+    price_26_ago_index = latest.name - ichi_base_period
+    if price_26_ago_index < 0: return None
+    price_26_ago = df_primary['close'].iloc[price_26_ago_index]
+
+    if latest['adx'] < SCALPING_SETTINGS['adx_threshold']: return None
+
+    buy_factors = set()
+    if latest['rsi'] < SCALPING_SETTINGS['rsi_oversold'] + 5: buy_factors.add('rsi')
+    if latest['stoch_k'] < SCALPING_SETTINGS['stoch_oversold'] and latest['stoch_k'] > latest['stoch_d']: buy_factors.add('stoch')
+    if prev['ema_short'] <= prev['ema_medium'] and latest['ema_short'] > latest['ema_medium']: buy_factors.add('ema')
+    if prev['macd'] <= prev['macd_signal'] and latest['macd'] > latest['macd_signal']: buy_factors.add('macd')
+    if latest['close'] <= latest['bb_lower']: buy_factors.add('bb')
+    if (latest['close'] > latest['ichi_a'] and latest['close'] > latest['ichi_b'] and
+        latest['ichi_conv'] > latest['ichi_base'] and latest['close'] > price_26_ago): buy_factors.add('ichi')
+    if latest['candle_pattern'] == 'bullish_engulfing' or latest['candle_pattern'] == 'hammer': buy_factors.add('candle')
+    if latest['rsi_divergence'] == 'bullish' or latest['macd_divergence'] == 'bullish': buy_factors.add('divergence')
+    if higher_tf_trend == 'up': buy_factors.add('higher_tf')
+    if latest['adx_pos'] > latest['adx_neg']: buy_factors.add('adx')
+    if abs(latest['close'] - latest['support']) / latest['close'] < 0.01: buy_factors.add('support')
+    if latest['volume_change'] > SCALPING_SETTINGS['volume_change_threshold']: buy_factors.add('volume')
+
+    if len(buy_factors) >= 3:
+        score = calculate_score(buy_factors, atr, current_price)
+        if score >= SCALPING_SETTINGS['min_score_threshold']:
+            target_price = current_price + (atr * SCALPING_SETTINGS['profit_target_multiplier'])
+            stop_loss = current_price - (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
+            if (current_price - stop_loss) > 0:
+                risk_reward_ratio = (target_price - current_price) / (current_price - stop_loss)
+                if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
+                    return {'type': 'BUY', 'price': current_price, 'tp': target_price, 'sl': stop_loss, 'score': score}
+
+    sell_factors = set()
+    if latest['rsi'] > SCALPING_SETTINGS['rsi_overbought'] - 5: sell_factors.add('rsi')
+    if latest['stoch_k'] > SCALPING_SETTINGS['stoch_oversold'] and latest['stoch_k'] < latest['stoch_d']: sell_factors.add('stoch')
+    if prev['ema_short'] >= prev['ema_medium'] and latest['ema_short'] < latest['ema_medium']: sell_factors.add('ema')
+    if prev['macd'] >= prev['macd_signal'] and latest['macd'] < latest['macd_signal']: sell_factors.add('macd')
+    if latest['close'] >= latest['bb_upper']: sell_factors.add('bb')
+    if (latest['close'] < latest['ichi_a'] and latest['close'] < latest['ichi_b'] and
+        latest['ichi_conv'] < latest['ichi_base'] and latest['close'] < price_26_ago): sell_factors.add('ichi')
+    if latest['candle_pattern'] == 'bearish_engulfing' or latest['candle_pattern'] == 'shooting_star': sell_factors.add('candle')
+    if latest['rsi_divergence'] == 'bearish' or latest['macd_divergence'] == 'bearish': sell_factors.add('divergence')
+    if higher_tf_trend == 'down': sell_factors.add('higher_tf')
+    if latest['adx_neg'] > latest['adx_pos']: sell_factors.add('adx')
+    if abs(latest['close'] - latest['resistance']) / latest['close'] < 0.01: sell_factors.add('resistance')
+
+    if len(sell_factors) >= 3:
+        score = calculate_score(sell_factors, atr, current_price)
+        if score >= SCALPING_SETTINGS['min_score_threshold']:
+            target_price = current_price - (atr * SCALPING_SETTINGS['profit_target_multiplier'])
+            stop_loss = current_price + (atr * SCALPING_SETTINGS['stop_loss_multiplier'])
+            if (stop_loss - current_price) > 0:
+                risk_reward_ratio = (current_price - target_price) / (stop_loss - current_price)
+                if risk_reward_ratio >= SCALPING_SETTINGS['min_risk_reward_ratio']:
+                    return {'type': 'SELL', 'price': current_price, 'tp': target_price, 'sl': stop_loss, 'score': score}
+    return None
+
+def run_backtest(symbol, start_date_str, end_date_str, initial_capital, trade_size):
+    tehran_tz = pytz.timezone('Asia/Tehran')
     try:
-        start_dt = utc_tz.localize(datetime.strptime(start_date_str, "%Y-%m-%d"))
-        end_dt = utc_tz.localize(datetime.strptime(end_date_str, "%Y-%m-%d"))
+        start_dt = tehran_tz.localize(datetime.strptime(start_date_str, "%Y-%m-%d"))
+        end_dt = tehran_tz.localize(datetime.strptime(end_date_str, "%Y-%m-%d"))
     except ValueError:
         print("Error: Date format must be YYYY-MM-DD.")
         return
 
-    print("\n--- Starting Backtest with High Win-Rate Strategy ---")
-    print(f"Symbol: {symbol}, Period: {start_date_str} to {end_date_str}")
-    print(f"Initial Capital: ${BACKTEST_SETTINGS['initial_capital']:,.2f}")
-    print("---------------------------------------------------\n")
+    print("\n--- Starting Backtest ---")
+    print(f"Symbol: {symbol}")
+    print(f"Period: {start_date_str} to {end_date_str}")
+    print(f"Initial Capital: ${initial_capital:,.2f}")
+    print(f"Trade Size: ${trade_size:,.2f}")
+    print(f"Min Score Threshold: {SCALPING_SETTINGS['min_score_threshold']}")
+    print("-------------------------\n")
 
-    # Fetch data for all three timeframes
     df_primary_raw = fetch_historical_kline(symbol, start_dt, end_dt, PRIMARY_TIMEFRAME)
     df_higher_raw = fetch_historical_kline(symbol, start_dt, end_dt, HIGHER_TIMEFRAME)
-    df_trend_raw = fetch_historical_kline(symbol, start_dt, end_dt, TREND_TIMEFRAME)
 
-    if any(df is None or df.empty for df in [df_primary_raw, df_higher_raw, df_trend_raw]):
-        print("Failed to fetch sufficient historical data for one or more timeframes.")
+    if df_primary_raw is None or df_higher_raw is None: return
+
+    print("Preparing primary timeframe data...")
+    df_primary = prepare_dataframe(df_primary_raw.copy(), PRIMARY_TIMEFRAME)
+    print("Preparing higher timeframe data...")
+    df_higher = prepare_dataframe(df_higher_raw.copy(), HIGHER_TIMEFRAME)
+
+    if df_primary is None or df_higher is None or df_primary.empty or df_higher.empty:
+        print("Failed to prepare dataframes (ensure they have enough data after NaN drop).")
         return
 
-    capital = BACKTEST_SETTINGS['initial_capital']
-    position = None
-    trades = []
-    equity_curve = [{'timestamp': df_primary_raw['timestamp'].iloc[0], 'capital': capital}]
+    df_higher = df_higher.set_index('timestamp')
+    df_primary = df_primary.set_index('timestamp')
+    df_higher_aligned = df_higher.reindex(df_primary.index, method='ffill').reset_index()
+    df_primary = df_primary.reset_index()
 
-    print(f"\nStarting simulation with {len(df_primary_raw)} primary candles...")
-    # Loop through each candle of the primary timeframe
-    for i in range(KLINE_SIZE, len(df_primary_raw)):
-        # --- DATA PREPARATION FOR EACH STEP ---
-        # Create rolling dataframes for each timeframe
-        current_time = df_primary_raw['timestamp'].iloc[i]
-        
-        df_p_step = df_primary_raw.iloc[i-KLINE_SIZE:i+1].copy()
-        df_h_step = df_higher_raw[df_higher_raw['timestamp'] <= current_time].iloc[-KLINE_SIZE:].copy()
-        df_t_step = df_trend_raw[df_trend_raw['timestamp'] <= current_time].iloc[-KLINE_SIZE:].copy()
+    capital = initial_capital
+    position, entry_price, target_price, stop_loss, entry_time = None, 0, 0, 0, None
+    entry_score = 0  # <<<--- Initialize entry_score
+    trades, equity_curve = [], [initial_capital]
 
-        if len(df_p_step) < 50 or len(df_h_step) < 50 or len(df_t_step) < 50: continue
+    print(f"\nStarting simulation with {len(df_primary)} prepared candles...")
+    start_index_loop = SCALPING_SETTINGS['ichi_base_period'] + 5
 
-        # Prepare dataframes with indicators for the current step
-        prep_p = prepare_dataframe(df_p_step, PRIMARY_TIMEFRAME)
-        prep_h = prepare_dataframe(df_h_step, HIGHER_TIMEFRAME)
-        prep_t = prepare_dataframe(df_t_step, TREND_TIMEFRAME)
+    for i in range(start_index_loop, len(df_primary)):
+        latest = df_primary.iloc[i]
+        prev = df_primary.iloc[i-1]
+        higher_tf_trend = df_higher_aligned.iloc[i]['trend_confirmed']
 
-        if any(df is None or df.empty for df in [prep_p, prep_h, prep_t]): continue
-        
-        latest_candle = prep_p.iloc[-1]
-        
-        # --- POSITION MANAGEMENT ---
         if position:
-            pnl = 0
-            close_price = 0
-            status = ""
-            if position['type'] == 'BUY':
-                if latest_candle['high'] >= position['tp']:
-                    status, close_price = 'Target Reached', position['tp']
-                elif latest_candle['low'] <= position['sl']:
-                    status, close_price = 'Stop Loss Hit', position['sl']
-            elif position['type'] == 'SELL':
-                if latest_candle['low'] <= position['tp']:
-                    status, close_price = 'Target Reached', position['tp']
-                elif latest_candle['high'] >= position['sl']:
-                    status, close_price = 'Stop Loss Hit', position['sl']
+            hit, pnl, close_price, status = False, 0, 0, ""
+            if position == 'BUY' and latest['high'] >= target_price: close_price, status, hit = target_price, 'Target Reached', True
+            elif position == 'BUY' and latest['low'] <= stop_loss: close_price, status, hit = stop_loss, 'Stop Loss Hit', True
+            elif position == 'SELL' and latest['low'] <= target_price: close_price, status, hit = target_price, 'Target Reached', True
+            elif position == 'SELL' and latest['high'] >= stop_loss: close_price, status, hit = stop_loss, 'Stop Loss Hit', True
 
-            if status:
-                pnl = (close_price - position['entry']) * position['size'] if position['type'] == 'BUY' else (position['entry'] - close_price) * position['size']
-                pnl -= position['commission'] # Subtract commission
+            if hit:
+                pnl = (close_price - entry_price) * (trade_size / entry_price) if position == 'BUY' else (entry_price - close_price) * (trade_size / entry_price)
                 capital += pnl
                 trades.append({
-                    'Entry Time': position['entry_time'], 'Close Time': current_time,
-                    'Type': position['type'], 'Status': status, 'Entry Price': position['entry'],
-                    'Close Price': close_price, 'PNL': pnl, 'Score': position['score']
+                    'Symbol': symbol, 'Type': position, 'Status': status,
+                    'Entry Time': entry_time, 'Close Time': latest['timestamp'],
+                    'Entry Price': entry_price, 'Close Price': close_price,
+                    'Score': entry_score,  # <<<--- Add score to the trade log
+                    'PNL': pnl, 'Capital': capital
                 })
-                equity_curve.append({'timestamp': current_time, 'capital': capital})
                 position = None
-        
-        # --- SIGNAL GENERATION ---
+                equity_curve.append(capital)
+
         if not position:
-            # Use the actual signal generator
-            signals = generate_signals(prep_p, prep_h, prep_t, symbol)
-            if signals:
-                signal = signals[0] # Take the first signal if multiple are generated
-                position_size_usd = capital * (BACKTEST_SETTINGS['position_size_percent'] / 100)
-                coin_size = position_size_usd / float(signal['entry_price'])
-                commission_cost = position_size_usd * (BACKTEST_SETTINGS['commission_percent'] / 100) * 2 # Entry and Exit
+            signal_details = apply_signal_logic(latest, prev, higher_tf_trend, df_primary, symbol)
+            if signal_details:
+                position = signal_details['type']
+                entry_price = signal_details['price']
+                target_price = signal_details['tp']
+                stop_loss = signal_details['sl']
+                entry_score = signal_details['score'] # <<<--- Store the score of the signal
+                entry_time = latest['timestamp']
+                print(f"[{latest['timestamp']}] OPENED {position} (Score: {entry_score}) at {entry_price:.4f}. TP: {target_price:.4f}, SL: {stop_loss:.4f}")
 
-                position = {
-                    'type': signal['type'],
-                    'entry': float(signal['entry_price']),
-                    'tp': float(signal['target_price']),
-                    'sl': float(signal['stop_loss']),
-                    'size': coin_size,
-                    'entry_time': current_time,
-                    'score': signal['score'],
-                    'commission': commission_cost
-                }
-                print(f"[{current_time.date()}] OPEN {signal['type']} at {signal['entry_price']:.4f} (Score: {signal['score']})")
-
-
-    # --- RESULTS ANALYSIS ---
     print("\n--- Backtest Results ---")
-    if not trades:
-        print("No trades were executed.")
-        return
+    if not trades: print("No trades were executed."); return
 
     trades_df = pd.DataFrame(trades)
-    total_trades = len(trades_df)
-    wins = trades_df[trades_df['PNL'] > 0]
+    total_trades = len(trades_df); wins = trades_df[trades_df['PNL'] > 0]; losses = trades_df[trades_df['PNL'] <= 0]
     win_rate = (len(wins) / total_trades) * 100 if total_trades > 0 else 0
-    total_pnl = trades_df['PNL'].sum()
-    profit_factor = abs(wins['PNL'].sum() / trades_df[trades_df['PNL'] < 0]['PNL'].sum()) if trades_df[trades_df['PNL'] < 0]['PNL'].sum() != 0 else float('inf')
-    
-    equity_df = pd.DataFrame(equity_curve)
-    equity_df['peak'] = equity_df['capital'].cummax()
-    equity_df['drawdown'] = equity_df['peak'] - equity_df['capital']
-    max_drawdown = equity_df['drawdown'].max()
-    max_drawdown_pct = (max_drawdown / equity_df.loc[equity_df['drawdown'].idxmax()]['peak']) * 100 if max_drawdown > 0 else 0
+    avg_win = wins['PNL'].mean() if not wins.empty else 0; avg_loss = losses['PNL'].mean() if not losses.empty else 0
+    profit_factor = abs(wins['PNL'].sum() / losses['PNL'].sum()) if not losses.empty and losses['PNL'].sum() != 0 else float('inf')
+    total_pnl = trades_df['PNL'].sum(); final_capital = capital
 
+    equity_df = pd.DataFrame(equity_curve, columns=['Equity'])
+    equity_df['Peak'] = equity_df['Equity'].cummax(); equity_df['Drawdown'] = equity_df['Peak'] - equity_df['Equity']
+    equity_df['Drawdown_Pct'] = (equity_df['Drawdown'] / equity_df['Peak']) * 100
+    max_drawdown = equity_df['Drawdown'].max(); max_drawdown_pct = equity_df['Drawdown_Pct'].max() if not equity_df['Drawdown_Pct'].empty else 0
 
-    print(f"Period:                {start_date_str} to {end_date_str}")
-    print(f"Final Capital:         ${capital:,.2f}")
-    print(f"Total PNL:             ${total_pnl:,.2f} ({(total_pnl/BACKTEST_SETTINGS['initial_capital'])*100:.2f}%)")
-    print(f"Total Trades:          {total_trades}")
-    print(f"Win Rate:              {win_rate:.2f}%")
-    print(f"Profit Factor:         {profit_factor:.2f}")
-    print(f"Max Drawdown:          ${max_drawdown:,.2f} ({max_drawdown_pct:.2f}%)")
-    print("--------------------------\n")
+    print(f"Total Trades: {total_trades}"); print(f"Win Rate: {win_rate:.2f}%")
+    print(f"Average Win: ${avg_win:.2f}"); print(f"Average Loss: ${avg_loss:.2f}")
+    print(f"Profit Factor: {profit_factor:.2f}"); print(f"Total PNL: ${total_pnl:.2f} ({ (total_pnl/initial_capital)*100 :.2f}%)")
+    print(f"Final Capital: ${final_capital:,.2f}"); print(f"Max Drawdown: ${max_drawdown:,.2f} ({max_drawdown_pct:.2f}%)")
+    print("------------------------\n")
 
     os.makedirs('data', exist_ok=True)
     result_filename = f"data/backtest_results_{symbol}_{start_date_str}_to_{end_date_str}.csv"
-    trades_df.to_csv(result_filename, index=False)
-    print(f"Results saved to {result_filename}")
+    # Ensure 'Score' column is included if trades exist
+    if not trades_df.empty and 'Score' in trades_df.columns:
+        trades_df.to_csv(result_filename, index=False)
+        print(f"Results (including score) saved to {result_filename}")
+    elif not trades_df.empty:
+        trades_df.to_csv(result_filename, index=False) # Save even if score column somehow missing
+        print(f"Results (score column might be missing) saved to {result_filename}")
+    else:
+        print("No trades to save to CSV.")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run a backtest for the crypto trading strategy.')
     parser.add_argument('--symbol', type=str, required=True, help='Trading symbol (e.g., BTC-USDT)')
     parser.add_argument('--start', type=str, required=True, help='Start date (YYYY-MM-DD)')
     parser.add_argument('--end', type=str, required=True, help='End date (YYYY-MM-DD)')
-    # Capital and Size are now read from config.py
+    parser.add_argument('--capital', type=float, default=10000, help='Initial capital')
+    parser.add_argument('--size', type=float, default=1000, help='Fixed trade size in USDT')
     args = parser.parse_args()
-    run_backtest(args.symbol, args.start, args.end)
+    run_backtest(args.symbol, args.start, args.end, args.capital, args.size)
