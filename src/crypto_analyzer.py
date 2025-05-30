@@ -10,288 +10,327 @@ import pytz
 import ta
 import traceback
 from scipy.signal import argrelextrema
-import warnings
 
-# --- IMPORTS ---
 from config import *
 from signal_generator import generate_signals
 from telegram_sender import send_telegram_message
 from signal_tracker import save_signal, load_signals
 
-warnings.filterwarnings('ignore')
+# ... (تمام توابع دیگر بدون تغییر باقی می‌مانند) ...
 
-def fetch_kline_data(symbol, size=200, interval="15min"):
-    """Fetch kline data from KuCoin with enhanced error handling"""
+def fetch_kline_data(symbol, size=100, interval="30min"):
+    """Fetch kline data from KuCoin with retry"""
     url = f"{KUCOIN_BASE_URL}{KUCOIN_KLINE_ENDPOINT}"
     end_time = int(time.time())
 
-    interval_map = {
-        '1min': 60, '3min': 180, '5min': 300, '15min': 900,
-        '30min': 1800, '1hour': 3600, '2hour': 7200, '4hour': 14400,
-        '6hour': 21600, '8hour': 28800, '12hour': 43200, '1day': 86400
-    }
-    
-    interval_seconds = interval_map.get(interval, 900)
+    # Calculate interval in seconds (handle different units)
+    if 'min' in interval:
+        interval_seconds = int(interval.replace('min', '')) * 60
+    elif 'hour' in interval:
+        interval_seconds = int(interval.replace('hour', '')) * 3600
+    else:
+        interval_seconds = 1800 # Default to 30min
+
     start_time = end_time - (size * interval_seconds)
 
     params = {"symbol": symbol, "type": interval, "startAt": start_time, "endAt": end_time}
-    
     for attempt in range(3):
         try:
-            response = requests.get(url, params=params, timeout=20)
+            response = requests.get(url, params=params, timeout=15) # Increased timeout
             response.raise_for_status()
             data = response.json()
-            
-            if not data.get('data') or len(data['data']) < 50:
-                print(f"-> Insufficient data for {symbol} on {interval}: {len(data.get('data', []))} candles")
+            if not data.get('data'):
+                print(f"Error fetching data for {symbol} on {interval}: {data}")
                 return None
-                
-            df = pd.DataFrame(data['data'], columns=["timestamp", "open", "close", "high", "low", "volume", "turnover"])
-            df = df[["timestamp", "open", "high", "low", "close", "volume"]].astype(float)
+            df = pd.DataFrame(data['data'], columns=[
+                "timestamp", "open", "close", "high", "low", "volume", "turnover"
+            ])
+            df = df[["timestamp", "open", "high", "low", "close", "volume"]]
+            df = df.astype(float)
             df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
             df = df.iloc[::-1].reset_index(drop=True)
-            
-            print(f"-> Fetched {len(df)} candles for {symbol} on {interval}")
+            print(f"Received {len(df)} candles for {symbol} on {interval}")
             return df
-            
-        except requests.exceptions.RequestException as e:
-            print(f"--> Attempt {attempt + 1} failed for {symbol} on {interval}: {e}")
-            if attempt < 2:
-                time.sleep(2 ** attempt)
-    
-    print(f"--> Failed to fetch data for {symbol} after 3 attempts.")
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed for {symbol} on {interval}: {e}")
+            time.sleep(2 ** attempt)
     return None
 
-def fetch_market_stats(symbol):
-    """Fetch comprehensive market statistics"""
+def fetch_volume_data(symbol):
+    """Fetch 24h trading volume from KuCoin"""
     url = f"{KUCOIN_BASE_URL}{KUCOIN_STATS_ENDPOINT}"
     params = {"symbol": symbol}
     try:
         response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()
-        data = response.json().get('data', {})
-        stats = {
-            'volume_24h': float(data.get('volValue', 0)),
-            'change_rate_24h': float(data.get('changeRate', 0)) * 100,
-        }
-        return stats
+        data = response.json()
+        volume = float(data.get('data', {}).get('volValue', 0))
+        print(f"24h volume for {symbol}: {volume} USDT")
+        return volume
     except Exception as e:
-        print(f"--> Error fetching market stats for {symbol}: {e}")
-        return None
+        print(f"Error fetching volume for {symbol}: {e}")
+        return 0
 
-def analyze_candlestick_patterns(df):
+def check_trend_consistency(trend_series):
+    """Check trend consistency in the time window"""
+    if len(trend_series) == 0:
+        return 'neutral'
+    if all(trend == 'up' for trend in trend_series):
+        return 'up'
+    if all(trend == 'down' for trend in trend_series):
+        return 'down'
+    return 'neutral'
+
+def identify_candlestick_patterns(df):
+    """Identify simple candlestick patterns."""
     patterns = []
     for i in range(1, len(df)):
         prev = df.iloc[i-1]
         curr = df.iloc[i]
         pattern = 'none'
 
-        body = abs(curr['close'] - curr['open'])
-        range_size = curr['high'] - curr['low']
-        if range_size == 0:
-            patterns.append('none')
-            continue
-
         # Bullish Engulfing
         if (curr['close'] > curr['open'] and prev['close'] < prev['open'] and
-            curr['close'] > prev['open'] and curr['open'] < prev['close'] and body > range_size * 0.6):
+            curr['close'] > prev['open'] and curr['open'] < prev['close']):
             pattern = 'bullish_engulfing'
         # Bearish Engulfing
         elif (curr['close'] < curr['open'] and prev['close'] > prev['open'] and
-              curr['open'] > prev['close'] and curr['close'] < prev['open'] and body > range_size * 0.6):
+              curr['open'] > prev['close'] and curr['close'] < prev['open']):
             pattern = 'bearish_engulfing'
-        # Hammer
+        # Hammer (Simplified) - Needs context (downtrend)
         elif (curr['close'] > curr['open'] and
-              (min(curr['open'], curr['close']) - curr['low']) > 2 * body and
-              (curr['high'] - max(curr['open'], curr['close'])) < body * 0.5):
+              (curr['high'] - curr['close']) < 0.2 * (curr['high'] - curr['low']) and
+              (curr['open'] - curr['low']) > 2 * (curr['close'] - curr['open'])):
              pattern = 'hammer'
-        # Shooting Star
-        elif (curr['close'] < curr['open'] and
-              (curr['high'] - max(curr['open'], curr['close'])) > 2 * body and
-              (min(curr['open'], curr['close']) - curr['low']) < body * 0.5):
+        # Shooting Star (Simplified) - Needs context (uptrend)
+        elif (curr['open'] > curr['close'] and
+              (curr['high'] - curr['open']) > 2 * (curr['open'] - curr['close']) and
+              (curr['close'] - curr['low']) < 0.2 * (curr['high'] - curr['low'])):
              pattern = 'shooting_star'
+
         patterns.append(pattern)
+    # Add 'none' for the first row as it has no previous candle
     return ['none'] + patterns
 
+def find_divergence(price, indicator, lookback=14, order=5):
+    """
+    Finds simple divergence (Bullish/Bearish Regular)
+    order: How many points on each side to use for local extrema.
+    Returns: 'bullish', 'bearish', or 'none'.
+    """
+    if len(price) < lookback or len(indicator) < lookback:
+        return 'none'
 
-def find_divergence(price, indicator, lookback, order=5):
-    if len(price) < lookback: return 'none'
     price_subset = price.iloc[-lookback:]
     indicator_subset = indicator.iloc[-lookback:]
 
+    # Find local minima (lows) and maxima (highs)
     low_indices = argrelextrema(price_subset.values, np.less, order=order)[0]
     high_indices = argrelextrema(price_subset.values, np.greater, order=order)[0]
 
+    # Bullish Divergence (Lower Lows in Price, Higher Lows in Indicator)
     if len(low_indices) >= 2:
-        if (price_subset.iloc[low_indices[-1]] < price_subset.iloc[low_indices[-2]] and
-            indicator_subset.iloc[low_indices[-1]] > indicator_subset.iloc[low_indices[-2]]):
+        last_low_idx = low_indices[-1]
+        prev_low_idx = low_indices[-2]
+        if (price_subset.iloc[last_low_idx] < price_subset.iloc[prev_low_idx] and
+            indicator_subset.iloc[last_low_idx] > indicator_subset.iloc[prev_low_idx]):
             return 'bullish'
 
+    # Bearish Divergence (Higher Highs in Price, Lower Highs in Indicator)
     if len(high_indices) >= 2:
-        if (price_subset.iloc[high_indices[-1]] > price_subset.iloc[high_indices[-2]] and
-            indicator_subset.iloc[high_indices[-1]] < indicator_subset.iloc[high_indices[-2]]):
+        last_high_idx = high_indices[-1]
+        prev_high_idx = high_indices[-2]
+        if (price_subset.iloc[last_high_idx] > price_subset.iloc[prev_high_idx] and
+            indicator_subset.iloc[last_high_idx] < indicator_subset.iloc[prev_high_idx]):
             return 'bearish'
+
     return 'none'
 
+
 def prepare_dataframe(df, timeframe=PRIMARY_TIMEFRAME):
-    if df is None or len(df) < 50:
-        print(f"--> Insufficient data for preparation on {timeframe}: {len(df) if df is not None else 0} candles")
+    """Add technical indicators and price action rules (Enhanced)"""
+    if df is None or len(df) < SCALPING_SETTINGS['trend_confirmation_window'] or len(df) < SCALPING_SETTINGS['ichi_span_b_period']:
+        print(f"Not enough data to prepare DataFrame for {timeframe} ({len(df)} candles)")
         return None
     try:
-        # EMA
-        df['ema_fast'] = ta.trend.ema_indicator(df['close'], window=SCALPING_SETTINGS['ema_fast'])
+        # Standard Indicators
+        df['rsi'] = ta.momentum.RSIIndicator(df['close'], window=SCALPING_SETTINGS['rsi_period']).rsi()
+        df['ema_short'] = ta.trend.ema_indicator(df['close'], window=SCALPING_SETTINGS['ema_short'])
         df['ema_medium'] = ta.trend.ema_indicator(df['close'], window=SCALPING_SETTINGS['ema_medium'])
-        df['ema_slow'] = ta.trend.ema_indicator(df['close'], window=SCALPING_SETTINGS['ema_slow'])
         df['ema_long'] = ta.trend.ema_indicator(df['close'], window=SCALPING_SETTINGS['ema_long'])
-        # RSI
-        df['rsi'] = ta.momentum.rsi(df['close'], window=SCALPING_SETTINGS['rsi_period'])
-        # MACD
-        macd = ta.trend.MACD(df['close'], window_fast=SCALPING_SETTINGS['macd_fast'], window_slow=SCALPING_SETTINGS['macd_slow'], window_sign=SCALPING_SETTINGS['macd_signal'])
+
+        macd = ta.trend.MACD(df['close'],
+                           window_fast=SCALPING_SETTINGS['macd_fast'],
+                           window_slow=SCALPING_SETTINGS['macd_slow'],
+                           window_sign=SCALPING_SETTINGS['macd_signal'])
         df['macd'] = macd.macd()
         df['macd_signal'] = macd.macd_signal()
-        # Bollinger Bands
-        bb = ta.volatility.BollingerBands(df['close'], window=SCALPING_SETTINGS['bb_period'], window_dev=SCALPING_SETTINGS['bb_std'])
-        df['bb_upper'] = bb.bollinger_hband()
-        df['bb_middle'] = bb.bollinger_mavg()
-        df['bb_lower'] = bb.bollinger_lband()
-        df['bb_width'] = (df['bb_upper'] - df['bb_lower']) / df['bb_middle']
-        # Stochastic
-        stoch = ta.momentum.StochasticOscillator(df['high'], df['low'], df['close'], window=SCALPING_SETTINGS['stoch_k'], smooth_window=SCALPING_SETTINGS['stoch_d'])
+        df['macd_diff'] = macd.macd_diff()
+
+        bollinger = ta.volatility.BollingerBands(df['close'],
+                                              window=SCALPING_SETTINGS['bb_period'],
+                                              window_dev=SCALPING_SETTINGS['bb_std'])
+        df['bb_upper'] = bollinger.bollinger_hband()
+        df['bb_middle'] = bollinger.bollinger_mavg()
+        df['bb_lower'] = bollinger.bollinger_lband()
+
+        df['atr'] = ta.volatility.AverageTrueRange(
+            high=df['high'], low=df['low'], close=df['close'], window=14
+        ).average_true_range()
+
+        # New Indicators
+        stoch = ta.momentum.StochasticOscillator(high=df['high'], low=df['low'], close=df['close'],
+                                               window=SCALPING_SETTINGS['stoch_k'],
+                                               smooth_window=SCALPING_SETTINGS['stoch_d'])
         df['stoch_k'] = stoch.stoch()
         df['stoch_d'] = stoch.stoch_signal()
-        # ADX
-        adx = ta.trend.ADXIndicator(df['high'], df['low'], df['close'], window=SCALPING_SETTINGS['adx_period'])
+
+        adx = ta.trend.ADXIndicator(high=df['high'], low=df['low'], close=df['close'],
+                                  window=SCALPING_SETTINGS['adx_period'])
         df['adx'] = adx.adx()
-        df['adx_pos'] = adx.adx_pos()
-        df['adx_neg'] = adx.adx_neg()
-        # ATR
-        df['atr'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=SCALPING_SETTINGS['atr_period'])
-        # Volume
-        df['volume_sma'] = df['volume'].rolling(window=SCALPING_SETTINGS['volume_sma_period']).mean()
-        df['volume_ratio'] = df['volume'] / df['volume_sma']
-        # Support & Resistance
-        df['resistance'] = df['high'].rolling(window=15).max().shift(1)
-        df['support'] = df['low'].rolling(window=15).min().shift(1)
-        # Trend detection
-        df['trend'] = np.select(
-            [ (df['ema_fast'] > df['ema_medium']) & (df['ema_slow'] > df['ema_long']),
-              (df['ema_fast'] < df['ema_medium']) & (df['ema_slow'] < df['ema_long']) ],
-            ['up', 'down'], default='sideways'
-        )
+        df['adx_pos'] = adx.adx_pos() # +DI
+        df['adx_neg'] = adx.adx_neg() # -DI
+
+        ichi = ta.trend.IchimokuIndicator(high=df['high'], low=df['low'],
+                                        window1=SCALPING_SETTINGS['ichi_conv_period'],
+                                        window2=SCALPING_SETTINGS['ichi_base_period'],
+                                        window3=SCALPING_SETTINGS['ichi_span_b_period'],
+                                        visual=True) # visual=True shifts A and B forward
+        df['ichi_conv'] = ichi.ichimoku_conversion_line()
+        df['ichi_base'] = ichi.ichimoku_base_line()
+        df['ichi_a'] = ichi.ichimoku_a()
+        df['ichi_b'] = ichi.ichimoku_b()
+
+        # Price Action & Trend
+        df['volume_change'] = df['volume'].pct_change()
+        df['price_change'] = df['close'].pct_change()
+        df['resistance'] = df['high'].rolling(window=10).max()
+        df['support'] = df['low'].rolling(window=10).min()
+        df['trend'] = np.where(df['ema_short'] > df['ema_long'], 'up', 'down')
+
+        window = SCALPING_SETTINGS['trend_confirmation_window']
+        trend_confirmed = []
+        for i in range(len(df)):
+            if i < window - 1:
+                trend_confirmed.append('neutral')
+            else:
+                trend_slice = df['trend'].iloc[i - window + 1:i + 1]
+                trend_confirmed.append(check_trend_consistency(trend_slice))
+        df['trend_confirmed'] = trend_confirmed
+
         # Candlestick Patterns
-        df['candle_pattern'] = analyze_candlestick_patterns(df)
-        # Divergence (calculated on the last candle)
+        df['candle_pattern'] = identify_candlestick_patterns(df)
+
+        # Divergence (Check only for the latest candle for performance)
         df['rsi_divergence'] = 'none'
         df['macd_divergence'] = 'none'
         if len(df) > SCALPING_SETTINGS['divergence_lookback']:
-            df.loc[df.index[-1], 'rsi_divergence'] = find_divergence(df['close'], df['rsi'], SCALPING_SETTINGS['divergence_lookback'])
-            df.loc[df.index[-1], 'macd_divergence'] = find_divergence(df['close'], df['macd'], SCALPING_SETTINGS['divergence_lookback'])
+             df.loc[df.index[-1], 'rsi_divergence'] = find_divergence(df['close'], df['rsi'], SCALPING_SETTINGS['divergence_lookback'])
+             df.loc[df.index[-1], 'macd_divergence'] = find_divergence(df['close'], df['macd_diff'], SCALPING_SETTINGS['divergence_lookback'])
 
+        # Drop NaN values created by indicators
         df.dropna(inplace=True)
-        return df.reset_index(drop=True)
+        df.reset_index(drop=True, inplace=True)
+
+        return df
     except Exception as e:
-        print(f"--> Error preparing dataframe for {timeframe}: {e}")
-        traceback.print_exc()
+        print(f"Error preparing DataFrame for {timeframe}: {e}")
+        print(traceback.format_exc())
         return None
 
-def quality_filter(symbol, market_stats, df_primary):
-    if not market_stats:
-        print(f"--> Skipping {symbol}: No market stats available.")
-        return False
-    # Volume filter
-    if market_stats['volume_24h'] < MARKET_FILTERS['min_daily_volume']:
-        print(f"--> Skipping {symbol}: Low 24h volume ({market_stats['volume_24h']:,.0f}).")
-        return False
-    # Price change filter
-    abs_change = abs(market_stats['change_rate_24h'])
-    if not (MARKET_FILTERS['min_price_change_percent'] <= abs_change <= MARKET_FILTERS['max_price_change_percent']):
-        print(f"--> Skipping {symbol}: 24h change ({abs_change:.2f}%) is outside acceptable range.")
-        return False
-    # Volatility filter (using ATR from prepared dataframe)
-    if df_primary is not None and not df_primary.empty:
-        volatility_pct = (df_primary['atr'].iloc[-1] / df_primary['close'].iloc[-1]) * 100
-        if not (MARKET_FILTERS['min_volatility_percent'] <= volatility_pct <= MARKET_FILTERS['max_volatility_percent']):
-            print(f"--> Skipping {symbol}: Volatility ({volatility_pct:.2f}%) is outside acceptable range.")
-            return False
-    
-    print(f"-> {symbol} passed quality filters.")
-    return True
-
 def generate_tradingview_link(symbol):
-    tv_symbol = symbol.replace('-', '')
-    return f"https://www.tradingview.com/chart/?symbol=KUCOIN:{tv_symbol}"
+    """Generate TradingView chart link for the given symbol"""
+    tradingview_symbol = symbol.replace('-', '')
+    return f"https://www.tradingview.com/chart/?symbol=KUCOIN:{tradingview_symbol}"
 
 def main():
-    print("🚀 Starting High Win-Rate Crypto Analysis...")
+    print("🚀 Starting cryptocurrency analysis (Enhanced)...")
     signals_sent = 0
     tehran_tz = pytz.timezone('Asia/Tehran')
     active_signals = {s['symbol']: s for s in load_signals() if s['status'] == 'active'}
 
     for crypto in CRYPTOCURRENCIES:
-        print(f"\n{'='*50}\nAnalyzing {crypto}...")
+        print(f"\nAnalyzing {crypto}...")
         try:
             trading_symbol = KUCOIN_SUPPORTED_PAIRS.get(crypto, crypto)
-            if trading_symbol != crypto: print(f"-> Using {trading_symbol} for {crypto}")
+            if trading_symbol != crypto:
+                print(f"Using {trading_symbol} instead of {crypto}")
 
-            market_stats = fetch_market_stats(trading_symbol)
-            if not quality_filter(crypto, market_stats, None):
+            volume_24h = fetch_volume_data(trading_symbol)
+            if volume_24h < SCALPING_SETTINGS['min_volume_threshold']:
+                print(f"Skipping {crypto} due to low 24h volume: {volume_24h}")
                 continue
 
             if crypto in active_signals:
-                created_at = datetime.fromisoformat(active_signals[crypto]['created_at'])
-                time_diff_min = (datetime.now(pytz.utc) - created_at).total_seconds() / 60
-                if time_diff_min < SCALPING_SETTINGS['signal_cooldown_minutes']:
-                    print(f"--> Skipping {crypto}: In cooldown for another {SCALPING_SETTINGS['signal_cooldown_minutes'] - time_diff_min:.0f} minutes.")
-                    continue
-            
-            # Fetch data for all timeframes
-            df_primary = fetch_kline_data(trading_symbol, KLINE_SIZE, PRIMARY_TIMEFRAME)
-            df_higher = fetch_kline_data(trading_symbol, KLINE_SIZE, HIGHER_TIMEFRAME)
-            df_trend = fetch_kline_data(trading_symbol, KLINE_SIZE, TREND_TIMEFRAME)
-            if any(df is None for df in [df_primary, df_higher, df_trend]): continue
-            
-            # Prepare all dataframes
-            prepared_primary = prepare_dataframe(df_primary, PRIMARY_TIMEFRAME)
-            prepared_higher = prepare_dataframe(df_higher, HIGHER_TIMEFRAME)
-            prepared_trend = prepare_dataframe(df_trend, TREND_TIMEFRAME)
-            if any(df is None or df.empty for df in [prepared_primary, prepared_higher, prepared_trend]):
-                print(f"--> Skipping {crypto}: Failed to prepare one or more dataframes.")
+                try:
+                    created_at_str = active_signals[crypto]['created_at']
+                    # Handle both ISO format and older format robustly
+                    if 'T' in created_at_str and ('+' in created_at_str or 'Z' in created_at_str):
+                         created_at = datetime.fromisoformat(created_at_str)
+                    else:
+                         created_at = tehran_tz.localize(datetime.strptime(created_at_str, "%Y-%m-%d %H:%M:%S"))
+
+                    time_diff = (datetime.now(tehran_tz) - created_at).total_seconds() / 60
+                    if time_diff < SCALPING_SETTINGS['signal_cooldown_minutes']:
+                        print(f"Skipping {crypto} due to active signal cooldown ({time_diff:.1f}m < {SCALPING_SETTINGS['signal_cooldown_minutes']}m)")
+                        continue
+                except Exception as e:
+                     print(f"Error processing cooldown for {crypto}: {e}. Continuing analysis.")
+
+
+            df_primary = fetch_kline_data(trading_symbol, size=KLINE_SIZE, interval=PRIMARY_TIMEFRAME)
+            if df_primary is None:
                 continue
 
-            if not quality_filter(crypto, market_stats, prepared_primary):
+            df_higher = fetch_kline_data(trading_symbol, size=KLINE_SIZE // 2, interval=HIGHER_TIMEFRAME)
+            if df_higher is None:
                 continue
-            
-            print(f"-> Generating signals for {crypto}...")
-            signals = generate_signals(prepared_primary, prepared_higher, prepared_trend, crypto)
-            
+
+            prepared_df_primary = prepare_dataframe(df_primary, PRIMARY_TIMEFRAME)
+            prepared_df_higher = prepare_dataframe(df_higher, HIGHER_TIMEFRAME)
+            if prepared_df_primary is None or len(prepared_df_primary) == 0 or \
+               prepared_df_higher is None or len(prepared_df_higher) == 0:
+                print(f"Skipping {crypto} due to insufficient prepared data.")
+                continue
+
+            signals = generate_signals(prepared_df_primary, prepared_df_higher, crypto)
             for signal in signals:
                 tradingview_link = generate_tradingview_link(signal['symbol'])
+                # *** THIS IS THE CHANGED PART ***
+                # Using <code> for prices and <b> for titles for better HTML.
+                # Added <a href> for the link.
                 message = (
                     f"<b>🚨 Signal {signal['type']} for {signal['symbol']} 🚨</b>\n\n"
-                    f"💰 <b>Entry Price:</b> <code>{signal['entry_price']:.8f}</code>\n"
-                    f"🎯 <b>Target Price:</b> <code>{signal['target_price']:.8f}</code>\n"
-                    f"🛑 <b>Stop Loss:</b> <code>{signal['stop_loss']:.8f}</code>\n\n"
+                    f"💰 <b>Current Price:</b> <code>{signal['current_price']}</code>\n"
+                    f"🎯 <b>Target Price:</b> <code>{signal['target_price']}</code>\n"
+                    f"🛑 <b>Stop Loss:</b> <code>{signal['stop_loss']}</code>\n"
                     f"🏆 <b>Score:</b> {signal['score']}/100\n"
-                    f"📈 <b>Risk/Reward Ratio:</b> {signal['risk_reward_ratio']:.2f}\n\n"
+                    f"📈 <b>Risk/Reward:</b> {signal['risk_reward_ratio']:.2f}\n\n"
                     f"<b>📝 Reasons:</b>\n{signal['reasons']}\n\n"
-                    f"📊 <a href='{tradingview_link}'>TradingView Chart</a>\n"
+                    f"📊 <b>View Chart:</b> <a href=\"{tradingview_link}\">TradingView Link</a>\n"
                     f"⏱️ <b>Time (Tehran):</b> {signal['time']}"
                 )
+                # *** END OF CHANGED PART ***
                 if send_telegram_message(message):
                     signals_sent += 1
-                    save_signal(signal) # The signal with float prices is saved here
+                    save_signal(signal)
                     print(f"✅ Signal sent and saved for {crypto}: {signal['type']}")
                 else:
                     print(f"❌ Failed to send signal for {crypto}")
 
         except Exception as e:
-            print(f"--> UNHANDLED ERROR during analysis of {crypto}: {e}")
-            traceback.print_exc()
-        time.sleep(1)
+            print(f"Error during analysis of {crypto}: {e}")
+            print(traceback.format_exc())
 
-    print(f"\n{'='*50}\nAnalysis complete. {signals_sent} new signals sent.")
-    if signals_sent > 0:
-        send_telegram_message(f"✅ Scan finished. Sent {signals_sent} new high-quality signals.", silent=True)
+        time.sleep(1) # Slightly increased sleep time
+
+    send_telegram_message(f"✅ Scan completed. {signals_sent} signals sent.", silent=True)
+    print(f"\nAnalysis complete. {signals_sent} signals sent.")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"Fatal error: {e}")
+        send_telegram_message(f"❌ System error: {e}")
+
