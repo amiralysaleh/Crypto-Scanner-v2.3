@@ -18,7 +18,16 @@ on:
         required: true
         default: '2025-05-26'
         type: string
-      # Capital and size inputs are no longer needed as they are read from config.py
+      capital:
+        description: 'Initial Capital'
+        required: false
+        default: '10000'
+        type: string
+      size:
+        description: 'Trade Size'
+        required: false
+        default: '1000'
+        type: string
 
 jobs:
   run-backtest:
@@ -33,6 +42,8 @@ jobs:
         with:
           python-version: '3.10'
 
+      # No need for __init__.py if not using -m or relative imports
+
       - name: ⚙️ Install Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -41,19 +52,17 @@ jobs:
       - name: 🏃 Run Backtester
         id: backtest_run
         env:
-          PYTHONPATH: 'src'
+          PYTHONPATH: 'src' # <<<--- Set PYTHONPATH to 'src'
         run: |
-          # The --capital and --size arguments have been removed
-          # as they are now defined in config.py
           python src/backtester.py \
             --symbol ${{ github.event.inputs.symbol }} \
             --start ${{ github.event.inputs.start_date }} \
-            --end ${{ github.event.inputs.end_date }}
+            --end ${{ github.event.inputs.end_date }} \
+            --capital ${{ github.event.inputs.capital }} \
+            --size ${{ github.event.inputs.size }}
 
       - name: 📄 Prepare Result File Path
         id: file_info
-        # This step will only run if the backtest is successful
-        if: success()
         run: |
           FILE_NAME="data/backtest_results_${{ github.event.inputs.symbol }}_${{ github.event.inputs.start_date }}_to_${{ github.event.inputs.end_date }}.csv"
           echo "file_path=${FILE_NAME}" >> $GITHUB_OUTPUT
@@ -64,12 +73,11 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          PYTHONPATH: 'src'
+          PYTHONPATH: 'src' # <<<--- Set PYTHONPATH here too
         run: |
           python src/telegram_file_sender.py ${{ steps.file_info.outputs.file_path }}
 
-      - name: 📤 Upload Artifact
-        # This step will always run, making it easier to debug if the file is not found
+      - name: 📤 Upload Artifact (Optional)
         if: always()
         uses: actions/upload-artifact@v4
         with:
