@@ -170,5 +170,19 @@
         "created_at": "2025-05-30T20:18:22.666904+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "1.10030000"
+    },
+    {
+        "symbol": "ZEC-USDT",
+        "type": "BUY",
+        "current_price": "49.48400000",
+        "target_price": "50.69179836",
+        "stop_loss": "48.88010082",
+        "time": "2025-05-30 21:06:23",
+        "reasons": "\u2705 RSI near oversold (30.52)\n\u2705 Stoch K > D in oversold (6.96 > 4.93)\n\u2705 Price near support (49.2830)\n\u2705 Bullish candle pattern (bullish_engulfing)\n\u2705 Bullish Divergence detected (RSI: none, MACD: bullish)",
+        "score": 41,
+        "status": "active",
+        "created_at": "2025-05-30T21:06:23.685162+03:30",
+        "risk_reward_ratio": 1.9999999999999882,
+        "entry_price": "49.48400000"
     }
 ]
