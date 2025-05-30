@@ -118,10 +118,12 @@
         "time": "2025-05-30 10:19:29",
         "reasons": "\u2705 MACD bearish cross\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish candle pattern (shooting_star)\n\u2705 Higher TF (1h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 45,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-05-30T10:19:29.460919+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.27160000"
+        "entry_price": "0.27160000",
+        "closed_price": "0.27342211",
+        "closed_at": "2025-05-30T14:00:00+03:30"
     },
     {
         "symbol": "LTC-USDT",
