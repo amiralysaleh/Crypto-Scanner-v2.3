@@ -132,9 +132,11 @@
         "time": "2025-05-30 12:50:27",
         "reasons": "\u2705 RSI near oversold (33.09)\n\u2705 Stoch K > D in oversold (19.02 > 16.10)\n\u2705 Price near support (89.7290)\n\u2705 Bullish candle pattern (hammer)\n\u2705 Bullish Divergence detected (RSI: bullish, MACD: bullish)",
         "score": 41,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-05-30T12:50:27.931622+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "90.18700000"
+        "entry_price": "90.18700000",
+        "closed_price": "89.44287298",
+        "closed_at": "2025-05-30T13:00:00+03:30"
     }
 ]
