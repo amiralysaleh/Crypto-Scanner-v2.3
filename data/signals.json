@@ -216,10 +216,12 @@
         "time": "2025-05-31 07:05:14",
         "reasons": "\u2705 RSI near oversold (27.85)\n\u2705 Stoch K > D in oversold (3.02 > 2.27)\n\u2705 Price near support (3.1450)\n\u2705 Bullish candle pattern (hammer)\n\u2705 Bullish Divergence detected (RSI: bullish, MACD: none)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 47,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-05-31T07:05:14.788806+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "3.15700000"
+        "entry_price": "3.15700000",
+        "closed_price": "3.26381825",
+        "closed_at": "2025-05-31T16:00:00+03:30"
     },
     {
         "symbol": "SUI-USDT",
@@ -230,10 +232,12 @@
         "time": "2025-05-31 12:45:23",
         "reasons": "\u2705 Stoch K < D in overbought (82.24 < 82.65)\n\u2705 Price near resistance (3.1885)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish candle pattern (shooting_star)\n\u2705 Higher TF (1h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 44,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-05-31T12:45:23.370835+03:30",
         "risk_reward_ratio": 2.000000000000012,
-        "entry_price": "3.16450000"
+        "entry_price": "3.16450000",
+        "closed_price": "3.20190609",
+        "closed_at": "2025-05-31T16:30:00+03:30"
     },
     {
         "symbol": "HBAR-USDT",
@@ -244,9 +248,11 @@
         "time": "2025-05-31 15:16:08",
         "reasons": "\u2705 RSI near oversold (34.76)\n\u2705 Stoch K > D in oversold (18.39 > 14.60)\n\u2705 Price near support (0.1610)\n\u2705 Bullish candle pattern (hammer)\n\u2705 Bullish Divergence detected (RSI: none, MACD: bullish)",
         "score": 41,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-05-31T15:16:08.533688+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.16162000"
+        "entry_price": "0.16162000",
+        "closed_price": "0.16458403",
+        "closed_at": "2025-05-31T16:00:00+03:30"
     }
 ]
