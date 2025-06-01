@@ -344,5 +344,19 @@
         "created_at": "2025-06-01T00:43:42.939768+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "0.65600000"
+    },
+    {
+        "symbol": "BTC-USDT",
+        "type": "SELL",
+        "current_price": "104364.00000000",
+        "target_price": "103911.19910157",
+        "stop_loss": "104590.40044922",
+        "time": "2025-06-01 04:56:33",
+        "reasons": "\u2705 Price near resistance (104899.9000)\n\u2705 Bearish candle pattern (bearish_engulfing)\n\u2705 Bearish Divergence detected (RSI: bearish, MACD: bearish)\n\u2705 Higher TF (1h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 41,
+        "status": "active",
+        "created_at": "2025-06-01T04:56:33.252575+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "104364.00000000"
     }
 ]
