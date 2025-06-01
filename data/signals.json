@@ -358,10 +358,12 @@
         "time": "2025-06-01 04:56:33",
         "reasons": "\u2705 Price near resistance (104899.9000)\n\u2705 Bearish candle pattern (bearish_engulfing)\n\u2705 Bearish Divergence detected (RSI: bearish, MACD: bearish)\n\u2705 Higher TF (1h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 41,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-01T04:56:33.252575+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "104364.00000000"
+        "entry_price": "104364.00000000",
+        "closed_price": "104590.40044922",
+        "closed_at": "2025-06-01T08:00:00+03:30"
     },
     {
         "symbol": "UNI-USDT",
@@ -372,10 +374,12 @@
         "time": "2025-06-01 06:49:27",
         "reasons": "\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish Divergence detected (RSI: bearish, MACD: bearish)\n\u2705 Higher TF (1h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 41,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-01T06:49:27.609257+03:30",
         "risk_reward_ratio": 1.999999999999984,
-        "entry_price": "5.93580000"
+        "entry_price": "5.93580000",
+        "closed_price": "5.99100061",
+        "closed_at": "2025-06-01T07:00:00+03:30"
     },
     {
         "symbol": "ARB-USDT",
