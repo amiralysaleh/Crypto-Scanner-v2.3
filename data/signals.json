@@ -396,5 +396,19 @@
         "entry_price": "0.33680000",
         "closed_price": "0.33962821",
         "closed_at": "2025-06-01T08:00:00+03:30"
+    },
+    {
+        "symbol": "LUNA-USDT",
+        "type": "SELL",
+        "current_price": "0.17410000",
+        "target_price": "0.17120849",
+        "stop_loss": "0.17554575",
+        "time": "2025-06-01 09:52:43",
+        "reasons": "\u2705 RSI near overbought (65.40)\n\u2705 Stoch K < D in overbought (80.95 < 87.11)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.1753)\n\u2705 Bearish Divergence detected (RSI: bearish, MACD: bearish)\n\u2705 Higher TF (1h) is in downtrend",
+        "score": 44,
+        "status": "active",
+        "created_at": "2025-06-01T09:52:43.094164+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "0.17410000"
     }
 ]
