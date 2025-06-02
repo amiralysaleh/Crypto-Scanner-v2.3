@@ -446,5 +446,19 @@
         "entry_price": "0.75550000",
         "closed_price": "0.77209969",
         "closed_at": "2025-06-01T19:30:00+03:30"
+    },
+    {
+        "symbol": "CKB-USDT",
+        "type": "SELL",
+        "current_price": "0.00412800",
+        "target_price": "0.00399234",
+        "stop_loss": "0.00419583",
+        "time": "2025-06-02 12:59:22",
+        "reasons": "\u2705 EMA Short/Medium bearish cross\n\u2705 MACD bearish cross\n\u2705 Bearish Divergence detected (RSI: bearish, MACD: bearish)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 41,
+        "status": "active",
+        "created_at": "2025-06-02T12:59:22.789647+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "0.00412800"
     }
 ]
