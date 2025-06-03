@@ -580,9 +580,11 @@
         "time": "2025-06-03 19:51:50",
         "reasons": "\u2705 Volume surge (10.42X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Bullish Divergence detected (RSI: bearish, MACD: bullish)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 44,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-03T19:51:50.985891+03:30",
         "risk_reward_ratio": 1.9999999999999856,
-        "entry_price": "5.45500000"
+        "entry_price": "5.45500000",
+        "closed_price": "5.39301827",
+        "closed_at": "2025-06-03T20:00:00+03:30"
     }
 ]
