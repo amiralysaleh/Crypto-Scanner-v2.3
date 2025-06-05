@@ -14,5 +14,19 @@
         "entry_price": "2.18737000",
         "closed_price": "2.19736849",
         "closed_at": "2025-06-05T12:30:00+03:30"
+    },
+    {
+        "symbol": "XMR-USDT",
+        "type": "SELL",
+        "current_price": "313.33000000",
+        "target_price": "304.45922420",
+        "stop_loss": "317.76538790",
+        "time": "2025-06-05 23:45:55",
+        "reasons": "\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish candle pattern (shooting_star)\n\u2705 Bearish Divergence detected (RSI: none, MACD: bearish)\n\u2705 Higher TF (1h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 51,
+        "status": "active",
+        "created_at": "2025-06-05T23:45:55.024644+03:30",
+        "risk_reward_ratio": 2.000000000000013,
+        "entry_price": "313.33000000"
     }
 ]
