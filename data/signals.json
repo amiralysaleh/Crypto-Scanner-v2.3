@@ -40,9 +40,11 @@
         "time": "2025-06-06 04:44:52",
         "reasons": "\u2705 Stoch K < D in overbought (95.44 < 96.60)\n\u2705 Price near resistance (101928.8000)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish Divergence detected (RSI: none, MACD: bearish)\n\u2705 Higher TF (1h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 51,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-06T04:44:52.179697+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "101887.90000000"
+        "entry_price": "101887.90000000",
+        "closed_price": "102253.2503836",
+        "closed_at": "2025-06-06T06:30:00+03:30"
     }
 ]
