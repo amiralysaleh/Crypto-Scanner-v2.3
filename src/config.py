@@ -87,8 +87,8 @@ SCALPING_SETTINGS = {
 }
 
 # تنظیمات تایم فریم‌ها
-PRIMARY_TIMEFRAME = "30min"
-HIGHER_TIMEFRAME = "1hour"
+PRIMARY_TIMEFRAME = "15min"
+HIGHER_TIMEFRAME = "30min"
 KLINE_SIZE = 900  # Ensure enough data for Ichimoku and lookbacks
 SIGNALS_FILE = "data/signals.json"
 
