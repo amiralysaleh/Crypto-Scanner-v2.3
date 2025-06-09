@@ -78,7 +78,7 @@ SCALPING_SETTINGS = {
     'volume_change_threshold': 1.3,
     'profit_target_multiplier': 3.0,  # افزایش به 3.0 برای هدف سود بزرگ‌تر
     'stop_loss_multiplier': 1.5,      # افزایش به 1.5 برای استاپ لاس بازتر
-    'min_score_threshold': 65        # افزایش به 70 برای فیلتر سیگنال‌های ضعیف
+    'min_score_threshold': 65,       # افزایش به 70 برای فیلتر سیگنال‌های ضعیف
     'min_risk_reward_ratio': 2.5,     # افزایش به 2.5 برای نسبت ریسک/ریوارد بالاتر
     'signal_cooldown_minutes': 60,
     'max_signals_per_symbol': 1,
