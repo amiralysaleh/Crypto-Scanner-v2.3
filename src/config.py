@@ -47,9 +47,9 @@ SCALPING_SETTINGS = {
     'rsi_overbought': 70,
     'rsi_oversold': 30,
     # EMA
-    'ema_short': 9,  # Slightly adjusted
+    'ema_short': 9,
     'ema_medium': 21,
-    'ema_long': 55,  # Adjusted
+    'ema_long': 55,
     # MACD
     'macd_fast': 12,
     'macd_slow': 26,
@@ -65,31 +65,31 @@ SCALPING_SETTINGS = {
     'stoch_oversold': 20,
     # ADX
     'adx_period': 14,
-    'adx_threshold': 23,  # Minimum trend strength
+    'adx_threshold': 23,
     # Ichimoku
     'ichi_conv_period': 9,
     'ichi_base_period': 26,
     'ichi_span_b_period': 52,
     'ichi_lag_span_period': 26,
     # Divergence
-    'divergence_lookback': 25, # How many candles to look back for divergence
+    'divergence_lookback': 25,
     # General
     'min_volume_threshold': 300000,
     'volume_change_threshold': 1.3,
-    'profit_target_multiplier': 2.0,  # Increased R:R target
-    'stop_loss_multiplier': 1.0,     # Tighter stop loss
-    'min_score_threshold': 40,       # Increased threshold for higher quality
-    'min_risk_reward_ratio': 1.5,    # Increased R:R
+    'profit_target_multiplier': 3.0,  # افزایش به 3.0 برای هدف سود بزرگ‌تر
+    'stop_loss_multiplier': 1.5,      # افزایش به 1.5 برای استاپ لاس بازتر
+    'min_score_threshold': 65        # افزایش به 70 برای فیلتر سیگنال‌های ضعیف
+    'min_risk_reward_ratio': 2.5,     # افزایش به 2.5 برای نسبت ریسک/ریوارد بالاتر
     'signal_cooldown_minutes': 60,
     'max_signals_per_symbol': 1,
-    'trend_confirmation_window': 10,
+    'trend_confirmation_window': 15,   # افزایش به 15 برای تأیید بهتر روند
     'fee_percent': 0.1,
 }
 
 # تنظیمات تایم فریم‌ها
-PRIMARY_TIMEFRAME = "1hour"  # تغییر به تایم فریم 1 ساعته
-HIGHER_TIMEFRAME = "4hour"   # تغییر تایم فریم بالاتر به 4 ساعته
-KLINE_SIZE = 200  # افزایش برای تحلیل بلندمدت
+PRIMARY_TIMEFRAME = "1hour"
+HIGHER_TIMEFRAME = "4hour"
+KLINE_SIZE = 200
 SIGNALS_FILE = "data/signals.json"
 
 # تنظیمات API کوکوین
@@ -100,17 +100,17 @@ KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
 # وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید با تمرکز روی Ichimoku، Divergence و Higher TF
 SIGNAL_WEIGHTS = {
-    'rsi': 0,           # غیرفعال کردن RSI
-    'ema': 0,           # غیرفعال کردن EMA
-    'macd': 0,          # غیرفعال کردن MACD
-    'bb': 0,            # غیرفعال کردن Bollinger Bands
-    'stoch': 0,         # غیرفعال کردن Stochastic
-    'adx': 0,           # غیرفعال کردن ADX
-    'ichi': 40,         # وزن بالا برای Ichimoku به دلیل دقت در روند
-    'divergence': 30,   # وزن بالا برای واگرایی به عنوان سیگنال برگشتی
-    'candle': 0,        # غیرفعال کردن الگوهای کندلی
-    'volume': 0,        # غیرفعال کردن حجم
-    'support': 0,       # غیرفعال کردن حمایت
-    'resistance': 0,    # غیرفعال کردن مقاومت
-    'higher_tf': 30,    # وزن بالا برای تأیید روند تایم فریم بالاتر
+    'rsi': 0,
+    'ema': 0,
+    'macd': 0,
+    'bb': 0,
+    'stoch': 0,
+    'adx': 0,
+    'ichi': 40,
+    'divergence': 30,
+    'candle': 0,
+    'volume': 0,
+    'support': 0,
+    'resistance': 0,
+    'higher_tf': 30,
 }
