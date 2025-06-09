@@ -104,3 +104,4 @@ SIGNAL_WEIGHTS = {
     'stoch': 10, 'adx': 10, 'ichi': 20, 'divergence': 25,
     'candle': 15, 'volume': 5, 'support': 5, 'resistance': 5,
     'higher_tf': 10
+}
