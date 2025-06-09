@@ -87,9 +87,9 @@ SCALPING_SETTINGS = {
 }
 
 # تنظیمات تایم فریم‌ها
-PRIMARY_TIMEFRAME = "1hour"
-HIGHER_TIMEFRAME = "4hour"
-KLINE_SIZE = 800  # Ensure enough data for Ichimoku and lookbacks
+PRIMARY_TIMEFRAME = "1hour"  # تغییر به تایم فریم 1 ساعته
+HIGHER_TIMEFRAME = "4hour"   # تغییر تایم فریم بالاتر به 4 ساعته
+KLINE_SIZE = 200  # افزایش برای تحلیل بلندمدت
 SIGNALS_FILE = "data/signals.json"
 
 # تنظیمات API کوکوین
@@ -98,10 +98,19 @@ KUCOIN_KLINE_ENDPOINT = "/api/v1/market/candles"
 KUCOIN_TICKER_ENDPOINT = "/api/v1/market/orderbook/level1"
 KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
-# وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
+# وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید با تمرکز روی Ichimoku، Divergence و Higher TF
 SIGNAL_WEIGHTS = {
-    'rsi': 10, 'ema': 15, 'macd': 15, 'bb': 10,
-    'stoch': 10, 'adx': 10, 'ichi': 20, 'divergence': 25,
-    'candle': 15, 'volume': 5, 'support': 5, 'resistance': 5,
-    'higher_tf': 10
+    'rsi': 0,           # غیرفعال کردن RSI
+    'ema': 0,           # غیرفعال کردن EMA
+    'macd': 0,          # غیرفعال کردن MACD
+    'bb': 0,            # غیرفعال کردن Bollinger Bands
+    'stoch': 0,         # غیرفعال کردن Stochastic
+    'adx': 0,           # غیرفعال کردن ADX
+    'ichi': 40,         # وزن بالا برای Ichimoku به دلیل دقت در روند
+    'divergence': 30,   # وزن بالا برای واگرایی به عنوان سیگنال برگشتی
+    'candle': 0,        # غیرفعال کردن الگوهای کندلی
+    'volume': 0,        # غیرفعال کردن حجم
+    'support': 0,       # غیرفعال کردن حمایت
+    'resistance': 0,    # غیرفعال کردن مقاومت
+    'higher_tf': 30,    # وزن بالا برای تأیید روند تایم فریم بالاتر
 }
