@@ -1024,5 +1024,47 @@
         "created_at": "2025-06-10T01:25:06.536834+03:30",
         "risk_reward_ratio": 2.0000000000000093,
         "entry_price": "425.29000000"
+    },
+    {
+        "symbol": "TRX-USDT",
+        "type": "BUY",
+        "current_price": "0.28940000",
+        "target_price": "0.29252868",
+        "stop_loss": "0.28783566",
+        "time": "2025-06-10 01:45:23",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Bullish Divergence detected (RSI: bullish, MACD: bullish)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 54,
+        "status": "active",
+        "created_at": "2025-06-10T01:45:23.954941+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "0.28940000"
+    },
+    {
+        "symbol": "TON-USDT",
+        "type": "BUY",
+        "current_price": "3.31550000",
+        "target_price": "3.36865626",
+        "stop_loss": "3.28892187",
+        "time": "2025-06-10 01:45:43",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 49,
+        "status": "active",
+        "created_at": "2025-06-10T01:45:43.309167+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "3.31550000"
+    },
+    {
+        "symbol": "BCH-USDT",
+        "type": "BUY",
+        "current_price": "427.65000000",
+        "target_price": "433.95693945",
+        "stop_loss": "424.49653027",
+        "time": "2025-06-10 01:45:57",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 49,
+        "status": "active",
+        "created_at": "2025-06-10T01:45:57.051842+03:30",
+        "risk_reward_ratio": 2.000000000000018,
+        "entry_price": "427.65000000"
     }
 ]
