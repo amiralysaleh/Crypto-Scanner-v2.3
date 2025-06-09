@@ -47,9 +47,9 @@ SCALPING_SETTINGS = {
     'rsi_overbought': 70,
     'rsi_oversold': 30,
     # EMA
-    'ema_short': 20,  # تنظیم برای کراس کوتاه‌مدت
-    'ema_medium': 50, # تنظیم برای تأیید روند
-    'ema_long': 200,  # حفظ برای تحلیل بلندمدت
+    'ema_short': 8,   # تغییر به EMA کوتاه‌تر برای سیگنال بیشتر
+    'ema_medium': 21, # تغییر به EMA میانی برای کراس
+    'ema_long': 50,   # کاهش برای تمرکز روی کوتاه‌مدت
     # MACD
     'macd_fast': 12,
     'macd_slow': 26,
@@ -65,7 +65,7 @@ SCALPING_SETTINGS = {
     'stoch_oversold': 20,
     # ADX
     'adx_period': 14,
-    'adx_threshold': 25,  # افزایش برای تأیید قوی‌تر روند
+    'adx_threshold': 20,  # کاهش برای تولید سیگنال بیشتر
     # Ichimoku
     'ichi_conv_period': 9,
     'ichi_base_period': 26,
@@ -75,21 +75,21 @@ SCALPING_SETTINGS = {
     'divergence_lookback': 25,
     # General
     'min_volume_threshold': 500000,
-    'volume_change_threshold': 1.5,
-    'profit_target_multiplier': 3.0,  # افزایش برای ریسک به ریوارد بهتر
+    'volume_change_threshold': 1.2,  # کاهش برای انعطاف بیشتر
+    'profit_target_multiplier': 2.0,
     'stop_loss_multiplier': 1.0,
-    'min_score_threshold': 40,  # افزایش برای سیگنال‌های قوی‌تر
-    'min_risk_reward_ratio': 3.0,  # افزایش برای وین ریت بالا
-    'signal_cooldown_minutes': 1440,  # تغییر به 24 ساعت (1440 دقیقه)
+    'min_score_threshold': 40,  # تنظیم طبق درخواست
+    'min_risk_reward_ratio': 2.0,  # کاهش برای تولید سیگنال بیشتر
+    'signal_cooldown_minutes': 120,  # کاهش به 2 ساعت
     'max_signals_per_symbol': 1,
-    'trend_confirmation_window': 20,
+    'trend_confirmation_window': 15,  # کاهش برای انعطاف
     'fee_percent': 0.1,
 }
 
 # تنظیمات تایم فریم‌ها
 PRIMARY_TIMEFRAME = "1hour"
 HIGHER_TIMEFRAME = "4hour"
-KLINE_SIZE = 900
+KLINE_SIZE = 500
 SIGNALS_FILE = "data/signals.json"
 
 # تنظیمات API کوکوین
@@ -100,17 +100,17 @@ KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
 # وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
 SIGNAL_WEIGHTS = {
-    'rsi': 10,
-    'ema': 40,  # افزایش وزن برای کراس EMA (استراتژی اصلی)
-    'macd': 15,
-    'bb': 0,    # کاهش به 0 برای تمرکز روی EMA
-    'stoch': 5,
-    'adx': 20,  # افزایش وزن برای تأیید روند
-    'ichi': 0,  # کاهش به 0
-    'divergence': 0,  # کاهش به 0
-    'candle': 0,  # کاهش به 0
-    'volume': 5,
-    'support': 20,  # افزایش وزن برای نقاط ورود
-    'resistance': 20,  # افزایش وزن برای نقاط خروج
-    'higher_tf': 15,  # افزایش وزن برای تأیید تایم فریم بالاتر
+    'rsi': 15,  # افزایش برای تأیید مومنتوم
+    'ema': 35,  # کاهش اما همچنان مهم
+    'macd': 10,
+    'bb': 5,
+    'stoch': 10,
+    'adx': 15,  # کاهش اما همچنان مهم
+    'ichi': 5,
+    'divergence': 5,
+    'candle': 5,
+    'volume': 10,
+    'support': 20,  # افزایش برای نقاط ورود
+    'resistance': 20,  # افزایش برای نقاط خروج
+    'higher_tf': 15,  # افزایش برای تأیید
 }
