@@ -47,9 +47,9 @@ SCALPING_SETTINGS = {
     'rsi_overbought': 70,
     'rsi_oversold': 30,
     # EMA
-    'ema_short': 9,
+    'ema_short': 9,  # Slightly adjusted
     'ema_medium': 21,
-    'ema_long': 55,
+    'ema_long': 55,  # Adjusted
     # MACD
     'macd_fast': 12,
     'macd_slow': 26,
@@ -65,31 +65,31 @@ SCALPING_SETTINGS = {
     'stoch_oversold': 20,
     # ADX
     'adx_period': 14,
-    'adx_threshold': 23,
+    'adx_threshold': 23,  # Minimum trend strength
     # Ichimoku
     'ichi_conv_period': 9,
     'ichi_base_period': 26,
     'ichi_span_b_period': 52,
     'ichi_lag_span_period': 26,
     # Divergence
-    'divergence_lookback': 25,
+    'divergence_lookback': 25, # How many candles to look back for divergence
     # General
     'min_volume_threshold': 300000,
     'volume_change_threshold': 1.3,
-    'profit_target_multiplier': 3.0,  # افزایش به 3.0 برای هدف سود بزرگ‌تر
-    'stop_loss_multiplier': 1.5,      # افزایش به 1.5 برای استاپ لاس بازتر
-    'min_score_threshold': 65,       # افزایش به 70 برای فیلتر سیگنال‌های ضعیف
-    'min_risk_reward_ratio': 2.5,     # افزایش به 2.5 برای نسبت ریسک/ریوارد بالاتر
+    'profit_target_multiplier': 2.0,  # Increased R:R target
+    'stop_loss_multiplier': 1.0,     # Tighter stop loss
+    'min_score_threshold': 40,       # Increased threshold for higher quality
+    'min_risk_reward_ratio': 1.5,    # Increased R:R
     'signal_cooldown_minutes': 60,
     'max_signals_per_symbol': 1,
-    'trend_confirmation_window': 15,   # افزایش به 15 برای تأیید بهتر روند
+    'trend_confirmation_window': 10,
     'fee_percent': 0.1,
 }
 
 # تنظیمات تایم فریم‌ها
 PRIMARY_TIMEFRAME = "1hour"
 HIGHER_TIMEFRAME = "4hour"
-KLINE_SIZE = 200
+KLINE_SIZE = 800  # Ensure enough data for Ichimoku and lookbacks
 SIGNALS_FILE = "data/signals.json"
 
 # تنظیمات API کوکوین
@@ -98,19 +98,10 @@ KUCOIN_KLINE_ENDPOINT = "/api/v1/market/candles"
 KUCOIN_TICKER_ENDPOINT = "/api/v1/market/orderbook/level1"
 KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
-# وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید با تمرکز روی Ichimoku، Divergence و Higher TF
+# وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
 SIGNAL_WEIGHTS = {
-    'rsi': 0,
-    'ema': 0,
-    'macd': 0,
-    'bb': 0,
-    'stoch': 0,
-    'adx': 0,
-    'ichi': 40,
-    'divergence': 30,
-    'candle': 0,
-    'volume': 0,
-    'support': 0,
-    'resistance': 0,
-    'higher_tf': 30,
+    'rsi': 10, 'ema': 15, 'macd': 15, 'bb': 10,
+    'stoch': 10, 'adx': 10, 'ichi': 20, 'divergence': 25,
+    'candle': 15, 'volume': 5, 'support': 5, 'resistance': 5,
+    'higher_tf': 10
 }
