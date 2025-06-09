@@ -41,7 +41,7 @@ KUCOIN_SUPPORTED_PAIRS = {
 }
 
 # تنظیمات استراتژی سوینگ تریدینگ کوتاه‌مدت (1 ساعته) با وین ریت هدف بالای 80%
-SWING_TRADING_SETTINGS = {
+SCALPING_SETTINGS = {
     # RSI
     'rsi_period': 14,
     'rsi_overbought': 70,
