@@ -650,5 +650,33 @@
         "created_at": "2025-06-09T23:51:00.126122+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "123.72900000"
+    },
+    {
+        "symbol": "INJ-USDT",
+        "type": "BUY",
+        "current_price": "13.70100000",
+        "target_price": "14.06876635",
+        "stop_loss": "13.51711682",
+        "time": "2025-06-10 00:09:20",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Bullish candle pattern (bullish_engulfing)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 54,
+        "status": "active",
+        "created_at": "2025-06-10T00:09:20.146120+03:30",
+        "risk_reward_ratio": 1.9999999999999902,
+        "entry_price": "13.70100000"
+    },
+    {
+        "symbol": "RAY-USDT",
+        "type": "BUY",
+        "current_price": "2.43420000",
+        "target_price": "2.52203434",
+        "stop_loss": "2.39028283",
+        "time": "2025-06-10 00:10:11",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Bullish candle pattern (hammer)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 49,
+        "status": "active",
+        "created_at": "2025-06-10T00:10:11.171889+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "2.43420000"
     }
 ]
