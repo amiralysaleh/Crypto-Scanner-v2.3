@@ -40,43 +40,56 @@ KUCOIN_SUPPORTED_PAIRS = {
     "MATIC-USDT": "POLY-USDT",
 }
 
-# تنظیمات استراتژی سوینگ تریدینگ کوتاه‌مدت (1 ساعته) با وین ریت هدف بالای 80%
+# تنظیمات استراتژی اسکالپینگ با سیستم امتیازدهی بهبود یافته
 SCALPING_SETTINGS = {
     # RSI
     'rsi_period': 14,
     'rsi_overbought': 70,
     'rsi_oversold': 30,
-    # EMA (برای استراتژی Moving Average Crossover کوتاه‌مدت)
-    'ema_short': 20,  # EMA کوتاه برای تغییرات سریع
-    'ema_long': 50,   # EMA بلندتر برای تأیید روند
-    # MACD (برای تأیید مومنتوم)
+    # EMA
+    'ema_short': 20,  # تنظیم برای کراس کوتاه‌مدت
+    'ema_medium': 50, # تنظیم برای تأیید روند
+    'ema_long': 200,  # حفظ برای تحلیل بلندمدت
+    # MACD
     'macd_fast': 12,
     'macd_slow': 26,
     'macd_signal': 9,
-    # Bollinger Bands (برای شناسایی نقاط برگشت)
+    # Bollinger Bands
     'bb_period': 20,
     'bb_std': 2.0,
-    # ADX (برای تأیید قدرت روند)
+    # Stochastic
+    'stoch_k': 14,
+    'stoch_d': 3,
+    'stoch_smooth_k': 3,
+    'stoch_overbought': 80,
+    'stoch_oversold': 20,
+    # ADX
     'adx_period': 14,
-    'adx_threshold': 25,  # حداقل قدرت روند
-    # حجم
-    'min_volume_threshold': 500000,  # حداقل حجم 24 ساعته
-    'volume_change_threshold': 1.5,  # افزایش حداقل 50% در حجم
-    # مدیریت ریسک
-    'profit_target_multiplier': 3.0,  # نسبت سود به ریسک 3:1
-    'stop_loss_multiplier': 1.0,     # توقف ضرر بر اساس ATR
-    'min_score_threshold': 50,       # آستانه امتیاز بالاتر برای وین ریت بالا
-    'min_risk_reward_ratio': 3.0,    # حداقل نسبت ریسک به ریوارد
-    'signal_cooldown_hours': 24,     # خنک‌سازی سیگنال برای 24 ساعت
-    'max_signals_per_symbol': 1,     # حداکثر یک سیگنال فعال
-    'trend_confirmation_window': 20, # پنجره تأیید روند
+    'adx_threshold': 25,  # افزایش برای تأیید قوی‌تر روند
+    # Ichimoku
+    'ichi_conv_period': 9,
+    'ichi_base_period': 26,
+    'ichi_span_b_period': 52,
+    'ichi_lag_span_period': 26,
+    # Divergence
+    'divergence_lookback': 25,
+    # General
+    'min_volume_threshold': 500000,
+    'volume_change_threshold': 1.5,
+    'profit_target_multiplier': 3.0,  # افزایش برای ریسک به ریوارد بهتر
+    'stop_loss_multiplier': 1.0,
+    'min_score_threshold': 70,  # افزایش برای سیگنال‌های قوی‌تر
+    'min_risk_reward_ratio': 3.0,  # افزایش برای وین ریت بالا
+    'signal_cooldown_minutes': 1440,  # تغییر به 24 ساعت (1440 دقیقه)
+    'max_signals_per_symbol': 1,
+    'trend_confirmation_window': 20,
     'fee_percent': 0.1,
 }
 
 # تنظیمات تایم فریم‌ها
-PRIMARY_TIMEFRAME = "1hour"  # تایم فریم اصلی
-HIGHER_TIMEFRAME = "4hour"  # تایم فریم بالاتر برای تأیید روند
-KLINE_SIZE = 500  # داده‌های کافی برای تحلیل میان‌مدت
+PRIMARY_TIMEFRAME = "1hour"
+HIGHER_TIMEFRAME = "4hour"
+KLINE_SIZE = 500
 SIGNALS_FILE = "data/signals.json"
 
 # تنظیمات API کوکوین
@@ -85,18 +98,19 @@ KUCOIN_KLINE_ENDPOINT = "/api/v1/market/candles"
 KUCOIN_TICKER_ENDPOINT = "/api/v1/market/orderbook/level1"
 KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
-# وزن‌دهی فاکتورها برای سیستم امتیازدهی (تمرکز شدید روی استراتژی اصلی)
+# وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
 SIGNAL_WEIGHTS = {
-    'rsi': 10,         # تأیید اشباع خرید/فروش (کم اهمیت‌تر)
-    'ema': 40,         # وزن بسیار بالا برای کراس EMA (ستون اصلی)
-    'macd': 15,        # تأیید مومنتوم (کم اهمیت‌تر از EMA)
-    'bb': 0,           # غیرفعال، چون در استراتژی اصلی استفاده نمی‌شود
-    'adx': 20,         # تأیید قدرت روند (مهم برای وین ریت)
-    'ichi': 0,         # غیرفعال
-    'divergence': 0,   # غیرفعال، چون تأیید اضافی پیچیده است
-    'candle': 0,       # غیرفعال، الگوهای کندلی در این استراتژی کم اهمیت
-    'volume': 5,       # تأیید حجم (کم اهمیت)
-    'support': 20,     # نقاط ورود دقیق (مهم)
-    'resistance': 20,  # نقاط خروج دقیق (مهم)
-    'higher_tf': 15,   # تأیید روند تایم فریم بالاتر
+    'rsi': 10,
+    'ema': 40,  # افزایش وزن برای کراس EMA (استراتژی اصلی)
+    'macd': 15,
+    'bb': 0,    # کاهش به 0 برای تمرکز روی EMA
+    'stoch': 5,
+    'adx': 20,  # افزایش وزن برای تأیید روند
+    'ichi': 0,  # کاهش به 0
+    'divergence': 0,  # کاهش به 0
+    'candle': 0,  # کاهش به 0
+    'volume': 5,
+    'support': 20,  # افزایش وزن برای نقاط ورود
+    'resistance': 20,  # افزایش وزن برای نقاط خروج
+    'higher_tf': 15,  # افزایش وزن برای تأیید تایم فریم بالاتر
 }
