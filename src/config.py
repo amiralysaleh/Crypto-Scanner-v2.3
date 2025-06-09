@@ -65,7 +65,7 @@ SCALPING_SETTINGS = {
     # مدیریت ریسک
     'profit_target_multiplier': 3.0,  # نسبت سود به ریسک 3:1
     'stop_loss_multiplier': 1.0,     # توقف ضرر بر اساس ATR
-    'min_score_threshold': 70,       # آستانه امتیاز بالاتر برای وین ریت بالا
+    'min_score_threshold': 50,       # آستانه امتیاز بالاتر برای وین ریت بالا
     'min_risk_reward_ratio': 3.0,    # حداقل نسبت ریسک به ریوارد
     'signal_cooldown_hours': 24,     # خنک‌سازی سیگنال برای 24 ساعت
     'max_signals_per_symbol': 1,     # حداکثر یک سیگنال فعال
