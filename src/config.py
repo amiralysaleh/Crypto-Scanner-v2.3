@@ -78,7 +78,7 @@ SCALPING_SETTINGS = {
     'volume_change_threshold': 1.5,
     'profit_target_multiplier': 3.0,  # افزایش برای ریسک به ریوارد بهتر
     'stop_loss_multiplier': 1.0,
-    'min_score_threshold': 50,  # افزایش برای سیگنال‌های قوی‌تر
+    'min_score_threshold': 40,  # افزایش برای سیگنال‌های قوی‌تر
     'min_risk_reward_ratio': 3.0,  # افزایش برای وین ریت بالا
     'signal_cooldown_minutes': 1440,  # تغییر به 24 ساعت (1440 دقیقه)
     'max_signals_per_symbol': 1,
