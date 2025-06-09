@@ -47,7 +47,7 @@ SWING_TRADING_SETTINGS = {
     'rsi_overbought': 70,
     'rsi_oversold': 30,
     # EMA (برای استراتژی Moving Average Crossover کوتاه‌مدت)
-    'ema_short': 20,  # EMA کوتاه برای تغییرات سریع در 1 ساعته
+    'ema_short': 20,  # EMA کوتاه برای تغییرات سریع
     'ema_long': 50,   # EMA بلندتر برای تأیید روند
     # MACD (برای تأیید مومنتوم)
     'macd_fast': 12,
@@ -58,18 +58,18 @@ SWING_TRADING_SETTINGS = {
     'bb_std': 2.0,
     # ADX (برای تأیید قدرت روند)
     'adx_period': 14,
-    'adx_threshold': 25,  # حداقل قدرت روند برای ورود
+    'adx_threshold': 25,  # حداقل قدرت روند
     # حجم
     'min_volume_threshold': 500000,  # حداقل حجم 24 ساعته
     'volume_change_threshold': 1.5,  # افزایش حداقل 50% در حجم
     # مدیریت ریسک
     'profit_target_multiplier': 3.0,  # نسبت سود به ریسک 3:1
     'stop_loss_multiplier': 1.0,     # توقف ضرر بر اساس ATR
-    'min_score_threshold': 45,       # آستانه امتیاز بالاتر برای وین ریت بالا
+    'min_score_threshold': 70,       # آستانه امتیاز بالاتر برای وین ریت بالا
     'min_risk_reward_ratio': 3.0,    # حداقل نسبت ریسک به ریوارد
     'signal_cooldown_hours': 24,     # خنک‌سازی سیگنال برای 24 ساعت
-    'max_signals_per_symbol': 1,     # حداکثر یک سیگنال فعال به ازای هر نماد
-    'trend_confirmation_window': 20, # پنجره تأیید روند (تعداد کندل‌ها)
+    'max_signals_per_symbol': 1,     # حداکثر یک سیگنال فعال
+    'trend_confirmation_window': 20, # پنجره تأیید روند
     'fee_percent': 0.1,
 }
 
@@ -85,18 +85,18 @@ KUCOIN_KLINE_ENDPOINT = "/api/v1/market/candles"
 KUCOIN_TICKER_ENDPOINT = "/api/v1/market/orderbook/level1"
 KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
-# وزن‌دهی فاکتورها برای سیستم امتیازدهی (تمرکز بر روند و مومنتوم)
+# وزن‌دهی فاکتورها برای سیستم امتیازدهی (تمرکز شدید روی استراتژی اصلی)
 SIGNAL_WEIGHTS = {
-    'rsi': 15,         # تأیید اشباع خرید/فروش
-    'ema': 30,         # وزن بالا برای کراس EMA
-    'macd': 20,        # تأیید مومنتوم
-    'bb': 10,          # نقاط برگشت احتمالی
-    'adx': 15,         # قدرت روند
-    'ichi': 0,         # غیرفعال برای سادگی
-    'divergence': 10,  # تأیید اضافی
-    'candle': 0,       # الگوهای کندلی کمتر مهم هستند
-    'volume': 10,      # تأیید حجم
-    'support': 15,     # نقاط ورود دقیق
-    'resistance': 15,  # نقاط خروج دقیق
-    'higher_tf': 20,   # تأیید روند تایم فریم بالاتر
+    'rsi': 10,         # تأیید اشباع خرید/فروش (کم اهمیت‌تر)
+    'ema': 40,         # وزن بسیار بالا برای کراس EMA (ستون اصلی)
+    'macd': 15,        # تأیید مومنتوم (کم اهمیت‌تر از EMA)
+    'bb': 0,           # غیرفعال، چون در استراتژی اصلی استفاده نمی‌شود
+    'adx': 20,         # تأیید قدرت روند (مهم برای وین ریت)
+    'ichi': 0,         # غیرفعال
+    'divergence': 0,   # غیرفعال، چون تأیید اضافی پیچیده است
+    'candle': 0,       # غیرفعال، الگوهای کندلی در این استراتژی کم اهمیت
+    'volume': 5,       # تأیید حجم (کم اهمیت)
+    'support': 20,     # نقاط ورود دقیق (مهم)
+    'resistance': 20,  # نقاط خروج دقیق (مهم)
+    'higher_tf': 15,   # تأیید روند تایم فریم بالاتر
 }
