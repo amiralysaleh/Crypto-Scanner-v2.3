@@ -608,5 +608,47 @@
         "created_at": "2025-06-09T23:27:52.068290+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "0.47640000"
+    },
+    {
+        "symbol": "AAVE-USDT",
+        "type": "BUY",
+        "current_price": "267.63300000",
+        "target_price": "272.71471523",
+        "stop_loss": "265.09214238",
+        "time": "2025-06-09 23:50:09",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 49,
+        "status": "active",
+        "created_at": "2025-06-09T23:50:09.093741+03:30",
+        "risk_reward_ratio": 1.9999999999999776,
+        "entry_price": "267.63300000"
+    },
+    {
+        "symbol": "UMA-USDT",
+        "type": "BUY",
+        "current_price": "1.60800000",
+        "target_price": "1.75074011",
+        "stop_loss": "1.53662995",
+        "time": "2025-06-09 23:50:47",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 48,
+        "status": "active",
+        "created_at": "2025-06-09T23:50:47.739774+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "1.60800000"
+    },
+    {
+        "symbol": "QNT-USDT",
+        "type": "BUY",
+        "current_price": "123.72900000",
+        "target_price": "126.00845625",
+        "stop_loss": "122.58927187",
+        "time": "2025-06-09 23:51:00",
+        "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 49,
+        "status": "active",
+        "created_at": "2025-06-09T23:51:00.126122+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "123.72900000"
     }
 ]
