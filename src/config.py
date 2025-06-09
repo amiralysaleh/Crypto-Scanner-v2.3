@@ -100,8 +100,8 @@ KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
 # وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
 SIGNAL_WEIGHTS = {
-    'rsi': 10, 'ema': 15, 'macd': 15, 'bb': 10,
-    'stoch': 10, 'adx': 10, 'ichi': 20, 'divergence': 25,
-    'candle': 15, 'volume': 5, 'support': 5, 'resistance': 5,
-    'higher_tf': 10
+    'rsi': 5, 'ema': 5, 'macd': 5, 'bb': 5,
+    'stoch': 5, 'adx': 5, 'ichi': 40, 'divergence': 5,
+    'candle': 5, 'volume': 5, 'support': 5, 'resistance': 5,
+    'higher_tf': 5
 }
