@@ -40,56 +40,43 @@ KUCOIN_SUPPORTED_PAIRS = {
     "MATIC-USDT": "POLY-USDT",
 }
 
-# تنظیمات استراتژی اسکالپینگ با سیستم امتیازدهی بهبود یافته
-SCALPING_SETTINGS = {
+# تنظیمات استراتژی سوینگ تریدینگ کوتاه‌مدت (1 ساعته) با وین ریت هدف بالای 80%
+SWING_TRADING_SETTINGS = {
     # RSI
     'rsi_period': 14,
     'rsi_overbought': 70,
     'rsi_oversold': 30,
-    # EMA
-    'ema_short': 9,  # Slightly adjusted
-    'ema_medium': 21,
-    'ema_long': 55,  # Adjusted
-    # MACD
+    # EMA (برای استراتژی Moving Average Crossover کوتاه‌مدت)
+    'ema_short': 20,  # EMA کوتاه برای تغییرات سریع در 1 ساعته
+    'ema_long': 50,   # EMA بلندتر برای تأیید روند
+    # MACD (برای تأیید مومنتوم)
     'macd_fast': 12,
     'macd_slow': 26,
     'macd_signal': 9,
-    # Bollinger Bands
+    # Bollinger Bands (برای شناسایی نقاط برگشت)
     'bb_period': 20,
     'bb_std': 2.0,
-    # Stochastic
-    'stoch_k': 14,
-    'stoch_d': 3,
-    'stoch_smooth_k': 3,
-    'stoch_overbought': 80,
-    'stoch_oversold': 20,
-    # ADX
+    # ADX (برای تأیید قدرت روند)
     'adx_period': 14,
-    'adx_threshold': 23,  # Minimum trend strength
-    # Ichimoku
-    'ichi_conv_period': 9,
-    'ichi_base_period': 26,
-    'ichi_span_b_period': 52,
-    'ichi_lag_span_period': 26,
-    # Divergence
-    'divergence_lookback': 25, # How many candles to look back for divergence
-    # General
-    'min_volume_threshold': 300000,
-    'volume_change_threshold': 1.3,
-    'profit_target_multiplier': 2.0,  # Increased R:R target
-    'stop_loss_multiplier': 1.0,     # Tighter stop loss
-    'min_score_threshold': 40,       # Increased threshold for higher quality
-    'min_risk_reward_ratio': 1.5,    # Increased R:R
-    'signal_cooldown_minutes': 60,
-    'max_signals_per_symbol': 1,
-    'trend_confirmation_window': 10,
+    'adx_threshold': 25,  # حداقل قدرت روند برای ورود
+    # حجم
+    'min_volume_threshold': 500000,  # حداقل حجم 24 ساعته
+    'volume_change_threshold': 1.5,  # افزایش حداقل 50% در حجم
+    # مدیریت ریسک
+    'profit_target_multiplier': 3.0,  # نسبت سود به ریسک 3:1
+    'stop_loss_multiplier': 1.0,     # توقف ضرر بر اساس ATR
+    'min_score_threshold': 65,       # آستانه امتیاز بالاتر برای وین ریت بالا
+    'min_risk_reward_ratio': 3.0,    # حداقل نسبت ریسک به ریوارد
+    'signal_cooldown_hours': 24,     # خنک‌سازی سیگنال برای 24 ساعت
+    'max_signals_per_symbol': 1,     # حداکثر یک سیگنال فعال به ازای هر نماد
+    'trend_confirmation_window': 20, # پنجره تأیید روند (تعداد کندل‌ها)
     'fee_percent': 0.1,
 }
 
 # تنظیمات تایم فریم‌ها
-PRIMARY_TIMEFRAME = "1hour"
-HIGHER_TIMEFRAME = "4hour"
-KLINE_SIZE = 800  # Ensure enough data for Ichimoku and lookbacks
+PRIMARY_TIMEFRAME = "1hour"  # تایم فریم اصلی
+HIGHER_TIMEFRAME = "4hour"  # تایم فریم بالاتر برای تأیید روند
+KLINE_SIZE = 500  # داده‌های کافی برای تحلیل میان‌مدت
 SIGNALS_FILE = "data/signals.json"
 
 # تنظیمات API کوکوین
@@ -98,10 +85,18 @@ KUCOIN_KLINE_ENDPOINT = "/api/v1/market/candles"
 KUCOIN_TICKER_ENDPOINT = "/api/v1/market/orderbook/level1"
 KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 
-# وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
+# وزن‌دهی فاکتورها برای سیستم امتیازدهی (تمرکز بر روند و مومنتوم)
 SIGNAL_WEIGHTS = {
-    'rsi': 10, 'ema': 15, 'macd': 15, 'bb': 10,
-    'stoch': 10, 'adx': 10, 'ichi': 20, 'divergence': 25,
-    'candle': 15, 'volume': 5, 'support': 5, 'resistance': 5,
-    'higher_tf': 10
+    'rsi': 15,         # تأیید اشباع خرید/فروش
+    'ema': 30,         # وزن بالا برای کراس EMA
+    'macd': 20,        # تأیید مومنتوم
+    'bb': 10,          # نقاط برگشت احتمالی
+    'adx': 15,         # قدرت روند
+    'ichi': 0,         # غیرفعال برای سادگی
+    'divergence': 10,  # تأیید اضافی
+    'candle': 0,       # الگوهای کندلی کمتر مهم هستند
+    'volume': 10,      # تأیید حجم
+    'support': 15,     # نقاط ورود دقیق
+    'resistance': 15,  # نقاط خروج دقیق
+    'higher_tf': 20,   # تأیید روند تایم فریم بالاتر
 }
