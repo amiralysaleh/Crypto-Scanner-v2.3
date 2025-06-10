@@ -696,10 +696,12 @@
         "time": "2025-06-09 23:51:00",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-09T23:51:00.126122+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "123.72900000"
+        "entry_price": "123.72900000",
+        "closed_price": "122.58927187",
+        "closed_at": "2025-06-10T03:00:00+03:30"
     },
     {
         "symbol": "INJ-USDT",
@@ -740,10 +742,12 @@
         "time": "2025-06-10 00:20:33",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T00:20:33.803083+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "5.92800000"
+        "entry_price": "5.92800000",
+        "closed_price": "6.13318168",
+        "closed_at": "2025-06-10T02:30:00+03:30"
     },
     {
         "symbol": "TAO-USDT",
@@ -862,10 +866,12 @@
         "time": "2025-06-10 00:50:47",
         "reasons": "\u2705 Volume surge (2.33X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T00:50:47.584309+03:30",
         "risk_reward_ratio": 1.9999999999999882,
-        "entry_price": "6.71890000"
+        "entry_price": "6.71890000",
+        "closed_price": "6.870049",
+        "closed_at": "2025-06-10T03:00:00+03:30"
     },
     {
         "symbol": "AAVE-USDT",
@@ -892,10 +898,12 @@
         "time": "2025-06-10 00:51:19",
         "reasons": "\u2705 Volume surge (3.14X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T00:51:19.834113+03:30",
         "risk_reward_ratio": 2.0000000000000115,
-        "entry_price": "6.71400000"
+        "entry_price": "6.71400000",
+        "closed_price": "6.86846568",
+        "closed_at": "2025-06-10T03:30:00+03:30"
     },
     {
         "symbol": "CRV-USDT",
@@ -906,10 +914,12 @@
         "time": "2025-06-10 00:51:53",
         "reasons": "\u2705 Volume surge (3.10X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T00:51:53.404652+03:30",
         "risk_reward_ratio": 2.0000000000000133,
-        "entry_price": "0.68630000"
+        "entry_price": "0.68630000",
+        "closed_price": "0.70323351",
+        "closed_at": "2025-06-10T03:30:00+03:30"
     },
     {
         "symbol": "UMA-USDT",
@@ -948,10 +958,12 @@
         "time": "2025-06-10 00:52:09",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T00:52:09.950088+03:30",
         "risk_reward_ratio": 1.9999999999999878,
-        "entry_price": "123.77800000"
+        "entry_price": "123.77800000",
+        "closed_price": "122.60880858",
+        "closed_at": "2025-06-10T03:00:00+03:30"
     },
     {
         "symbol": "SOL-USDT",
@@ -990,10 +1002,12 @@
         "time": "2025-06-10 01:06:45",
         "reasons": "\u2705 Volume surge (2.34X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T01:06:45.394684+03:30",
         "risk_reward_ratio": 2.000000000000009,
-        "entry_price": "0.00001243"
+        "entry_price": "0.00001243",
+        "closed_price": "1.282e-05",
+        "closed_at": "2025-06-10T03:30:00+03:30"
     },
     {
         "symbol": "RUNE-USDT",
@@ -1032,10 +1046,12 @@
         "time": "2025-06-10 01:16:16",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T01:16:16.920489+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "13.90700000"
+        "entry_price": "13.90700000",
+        "closed_price": "13.7098993",
+        "closed_at": "2025-06-10T04:30:00+03:30"
     },
     {
         "symbol": "SUI-USDT",
@@ -1120,10 +1136,12 @@
         "time": "2025-06-10 01:45:57",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T01:45:57.051842+03:30",
         "risk_reward_ratio": 2.000000000000018,
-        "entry_price": "427.65000000"
+        "entry_price": "427.65000000",
+        "closed_price": "424.49653027",
+        "closed_at": "2025-06-10T03:30:00+03:30"
     },
     {
         "symbol": "AAVE-USDT",
@@ -1134,10 +1152,12 @@
         "time": "2025-06-10 02:08:22",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T02:08:22.009584+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "277.69000000"
+        "entry_price": "277.69000000",
+        "closed_price": "283.7841291",
+        "closed_at": "2025-06-10T03:00:00+03:30"
     },
     {
         "symbol": "UMA-USDT",
@@ -1148,10 +1168,12 @@
         "time": "2025-06-10 02:08:58",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 48,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T02:08:58.358932+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "1.70900000"
+        "entry_price": "1.70900000",
+        "closed_price": "1.63759966",
+        "closed_at": "2025-06-10T03:00:00+03:30"
     },
     {
         "symbol": "QNT-USDT",
@@ -1162,10 +1184,12 @@
         "time": "2025-06-10 02:09:12",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T02:09:12.595432+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "123.26500000"
+        "entry_price": "123.26500000",
+        "closed_price": "122.0889447",
+        "closed_at": "2025-06-10T03:30:00+03:30"
     },
     {
         "symbol": "INJ-USDT",
@@ -1176,10 +1200,12 @@
         "time": "2025-06-10 02:20:24",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T02:20:24.085229+03:30",
         "risk_reward_ratio": 1.999999999999991,
-        "entry_price": "13.91500000"
+        "entry_price": "13.91500000",
+        "closed_price": "13.71912077",
+        "closed_at": "2025-06-10T04:00:00+03:30"
     },
     {
         "symbol": "COMP-USDT",
@@ -1276,10 +1302,12 @@
         "time": "2025-06-10 02:52:04",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T02:52:04.069863+03:30",
         "risk_reward_ratio": 1.999999999999982,
-        "entry_price": "426.37000000"
+        "entry_price": "426.37000000",
+        "closed_price": "423.20392097",
+        "closed_at": "2025-06-10T03:30:00+03:30"
     },
     {
         "symbol": "ETH-USDT",
@@ -1290,10 +1318,12 @@
         "time": "2025-06-10 03:08:18",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Bullish candle pattern (hammer)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T03:08:18.709037+03:30",
         "risk_reward_ratio": 1.9999999999999791,
-        "entry_price": "2669.53000000"
+        "entry_price": "2669.53000000",
+        "closed_price": "2713.05018449",
+        "closed_at": "2025-06-10T03:30:00+03:30"
     },
     {
         "symbol": "ATOM-USDT",
@@ -1360,10 +1390,12 @@
         "time": "2025-06-10 03:09:55",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T03:09:55.534186+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "122.47900000"
+        "entry_price": "122.47900000",
+        "closed_price": "121.25417824",
+        "closed_at": "2025-06-10T04:00:00+03:30"
     },
     {
         "symbol": "BNB-USDT",
