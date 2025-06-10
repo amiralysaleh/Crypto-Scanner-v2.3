@@ -1662,9 +1662,11 @@
         "time": "2025-06-10 04:52:23",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Bullish candle pattern (hammer)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-10T04:52:23.886502+03:30",
         "risk_reward_ratio": 2.0000000000000133,
-        "entry_price": "0.37230000"
+        "entry_price": "0.37230000",
+        "closed_price": "0.36808452",
+        "closed_at": "2025-06-10T06:30:00+03:30"
     }
 ]
