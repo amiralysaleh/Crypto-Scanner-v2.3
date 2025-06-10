@@ -111,7 +111,7 @@ def generate_signals(df_primary, df_higher, symbol):
     # Higher TF Trend
     if higher_tf_trend == 'up':
         buy_factors.add('higher_tf')
-        buy_reasons.append("Higher TF (1h) is in uptrend")
+        buy_reasons.append("Higher TF (4h) is in uptrend")
         
     # ADX (Confirming Bullish Momentum)
     if latest['adx_pos'] > latest['adx_neg']:
@@ -203,7 +203,7 @@ def generate_signals(df_primary, df_higher, symbol):
     # Higher TF Trend
     if higher_tf_trend == 'down':
         sell_factors.add('higher_tf')
-        sell_reasons.append("Higher TF (1h) is in downtrend")
+        sell_reasons.append("Higher TF (4h) is in downtrend")
         
     # ADX (Confirming Bearish Momentum)
     if latest['adx_neg'] > latest['adx_pos']:
