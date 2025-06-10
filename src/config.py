@@ -78,7 +78,7 @@ SCALPING_SETTINGS = {
     'volume_change_threshold': 1.3,
     'profit_target_multiplier': 2.0,  # Increased R:R target
     'stop_loss_multiplier': 1.0,     # Tighter stop loss
-    'min_score_threshold': 60,       # Increased threshold for higher quality
+    'min_score_threshold': 59,       # Increased threshold for higher quality
     'min_risk_reward_ratio': 1.5,    # Increased R:R
     'signal_cooldown_minutes': 60,
     'max_signals_per_symbol': 1,
