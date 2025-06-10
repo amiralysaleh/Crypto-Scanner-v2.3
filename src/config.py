@@ -78,7 +78,7 @@ SCALPING_SETTINGS = {
     'volume_change_threshold': 1.3,
     'profit_target_multiplier': 2.0,  # Increased R:R target
     'stop_loss_multiplier': 1.0,     # Tighter stop loss
-    'min_score_threshold': 70,       # Increased threshold for higher quality
+    'min_score_threshold': 60,       # Increased threshold for higher quality
     'min_risk_reward_ratio': 1.5,    # Increased R:R
     'signal_cooldown_minutes': 60,
     'max_signals_per_symbol': 1,
@@ -101,7 +101,7 @@ KUCOIN_STATS_ENDPOINT = "/api/v1/market/stats"
 # وزن‌دهی فاکتورها برای سیستم امتیازدهی جدید
 SIGNAL_WEIGHTS = {
     'rsi': 10, 'ema': 5, 'macd': 5, 'bb': 5,
-    'stoch': 5, 'adx': 5, 'ichi': 40, 'divergence': 10,
+    'stoch': 5, 'adx': 5, 'ichi': 40, 'divergence': 5,
     'candle': 5, 'volume': 5, 'support': 10, 'resistance': 10,
     'higher_tf': 5
 }
