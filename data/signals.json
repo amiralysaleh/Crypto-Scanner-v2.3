@@ -422,10 +422,12 @@
         "time": "2025-06-09 22:18:55",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-09T22:18:55.535456+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "3.28130000"
+        "entry_price": "3.28130000",
+        "closed_price": "3.33929944",
+        "closed_at": "2025-06-10T15:00:00+03:30"
     },
     {
         "symbol": "BCH-USDT",
@@ -628,10 +630,12 @@
         "time": "2025-06-09 23:27:07",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-09T23:27:07.647023+03:30",
         "risk_reward_ratio": 2.0000000000000155,
-        "entry_price": "3.28530000"
+        "entry_price": "3.28530000",
+        "closed_price": "3.34219948",
+        "closed_at": "2025-06-10T15:00:00+03:30"
     },
     {
         "symbol": "BCH-USDT",
@@ -962,10 +966,12 @@
         "time": "2025-06-10 00:51:58",
         "reasons": "\u2705 MACD bullish cross\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T00:51:58.377158+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.79060000"
+        "entry_price": "0.79060000",
+        "closed_price": "0.81451831",
+        "closed_at": "2025-06-10T15:00:00+03:30"
     },
     {
         "symbol": "QNT-USDT",
@@ -1056,10 +1062,12 @@
         "time": "2025-06-10 01:16:10",
         "reasons": "\u2705 Volume surge (1.40X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T01:16:10.158612+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "2.52670000"
+        "entry_price": "2.52670000",
+        "closed_price": "2.58081326",
+        "closed_at": "2025-06-10T15:00:00+03:30"
     },
     {
         "symbol": "INJ-USDT",
@@ -1710,10 +1718,12 @@
         "time": "2025-06-10 04:52:19",
         "reasons": "\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (1h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 49,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-10T04:52:19.771868+03:30",
         "risk_reward_ratio": 1.9999999999999882,
-        "entry_price": "122.05000000"
+        "entry_price": "122.05000000",
+        "closed_price": "124.47922907",
+        "closed_at": "2025-06-10T15:00:00+03:30"
     },
     {
         "symbol": "ARB-USDT",
