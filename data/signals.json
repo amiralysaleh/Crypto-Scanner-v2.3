@@ -1742,5 +1742,19 @@
         "entry_price": "0.37230000",
         "closed_price": "0.36808452",
         "closed_at": "2025-06-10T06:30:00+03:30"
+    },
+    {
+        "symbol": "CKB-USDT",
+        "type": "BUY",
+        "current_price": "0.00423200",
+        "target_price": "0.00431903",
+        "stop_loss": "0.00418848",
+        "time": "2025-06-11 13:49:01",
+        "reasons": "\u2705 Stoch K > D in oversold (13.79 > 12.09)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.0042)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-06-11T13:49:01.914722+03:30",
+        "risk_reward_ratio": 2.00000000000002,
+        "entry_price": "0.00423200"
     }
 ]
