@@ -1752,10 +1752,12 @@
         "time": "2025-06-11 13:49:01",
         "reasons": "\u2705 Stoch K > D in oversold (13.79 > 12.09)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.0042)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-11T13:49:01.914722+03:30",
         "risk_reward_ratio": 2.00000000000002,
-        "entry_price": "0.00423200"
+        "entry_price": "0.00423200",
+        "closed_price": "0.00431903",
+        "closed_at": "2025-06-11T16:00:00+03:30"
     },
     {
         "symbol": "DOT-USDT",
@@ -1766,9 +1768,11 @@
         "time": "2025-06-11 15:12:17",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (4.2125)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-11T15:12:17.588794+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "4.21730000"
+        "entry_price": "4.21730000",
+        "closed_price": "4.30163416",
+        "closed_at": "2025-06-11T16:00:00+03:30"
     }
 ]
