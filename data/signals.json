@@ -40,9 +40,11 @@
         "time": "2025-06-11 23:10:47",
         "reasons": "\u2705 Stoch K > D in oversold (8.81 > 6.52)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.7021)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-11T23:10:47.479808+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.70470000"
+        "entry_price": "0.70470000",
+        "closed_price": "0.69610139",
+        "closed_at": "2025-06-12T01:00:00+03:30"
     }
 ]
