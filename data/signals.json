@@ -74,5 +74,19 @@
         "created_at": "2025-06-14T00:28:18.184183+03:30",
         "risk_reward_ratio": 1.9999999999999816,
         "entry_price": "16.80510000"
+    },
+    {
+        "symbol": "FIL-USDT",
+        "type": "SELL",
+        "current_price": "2.44080000",
+        "target_price": "2.37591395",
+        "stop_loss": "2.47324302",
+        "time": "2025-06-14 01:17:06",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.4423)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-06-14T01:17:06.556660+03:30",
+        "risk_reward_ratio": 2.0000000000000138,
+        "entry_price": "2.44080000"
     }
 ]
