@@ -56,10 +56,12 @@
         "time": "2025-06-14 00:27:55",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (85.7640)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-14T00:27:55.921113+03:30",
         "risk_reward_ratio": 1.999999999999986,
-        "entry_price": "85.76400000"
+        "entry_price": "85.76400000",
+        "closed_price": "86.77430849",
+        "closed_at": "2025-06-14T12:00:00+03:30"
     },
     {
         "symbol": "ETC-USDT",
