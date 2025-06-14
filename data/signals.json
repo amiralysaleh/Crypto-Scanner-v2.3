@@ -240,10 +240,12 @@
         "time": "2025-06-14 03:15:53",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (148.9190)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T03:15:53.292789+03:30",
         "risk_reward_ratio": 2.0000000000000147,
-        "entry_price": "148.91900000"
+        "entry_price": "148.91900000",
+        "closed_price": "145.06329788",
+        "closed_at": "2025-06-14T13:00:00+03:30"
     },
     {
         "symbol": "AVAX-USDT",
