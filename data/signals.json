@@ -114,10 +114,12 @@
         "time": "2025-06-14 01:45:17",
         "reasons": "\u2705 Stoch K < D in overbought (89.49 < 91.03)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.1587)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 69,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T01:45:17.594307+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.15812000"
+        "entry_price": "0.15812000",
+        "closed_price": "0.15410503",
+        "closed_at": "2025-06-14T20:00:00+03:30"
     },
     {
         "symbol": "CRO-USDT",
@@ -128,10 +130,12 @@
         "time": "2025-06-14 01:45:23",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.0917)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T01:45:23.962500+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.09173000"
+        "entry_price": "0.09173000",
+        "closed_price": "0.08993395",
+        "closed_at": "2025-06-14T20:30:00+03:30"
     },
     {
         "symbol": "GRT-USDT",
@@ -218,10 +222,12 @@
         "time": "2025-06-14 02:50:08",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.6355)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish Divergence detected (RSI: none, MACD: bearish)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T02:50:08.965899+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.63300000"
+        "entry_price": "0.63300000",
+        "closed_price": "0.6099125",
+        "closed_at": "2025-06-14T20:00:00+03:30"
     },
     {
         "symbol": "HBAR-USDT",
@@ -232,10 +238,12 @@
         "time": "2025-06-14 03:05:21",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.1587)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T03:05:21.283778+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.15867000"
+        "entry_price": "0.15867000",
+        "closed_price": "0.15479049",
+        "closed_at": "2025-06-14T20:00:00+03:30"
     },
     {
         "symbol": "SOL-USDT",
@@ -278,10 +286,12 @@
         "time": "2025-06-14 03:16:32",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.0921)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T03:16:32.716346+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.09206000"
+        "entry_price": "0.09206000",
+        "closed_price": "0.09029796",
+        "closed_at": "2025-06-14T20:00:00+03:30"
     },
     {
         "symbol": "SUI-USDT",
@@ -324,10 +334,12 @@
         "time": "2025-06-14 03:25:44",
         "reasons": "\u2705 Stoch K < D in overbought (91.48 < 94.05)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.4655)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T03:25:44.765618+03:30",
         "risk_reward_ratio": 1.9999999999999856,
-        "entry_price": "2.45820000"
+        "entry_price": "2.45820000",
+        "closed_price": "2.39685234",
+        "closed_at": "2025-06-14T20:00:00+03:30"
     },
     {
         "symbol": "ICP-USDT",
