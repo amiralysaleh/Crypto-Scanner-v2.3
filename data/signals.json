@@ -72,10 +72,12 @@
         "time": "2025-06-14 00:28:18",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (16.8160)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T00:28:18.184183+03:30",
         "risk_reward_ratio": 1.9999999999999816,
-        "entry_price": "16.80510000"
+        "entry_price": "16.80510000",
+        "closed_price": "16.41775579",
+        "closed_at": "2025-06-16T00:00:00+03:30"
     },
     {
         "symbol": "FIL-USDT",
@@ -86,10 +88,12 @@
         "time": "2025-06-14 01:17:06",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.4423)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T01:17:06.556660+03:30",
         "risk_reward_ratio": 2.0000000000000138,
-        "entry_price": "2.44080000"
+        "entry_price": "2.44080000",
+        "closed_price": "2.37591395",
+        "closed_at": "2025-06-16T00:00:00+03:30"
     },
     {
         "symbol": "PEPE-USDT",
@@ -148,10 +152,12 @@
         "time": "2025-06-14 01:45:30",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.0880)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-06-14T01:45:30.928079+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.08788000"
+        "entry_price": "0.08788000",
+        "closed_price": "0.08530267",
+        "closed_at": "2025-06-16T00:00:00+03:30"
     },
     {
         "symbol": "SUI-USDT",
