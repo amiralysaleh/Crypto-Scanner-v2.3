@@ -376,10 +376,12 @@
         "time": "2025-06-17 02:18:46",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (2551.9200)\n\u2705 Volume surge (1.45X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T02:18:46.605893+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "2559.16000000"
+        "entry_price": "2559.16000000",
+        "closed_price": "2530.28302116",
+        "closed_at": "2025-06-17T03:30:00+03:30"
     },
     {
         "symbol": "SOL-USDT",
@@ -390,10 +392,12 @@
         "time": "2025-06-17 02:18:50",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (153.0560)\n\u2705 Volume surge (1.43X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T02:18:50.863642+03:30",
         "risk_reward_ratio": 1.9999999999999838,
-        "entry_price": "153.09700000"
+        "entry_price": "153.09700000",
+        "closed_price": "151.34345975",
+        "closed_at": "2025-06-17T03:00:00+03:30"
     },
     {
         "symbol": "AVAX-USDT",
@@ -404,10 +408,12 @@
         "time": "2025-06-17 02:19:04",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (19.2740)\n\u2705 Volume surge (1.69X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T02:19:04.661550+03:30",
         "risk_reward_ratio": 1.999999999999985,
-        "entry_price": "19.29900000"
+        "entry_price": "19.29900000",
+        "closed_price": "19.06286015",
+        "closed_at": "2025-06-17T03:00:00+03:30"
     },
     {
         "symbol": "OP-USDT",
@@ -418,10 +424,12 @@
         "time": "2025-06-17 02:19:32",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.5920)\n\u2705 Volume surge (3.76X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T02:19:32.314817+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.59200000"
+        "entry_price": "0.59200000",
+        "closed_price": "0.58391821",
+        "closed_at": "2025-06-17T03:00:00+03:30"
     },
     {
         "symbol": "QNT-USDT",
@@ -432,10 +440,12 @@
         "time": "2025-06-17 02:20:33",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (105.9860)\n\u2705 Volume surge (14.93X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T02:20:33.107561+03:30",
         "risk_reward_ratio": 2.0000000000000138,
-        "entry_price": "106.07300000"
+        "entry_price": "106.07300000",
+        "closed_price": "105.04510867",
+        "closed_at": "2025-06-17T03:30:00+03:30"
     },
     {
         "symbol": "SOL-USDT",
@@ -446,10 +456,12 @@
         "time": "2025-06-17 03:24:15",
         "reasons": "\u2705 RSI near oversold (28.60)\n\u2705 Price at/below lower BB\n\u2705 Price near support (151.0480)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T03:24:15.813067+03:30",
         "risk_reward_ratio": 2.0000000000000147,
-        "entry_price": "151.25100000"
+        "entry_price": "151.25100000",
+        "closed_price": "149.32272283",
+        "closed_at": "2025-06-17T03:30:00+03:30"
     },
     {
         "symbol": "TAO-USDT",
@@ -460,10 +472,12 @@
         "time": "2025-06-17 03:25:24",
         "reasons": "\u2705 RSI near oversold (29.33)\n\u2705 Price at/below lower BB\n\u2705 Price near support (370.1100)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T03:25:24.419142+03:30",
         "risk_reward_ratio": 2.0000000000000098,
-        "entry_price": "370.11000000"
+        "entry_price": "370.11000000",
+        "closed_price": "364.33397973",
+        "closed_at": "2025-06-17T03:30:00+03:30"
     },
     {
         "symbol": "FET-USDT",
@@ -474,9 +488,11 @@
         "time": "2025-06-17 03:25:38",
         "reasons": "\u2705 RSI near oversold (26.98)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.6935)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-06-17T03:25:38.527327+03:30",
         "risk_reward_ratio": 2.0000000000000107,
-        "entry_price": "0.69350000"
+        "entry_price": "0.69350000",
+        "closed_price": "0.68292986",
+        "closed_at": "2025-06-17T03:30:00+03:30"
     }
 ]
