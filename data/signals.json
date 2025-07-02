@@ -696,10 +696,12 @@
         "time": "2025-07-02 09:12:27",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (4.8090)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-02T09:12:27.500865+03:30",
         "risk_reward_ratio": 2.00000000000002,
-        "entry_price": "4.80900000"
+        "entry_price": "4.80900000",
+        "closed_price": "4.85322748",
+        "closed_at": "2025-07-02T17:00:00+03:30"
     },
     {
         "symbol": "SUI-USDT",
