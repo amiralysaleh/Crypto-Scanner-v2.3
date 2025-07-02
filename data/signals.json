@@ -664,10 +664,12 @@
         "time": "2025-07-02 08:21:29",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (37.2060)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-02T08:21:29.395389+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "37.19400000"
+        "entry_price": "37.19400000",
+        "closed_price": "37.52274263",
+        "closed_at": "2025-07-02T14:00:00+03:30"
     },
     {
         "symbol": "NEAR-USDT",
@@ -708,10 +710,12 @@
         "time": "2025-07-02 10:22:38",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.7303)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-02T10:22:38.293236+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "2.72830000"
+        "entry_price": "2.72830000",
+        "closed_price": "2.75476477",
+        "closed_at": "2025-07-02T14:00:00+03:30"
     },
     {
         "symbol": "QNT-USDT",
@@ -738,10 +742,12 @@
         "time": "2025-07-02 11:25:37",
         "reasons": "\u2705 Stoch K < D in overbought (92.96 < 96.08)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.7341)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 69,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-02T11:25:37.083039+03:30",
         "risk_reward_ratio": 2.000000000000017,
-        "entry_price": "2.72800000"
+        "entry_price": "2.72800000",
+        "closed_price": "2.754078",
+        "closed_at": "2025-07-02T14:00:00+03:30"
     },
     {
         "symbol": "SUI-USDT",
@@ -752,10 +758,12 @@
         "time": "2025-07-02 12:32:13",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.7481)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish candle pattern (shooting_star)\n\u2705 Higher TF (4h) is in downtrend",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-02T12:32:13.230796+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "2.74430000"
+        "entry_price": "2.74430000",
+        "closed_price": "2.76843052",
+        "closed_at": "2025-07-02T14:00:00+03:30"
     },
     {
         "symbol": "RAY-USDT",
