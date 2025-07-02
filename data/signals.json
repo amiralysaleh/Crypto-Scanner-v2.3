@@ -742,5 +742,33 @@
         "created_at": "2025-07-02T11:25:37.083039+03:30",
         "risk_reward_ratio": 2.000000000000017,
         "entry_price": "2.72800000"
+    },
+    {
+        "symbol": "SUI-USDT",
+        "type": "SELL",
+        "current_price": "2.74430000",
+        "target_price": "2.69603896",
+        "stop_loss": "2.76843052",
+        "time": "2025-07-02 12:32:13",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.7481)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish candle pattern (shooting_star)\n\u2705 Higher TF (4h) is in downtrend",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-07-02T12:32:13.230796+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "2.74430000"
+    },
+    {
+        "symbol": "RAY-USDT",
+        "type": "SELL",
+        "current_price": "2.06880000",
+        "target_price": "2.02457458",
+        "stop_loss": "2.09091271",
+        "time": "2025-07-02 12:32:56",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.0747)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Bearish candle pattern (shooting_star)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-07-02T12:32:56.032722+03:30",
+        "risk_reward_ratio": 2.00000000000002,
+        "entry_price": "2.06880000"
     }
 ]
