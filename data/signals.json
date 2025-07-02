@@ -698,5 +698,33 @@
         "created_at": "2025-07-02T09:12:27.500865+03:30",
         "risk_reward_ratio": 2.00000000000002,
         "entry_price": "4.80900000"
+    },
+    {
+        "symbol": "SUI-USDT",
+        "type": "SELL",
+        "current_price": "2.72830000",
+        "target_price": "2.67537047",
+        "stop_loss": "2.75476477",
+        "time": "2025-07-02 10:22:38",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.7303)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-07-02T10:22:38.293236+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "2.72830000"
+    },
+    {
+        "symbol": "QNT-USDT",
+        "type": "SELL",
+        "current_price": "105.78700000",
+        "target_price": "104.36065130",
+        "stop_loss": "106.50017435",
+        "time": "2025-07-02 10:23:27",
+        "reasons": "\u2705 Stoch K < D in overbought (95.01 < 95.85)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (105.9530)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-07-02T10:23:27.542847+03:30",
+        "risk_reward_ratio": 2.00000000000002,
+        "entry_price": "105.78700000"
     }
 ]
