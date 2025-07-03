@@ -796,5 +796,33 @@
         "created_at": "2025-07-03T19:08:49.819388+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "6.18050000"
+    },
+    {
+        "symbol": "DOT-USDT",
+        "type": "BUY",
+        "current_price": "3.50250000",
+        "target_price": "3.59252037",
+        "stop_loss": "3.45748982",
+        "time": "2025-07-03 19:28:59",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (3.4990)\n\u2705 Volume surge (3.00X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-07-03T19:28:59.231221+03:30",
+        "risk_reward_ratio": 2.0000000000000098,
+        "entry_price": "3.50250000"
+    },
+    {
+        "symbol": "VET-USDT",
+        "type": "BUY",
+        "current_price": "0.02171000",
+        "target_price": "0.02223530",
+        "stop_loss": "0.02144735",
+        "time": "2025-07-03 19:29:27",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.0217)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-07-03T19:29:27.823500+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "0.02171000"
     }
 ]
