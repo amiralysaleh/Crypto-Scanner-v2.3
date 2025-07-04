@@ -808,10 +808,12 @@
         "time": "2025-07-03 19:28:59",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (3.4990)\n\u2705 Volume surge (3.00X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-03T19:28:59.231221+03:30",
         "risk_reward_ratio": 2.0000000000000098,
-        "entry_price": "3.50250000"
+        "entry_price": "3.50250000",
+        "closed_price": "3.45748982",
+        "closed_at": "2025-07-04T10:30:00+03:30"
     },
     {
         "symbol": "VET-USDT",
@@ -838,9 +840,11 @@
         "time": "2025-07-04 08:18:09",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.1569)\n\u2705 Volume surge (1.34X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-04T08:18:09.154078+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.15697000"
+        "entry_price": "0.15697000",
+        "closed_price": "0.15528027",
+        "closed_at": "2025-07-04T10:30:00+03:30"
     }
 ]
