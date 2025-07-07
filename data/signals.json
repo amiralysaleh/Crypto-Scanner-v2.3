@@ -892,5 +892,19 @@
         "created_at": "2025-07-07T20:55:53.694700+03:30",
         "risk_reward_ratio": 1.999999999999982,
         "entry_price": "280.65400000"
+    },
+    {
+        "symbol": "AAVE-USDT",
+        "type": "BUY",
+        "current_price": "280.77500000",
+        "target_price": "287.24849492",
+        "stop_loss": "277.53825254",
+        "time": "2025-07-07 22:20:33",
+        "reasons": "\u2705 Stoch K > D in oversold (13.45 > 11.72)\n\u2705 Price at/below lower BB\n\u2705 Price near support (279.2330)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-07-07T22:20:33.163516+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "280.77500000"
     }
 ]
