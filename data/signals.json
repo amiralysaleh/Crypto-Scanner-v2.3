@@ -902,10 +902,12 @@
         "time": "2025-07-07 22:20:33",
         "reasons": "\u2705 Stoch K > D in oversold (13.45 > 11.72)\n\u2705 Price at/below lower BB\n\u2705 Price near support (279.2330)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-07T22:20:33.163516+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "280.77500000"
+        "entry_price": "280.77500000",
+        "closed_price": "277.53825254",
+        "closed_at": "2025-07-08T06:00:00+03:30"
     },
     {
         "symbol": "AAVE-USDT",
