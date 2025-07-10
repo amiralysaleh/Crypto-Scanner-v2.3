@@ -952,10 +952,12 @@
         "time": "2025-07-10 19:14:27",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (4.2897)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-10T19:14:27.738307+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "4.29420000"
+        "entry_price": "4.29420000",
+        "closed_price": "4.35477315",
+        "closed_at": "2025-07-10T20:00:00+03:30"
     },
     {
         "symbol": "ETC-USDT",
@@ -966,10 +968,12 @@
         "time": "2025-07-10 19:14:40",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (17.4602)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-10T19:14:40.270328+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "17.49040000"
+        "entry_price": "17.49040000",
+        "closed_price": "17.7400919",
+        "closed_at": "2025-07-10T20:00:00+03:30"
     },
     {
         "symbol": "ICP-USDT",
@@ -980,9 +984,11 @@
         "time": "2025-07-10 19:27:09",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (5.0930)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-10T19:27:09.953386+03:30",
         "risk_reward_ratio": 1.9999999999999816,
-        "entry_price": "5.10100000"
+        "entry_price": "5.10100000",
+        "closed_price": "5.19701276",
+        "closed_at": "2025-07-10T20:00:00+03:30"
     }
 ]
