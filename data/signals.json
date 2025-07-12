@@ -1222,10 +1222,12 @@
         "time": "2025-07-12 02:08:42",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.0000)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-12T02:08:42.074177+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.00001317"
+        "entry_price": "0.00001317",
+        "closed_price": "1.294e-05",
+        "closed_at": "2025-07-12T19:00:00+03:30"
     },
     {
         "symbol": "AVAX-USDT",
@@ -1236,10 +1238,12 @@
         "time": "2025-07-12 02:08:46",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (20.3230)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-12T02:08:46.952128+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "20.49000000"
+        "entry_price": "20.49000000",
+        "closed_price": "20.18595043",
+        "closed_at": "2025-07-12T19:00:00+03:30"
     },
     {
         "symbol": "PEPE-USDT",
@@ -1298,10 +1302,12 @@
         "time": "2025-07-12 02:09:25",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.2815)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-12T02:09:25.733936+03:30",
         "risk_reward_ratio": 1.9999999999999882,
-        "entry_price": "0.28387000"
+        "entry_price": "0.28387000",
+        "closed_price": "0.27910973",
+        "closed_at": "2025-07-12T19:00:00+03:30"
     },
     {
         "symbol": "FLUX-USDT",
@@ -1312,10 +1318,12 @@
         "time": "2025-07-12 02:09:53",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.2301)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-12T02:09:53.519924+03:30",
         "risk_reward_ratio": 1.9999999999999944,
-        "entry_price": "0.23220000"
+        "entry_price": "0.23220000",
+        "closed_price": "0.22709895",
+        "closed_at": "2025-07-12T18:30:00+03:30"
     },
     {
         "symbol": "PYTH-USDT",
@@ -1422,10 +1430,12 @@
         "time": "2025-07-12 02:21:21",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (17.9890)\n\u2705 Volume surge (1.34X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-12T02:21:21.371645+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "18.10450000"
+        "entry_price": "18.10450000",
+        "closed_price": "17.89278085",
+        "closed_at": "2025-07-12T18:30:00+03:30"
     },
     {
         "symbol": "VET-USDT",
