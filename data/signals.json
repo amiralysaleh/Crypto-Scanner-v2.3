@@ -1262,10 +1262,12 @@
         "time": "2025-07-12 02:09:06",
         "reasons": "\u2705 Stoch K > D in oversold (7.01 > 6.07)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.1896)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 68,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-12T02:09:06.107359+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.19100000"
+        "entry_price": "0.19100000",
+        "closed_price": "0.19971666",
+        "closed_at": "2025-07-12T05:00:00+03:30"
     },
     {
         "symbol": "ALGO-USDT",
@@ -1276,10 +1278,12 @@
         "time": "2025-07-12 02:09:14",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.2148)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-12T02:09:14.715404+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.21680000"
+        "entry_price": "0.21680000",
+        "closed_price": "0.22631026",
+        "closed_at": "2025-07-12T05:30:00+03:30"
     },
     {
         "symbol": "SAND-USDT",
@@ -1346,10 +1350,12 @@
         "time": "2025-07-12 02:10:26",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.0142)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-12T02:10:26.365321+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.01430100"
+        "entry_price": "0.01430100",
+        "closed_price": "0.01491683",
+        "closed_at": "2025-07-12T05:30:00+03:30"
     },
     {
         "symbol": "KDA-USDT",
@@ -1416,10 +1422,12 @@
         "time": "2025-07-12 02:21:28",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.0237)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-12T02:21:28.223483+03:30",
         "risk_reward_ratio": 2.000000000000009,
-        "entry_price": "0.02381000"
+        "entry_price": "0.02381000",
+        "closed_price": "0.02460752",
+        "closed_at": "2025-07-12T05:30:00+03:30"
     },
     {
         "symbol": "GRT-USDT",
