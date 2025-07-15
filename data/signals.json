@@ -1528,10 +1528,12 @@
         "time": "2025-07-15 19:50:50",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (3.9847)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-15T19:50:50.573466+03:30",
         "risk_reward_ratio": 1.9999999999999851,
-        "entry_price": "3.98470000"
+        "entry_price": "3.98470000",
+        "closed_price": "4.04468186",
+        "closed_at": "2025-07-15T21:00:00+03:30"
     },
     {
         "symbol": "ATOM-USDT",
@@ -1542,9 +1544,11 @@
         "time": "2025-07-15 20:20:55",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (4.6206)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-15T20:20:55.193251+03:30",
         "risk_reward_ratio": 1.9999999999999851,
-        "entry_price": "4.60170000"
+        "entry_price": "4.60170000",
+        "closed_price": "4.66176741",
+        "closed_at": "2025-07-15T21:00:00+03:30"
     }
 ]
