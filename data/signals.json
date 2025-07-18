@@ -1608,5 +1608,19 @@
         "created_at": "2025-07-19T00:10:07.598873+03:30",
         "risk_reward_ratio": 1.999999999999994,
         "entry_price": "0.72700000"
+    },
+    {
+        "symbol": "ATOM-USDT",
+        "type": "BUY",
+        "current_price": "4.81650000",
+        "target_price": "4.98324356",
+        "stop_loss": "4.73312822",
+        "time": "2025-07-19 02:24:04",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (4.7843)\n\u2705 Volume surge (2.88X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-07-19T02:24:04.793350+03:30",
+        "risk_reward_ratio": 2.0000000000000107,
+        "entry_price": "4.81650000"
     }
 ]
