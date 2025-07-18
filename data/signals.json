@@ -1566,5 +1566,47 @@
         "entry_price": "0.00001418",
         "closed_price": "1.393e-05",
         "closed_at": "2025-07-17T23:30:00+03:30"
+    },
+    {
+        "symbol": "BNB-USDT",
+        "type": "BUY",
+        "current_price": "720.87400000",
+        "target_price": "738.78649627",
+        "stop_loss": "711.91775187",
+        "time": "2025-07-19 00:09:21",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (719.0410)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-07-19T00:09:21.900002+03:30",
+        "risk_reward_ratio": 1.9999999999999873,
+        "entry_price": "720.87400000"
+    },
+    {
+        "symbol": "LINK-USDT",
+        "type": "BUY",
+        "current_price": "17.38950000",
+        "target_price": "18.07423959",
+        "stop_loss": "17.04713020",
+        "time": "2025-07-19 00:09:40",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (17.3228)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-07-19T00:09:40.292261+03:30",
+        "risk_reward_ratio": 1.9999999999999896,
+        "entry_price": "17.38950000"
+    },
+    {
+        "symbol": "OP-USDT",
+        "type": "BUY",
+        "current_price": "0.72700000",
+        "target_price": "0.76469560",
+        "stop_loss": "0.70815220",
+        "time": "2025-07-19 00:10:07",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.7270)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-07-19T00:10:07.598873+03:30",
+        "risk_reward_ratio": 1.999999999999994,
+        "entry_price": "0.72700000"
     }
 ]
