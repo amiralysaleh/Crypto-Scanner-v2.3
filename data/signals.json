@@ -1590,10 +1590,12 @@
         "time": "2025-07-19 00:09:40",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (17.3228)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-19T00:09:40.292261+03:30",
         "risk_reward_ratio": 1.9999999999999896,
-        "entry_price": "17.38950000"
+        "entry_price": "17.38950000",
+        "closed_price": "18.07423959",
+        "closed_at": "2025-07-19T06:00:00+03:30"
     },
     {
         "symbol": "OP-USDT",
