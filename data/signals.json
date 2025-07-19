@@ -1606,10 +1606,12 @@
         "time": "2025-07-19 00:10:07",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.7270)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-19T00:10:07.598873+03:30",
         "risk_reward_ratio": 1.999999999999994,
-        "entry_price": "0.72700000"
+        "entry_price": "0.72700000",
+        "closed_price": "0.7646956",
+        "closed_at": "2025-07-19T06:30:00+03:30"
     },
     {
         "symbol": "ATOM-USDT",
@@ -1620,9 +1622,11 @@
         "time": "2025-07-19 02:24:04",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (4.7843)\n\u2705 Volume surge (2.88X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-19T02:24:04.793350+03:30",
         "risk_reward_ratio": 2.0000000000000107,
-        "entry_price": "4.81650000"
+        "entry_price": "4.81650000",
+        "closed_price": "4.98324356",
+        "closed_at": "2025-07-19T07:30:00+03:30"
     }
 ]
