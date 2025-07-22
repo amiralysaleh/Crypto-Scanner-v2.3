@@ -1734,9 +1734,11 @@
         "time": "2025-07-21 23:50:21",
         "reasons": "\u2705 RSI near oversold (29.32)\n\u2705 Stoch K > D in oversold (13.38 > 8.30)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.5319)\n\u2705 Bullish Divergence detected (RSI: none, MACD: bullish)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-21T23:50:21.164038+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.53720000"
+        "entry_price": "0.53720000",
+        "closed_price": "0.52426162",
+        "closed_at": "2025-07-22T04:30:00+03:30"
     }
 ]
