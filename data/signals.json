@@ -1848,9 +1848,11 @@
         "time": "2025-07-24 14:19:10",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.9150)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-24T14:19:10.640681+03:30",
         "risk_reward_ratio": 1.9999999999999938,
-        "entry_price": "0.91500000"
+        "entry_price": "0.91500000",
+        "closed_price": "0.93316246",
+        "closed_at": "2025-07-24T14:30:00+03:30"
     }
 ]
