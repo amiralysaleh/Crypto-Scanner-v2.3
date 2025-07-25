@@ -1864,10 +1864,12 @@
         "time": "2025-07-24 18:28:55",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.4452)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-24T18:28:55.697321+03:30",
         "risk_reward_ratio": 1.9999999999999947,
-        "entry_price": "0.44500000"
+        "entry_price": "0.44500000",
+        "closed_price": "0.42392571",
+        "closed_at": "2025-07-25T02:30:00+03:30"
     },
     {
         "symbol": "OP-USDT",
@@ -1878,9 +1880,11 @@
         "time": "2025-07-24 18:29:06",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.7240)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-07-24T18:29:06.924528+03:30",
         "risk_reward_ratio": 2.000000000000006,
-        "entry_price": "0.72400000"
+        "entry_price": "0.72400000",
+        "closed_price": "0.68885659",
+        "closed_at": "2025-07-25T03:30:00+03:30"
     }
 ]
