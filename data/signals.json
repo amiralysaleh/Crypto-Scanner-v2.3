@@ -1974,10 +1974,12 @@
         "time": "2025-07-28 15:02:33",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (118548.6000)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 65,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-28T15:02:33.793333+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "118553.90000000"
+        "entry_price": "118553.90000000",
+        "closed_price": "118167.3724164",
+        "closed_at": "2025-07-28T17:30:00+03:30"
     },
     {
         "symbol": "BTC-USDT",
@@ -1988,10 +1990,12 @@
         "time": "2025-07-28 16:54:32",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (118481.7000)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-28T16:54:32.368367+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "118513.60000000"
+        "entry_price": "118513.60000000",
+        "closed_price": "118131.11918266",
+        "closed_at": "2025-07-28T17:30:00+03:30"
     },
     {
         "symbol": "LINK-USDT",
@@ -2018,10 +2022,12 @@
         "time": "2025-07-28 17:26:20",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (10.6686)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-07-28T17:26:20.383062+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "10.68860000"
+        "entry_price": "10.68860000",
+        "closed_price": "10.54711348",
+        "closed_at": "2025-07-28T17:30:00+03:30"
     },
     {
         "symbol": "NEO-USDT",
