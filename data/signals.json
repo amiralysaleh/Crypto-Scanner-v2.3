@@ -2078,5 +2078,19 @@
         "entry_price": "1.46950000",
         "closed_price": "1.43246984",
         "closed_at": "2025-07-29T14:00:00+03:30"
+    },
+    {
+        "symbol": "TON-USDT",
+        "type": "BUY",
+        "current_price": "3.32290000",
+        "target_price": "3.42226489",
+        "stop_loss": "3.27321756",
+        "time": "2025-07-30 17:49:02",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (3.3191)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-07-30T17:49:02.216575+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "3.32290000"
     }
 ]
