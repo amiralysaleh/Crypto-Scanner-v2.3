@@ -2154,5 +2154,19 @@
         "created_at": "2025-08-06T18:28:37.625404+03:30",
         "risk_reward_ratio": 2.000000000000009,
         "entry_price": "0.01462100"
+    },
+    {
+        "symbol": "XLM-USDT",
+        "type": "SELL",
+        "current_price": "0.39980000",
+        "target_price": "0.38970953",
+        "stop_loss": "0.40484524",
+        "time": "2025-08-06 19:28:28",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.4003)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-08-06T19:28:28.381341+03:30",
+        "risk_reward_ratio": 2.000000000000011,
+        "entry_price": "0.39980000"
     }
 ]
