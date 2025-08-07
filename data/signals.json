@@ -2168,9 +2168,11 @@
         "time": "2025-08-06 19:28:28",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.4003)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-06T19:28:28.381341+03:30",
         "risk_reward_ratio": 2.000000000000011,
-        "entry_price": "0.39980000"
+        "entry_price": "0.39980000",
+        "closed_price": "0.40484524",
+        "closed_at": "2025-08-07T09:30:00+03:30"
     }
 ]
