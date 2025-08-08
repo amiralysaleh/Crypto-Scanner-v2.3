@@ -2184,10 +2184,12 @@
         "time": "2025-08-08 19:15:35",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (13.8290)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-08-08T19:15:35.541739+03:30",
         "risk_reward_ratio": 2.000000000000008,
-        "entry_price": "13.84500000"
+        "entry_price": "13.84500000",
+        "closed_price": "14.29958882",
+        "closed_at": "2025-08-08T21:30:00+03:30"
     },
     {
         "symbol": "HBAR-USDT",
@@ -2198,10 +2200,12 @@
         "time": "2025-08-08 19:58:14",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.2552)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-08-08T19:58:14.970520+03:30",
         "risk_reward_ratio": 2.000000000000014,
-        "entry_price": "0.25620000"
+        "entry_price": "0.25620000",
+        "closed_price": "0.26407214",
+        "closed_at": "2025-08-08T21:30:00+03:30"
     },
     {
         "symbol": "ALGO-USDT",
@@ -2212,9 +2216,11 @@
         "time": "2025-08-08 19:58:23",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.2563)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-08-08T19:58:23.592097+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.25740000"
+        "entry_price": "0.25740000",
+        "closed_price": "0.2656135",
+        "closed_at": "2025-08-08T21:30:00+03:30"
     }
 ]
