@@ -2264,10 +2264,12 @@
         "time": "2025-08-10 09:54:14",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.2362)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-10T09:54:14.734406+03:30",
         "risk_reward_ratio": 1.9999999999999925,
-        "entry_price": "0.23620000"
+        "entry_price": "0.23620000",
+        "closed_price": "0.23247571",
+        "closed_at": "2025-08-10T11:00:00+03:30"
     },
     {
         "symbol": "DOT-USDT",
@@ -2278,10 +2280,12 @@
         "time": "2025-08-10 09:54:19",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (4.0550)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-10T09:54:19.050487+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "4.05800000"
+        "entry_price": "4.05800000",
+        "closed_price": "4.01486689",
+        "closed_at": "2025-08-10T11:00:00+03:30"
     },
     {
         "symbol": "NEAR-USDT",
@@ -2292,10 +2296,12 @@
         "time": "2025-08-10 09:54:31",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (2.7681)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-10T09:54:31.346595+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "2.76810000"
+        "entry_price": "2.76810000",
+        "closed_price": "2.73544674",
+        "closed_at": "2025-08-10T11:00:00+03:30"
     },
     {
         "symbol": "PEPE-USDT",
@@ -2306,10 +2312,12 @@
         "time": "2025-08-10 09:54:35",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.0000)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-10T09:54:35.715615+03:30",
         "risk_reward_ratio": 2.000000000000009,
-        "entry_price": "0.00001217"
+        "entry_price": "0.00001217",
+        "closed_price": "1.198e-05",
+        "closed_at": "2025-08-10T11:00:00+03:30"
     },
     {
         "symbol": "FIL-USDT",
@@ -2320,10 +2328,12 @@
         "time": "2025-08-10 09:55:34",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (2.5968)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-10T09:55:34.178307+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "2.59840000"
+        "entry_price": "2.59840000",
+        "closed_price": "2.57286538",
+        "closed_at": "2025-08-10T11:00:00+03:30"
     },
     {
         "symbol": "CRV-USDT",
@@ -2334,10 +2344,12 @@
         "time": "2025-08-10 09:55:44",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.9686)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-10T09:55:44.348621+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.97420000"
+        "entry_price": "0.97420000",
+        "closed_price": "0.95859525",
+        "closed_at": "2025-08-10T11:30:00+03:30"
     },
     {
         "symbol": "SHIB-USDT",
@@ -2348,9 +2360,11 @@
         "time": "2025-08-10 11:07:48",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (0.0000)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-10T11:07:48.676140+03:30",
         "risk_reward_ratio": 2.0000000000000107,
-        "entry_price": "0.00001354"
+        "entry_price": "0.00001354",
+        "closed_price": "1.339e-05",
+        "closed_at": "2025-08-10T11:30:00+03:30"
     }
 ]
