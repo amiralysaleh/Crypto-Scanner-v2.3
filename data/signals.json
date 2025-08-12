@@ -2382,5 +2382,33 @@
         "entry_price": "0.86500000",
         "closed_price": "0.87785",
         "closed_at": "2025-08-12T15:30:00+03:30"
+    },
+    {
+        "symbol": "TAO-USDT",
+        "type": "SELL",
+        "current_price": "370.24000000",
+        "target_price": "360.34380766",
+        "stop_loss": "375.18809617",
+        "time": "2025-08-12 16:03:58",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (371.3400)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-08-12T16:03:58.550901+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "370.24000000"
+    },
+    {
+        "symbol": "FIL-USDT",
+        "type": "SELL",
+        "current_price": "2.54130000",
+        "target_price": "2.47994718",
+        "stop_loss": "2.57197641",
+        "time": "2025-08-12 16:04:04",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (2.5413)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 60,
+        "status": "active",
+        "created_at": "2025-08-12T16:04:04.111057+03:30",
+        "risk_reward_ratio": 2.0000000000000147,
+        "entry_price": "2.54130000"
     }
 ]
