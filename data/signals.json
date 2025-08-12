@@ -2376,9 +2376,11 @@
         "time": "2025-08-12 15:16:28",
         "reasons": "\u2705 RSI near overbought (71.17)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.8650)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-12T15:16:28.178383+03:30",
         "risk_reward_ratio": 2.0000000000000084,
-        "entry_price": "0.86500000"
+        "entry_price": "0.86500000",
+        "closed_price": "0.87785",
+        "closed_at": "2025-08-12T15:30:00+03:30"
     }
 ]
