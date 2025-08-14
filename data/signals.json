@@ -2440,10 +2440,12 @@
         "time": "2025-08-14 10:23:22",
         "reasons": "\u2705 Stoch K > D in oversold (14.12 > 13.77)\n\u2705 Price at/below lower BB\n\u2705 Price near support (11.5738)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-14T10:23:22.171180+03:30",
         "risk_reward_ratio": 2.000000000000009,
-        "entry_price": "11.67290000"
+        "entry_price": "11.67290000",
+        "closed_price": "11.47668721",
+        "closed_at": "2025-08-14T12:00:00+03:30"
     },
     {
         "symbol": "WAVES-USDT",
