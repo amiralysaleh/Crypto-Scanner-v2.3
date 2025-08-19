@@ -2648,10 +2648,12 @@
         "time": "2025-08-19 01:24:42",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.1485)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-19T01:24:42.435962+03:30",
         "risk_reward_ratio": 2.0000000000000173,
-        "entry_price": "0.14846000"
+        "entry_price": "0.14846000",
+        "closed_price": "0.15006131",
+        "closed_at": "2025-08-19T04:00:00+03:30"
     },
     {
         "symbol": "QNT-USDT",
@@ -2662,10 +2664,12 @@
         "time": "2025-08-19 02:05:25",
         "reasons": "\u2705 Stoch K < D in overbought (93.89 < 95.12)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (108.6480)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 69,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-08-19T02:05:25.983523+03:30",
         "risk_reward_ratio": 2.000000000000016,
-        "entry_price": "108.45900000"
+        "entry_price": "108.45900000",
+        "closed_price": "106.65992441",
+        "closed_at": "2025-08-19T03:30:00+03:30"
     },
     {
         "symbol": "CRO-USDT",
@@ -2676,9 +2680,11 @@
         "time": "2025-08-19 02:24:43",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.1498)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-19T02:24:43.834344+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.14952000"
+        "entry_price": "0.14952000",
+        "closed_price": "0.15110489",
+        "closed_at": "2025-08-19T04:30:00+03:30"
     }
 ]
