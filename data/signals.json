@@ -2696,10 +2696,12 @@
         "time": "2025-08-20 08:47:13",
         "reasons": "\u2705 Stoch K > D in oversold (8.16 > 5.66)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.0651)\n\u2705 Volume surge (6.18X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 68,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-20T08:47:13.813551+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.06550000"
+        "entry_price": "0.06550000",
+        "closed_price": "0.06375547",
+        "closed_at": "2025-08-20T17:30:00+03:30"
     },
     {
         "symbol": "VET-USDT",
@@ -2710,9 +2712,11 @@
         "time": "2025-08-20 16:01:53",
         "reasons": "\u2705 Stoch K < D in overbought (85.14 < 85.69)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.0237)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 69,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-08-20T16:01:53.063100+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.02355000"
+        "entry_price": "0.02355000",
+        "closed_price": "0.02304561",
+        "closed_at": "2025-08-20T17:00:00+03:30"
     }
 ]
