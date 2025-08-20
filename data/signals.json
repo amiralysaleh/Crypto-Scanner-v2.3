@@ -2790,10 +2790,12 @@
         "time": "2025-08-20 18:46:28",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.0000)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-20T18:46:28.924322+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.00001243"
+        "entry_price": "0.00001243",
+        "closed_price": "1.258e-05",
+        "closed_at": "2025-08-20T22:30:00+03:30"
     },
     {
         "symbol": "DOT-USDT",
@@ -2804,10 +2806,12 @@
         "time": "2025-08-20 18:46:32",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (3.8479)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-20T18:46:32.159541+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "3.84700000"
+        "entry_price": "3.84700000",
+        "closed_price": "3.89565445",
+        "closed_at": "2025-08-20T22:30:00+03:30"
     },
     {
         "symbol": "ICP-USDT",
@@ -2818,10 +2822,12 @@
         "time": "2025-08-20 18:46:55",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (5.2060)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-20T18:46:55.720248+03:30",
         "risk_reward_ratio": 1.999999999999986,
-        "entry_price": "5.20600000"
+        "entry_price": "5.20600000",
+        "closed_price": "5.26956161",
+        "closed_at": "2025-08-20T23:00:00+03:30"
     },
     {
         "symbol": "ETC-USDT",
@@ -2848,10 +2854,12 @@
         "time": "2025-08-20 18:47:01",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.4026)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-20T18:47:01.686354+03:30",
         "risk_reward_ratio": 2.000000000000011,
-        "entry_price": "0.40240000"
+        "entry_price": "0.40240000",
+        "closed_price": "0.40736812",
+        "closed_at": "2025-08-20T23:00:00+03:30"
     },
     {
         "symbol": "HBAR-USDT",
@@ -2924,10 +2932,12 @@
         "time": "2025-08-20 18:48:34",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.3891)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-20T18:48:34.048575+03:30",
         "risk_reward_ratio": 2.0000000000000098,
-        "entry_price": "0.38850000"
+        "entry_price": "0.38850000",
+        "closed_price": "0.39430759",
+        "closed_at": "2025-08-20T23:30:00+03:30"
     },
     {
         "symbol": "LTC-USDT",
