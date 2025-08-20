@@ -2700,5 +2700,19 @@
         "created_at": "2025-08-20T08:47:13.813551+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "0.06550000"
+    },
+    {
+        "symbol": "VET-USDT",
+        "type": "SELL",
+        "current_price": "0.02355000",
+        "target_price": "0.02304561",
+        "stop_loss": "0.02380219",
+        "time": "2025-08-20 16:01:53",
+        "reasons": "\u2705 Stoch K < D in overbought (85.14 < 85.69)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.0237)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 69,
+        "status": "active",
+        "created_at": "2025-08-20T16:01:53.063100+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "0.02355000"
     }
 ]
