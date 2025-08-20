@@ -2686,5 +2686,19 @@
         "entry_price": "0.14952000",
         "closed_price": "0.15110489",
         "closed_at": "2025-08-19T04:30:00+03:30"
+    },
+    {
+        "symbol": "AUDIO-USDT",
+        "type": "BUY",
+        "current_price": "0.06550000",
+        "target_price": "0.06898906",
+        "stop_loss": "0.06375547",
+        "time": "2025-08-20 08:47:13",
+        "reasons": "\u2705 Stoch K > D in oversold (8.16 > 5.66)\n\u2705 Price at/below lower BB\n\u2705 Price near support (0.0651)\n\u2705 Volume surge (6.18X)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 68,
+        "status": "active",
+        "created_at": "2025-08-20T08:47:13.813551+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "0.06550000"
     }
 ]
