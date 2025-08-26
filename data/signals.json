@@ -3110,5 +3110,33 @@
         "created_at": "2025-08-26T21:50:47.041438+03:30",
         "risk_reward_ratio": 2.000000000000011,
         "entry_price": "193.77000000"
+    },
+    {
+        "symbol": "BTC-USDT",
+        "type": "SELL",
+        "current_price": "110866.00000000",
+        "target_price": "109378.32244938",
+        "stop_loss": "111609.83877531",
+        "time": "2025-08-26 22:16:52",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (110976.6000)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-08-26T22:16:52.836587+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "110866.00000000"
+    },
+    {
+        "symbol": "CRV-USDT",
+        "type": "SELL",
+        "current_price": "0.79210000",
+        "target_price": "0.76618255",
+        "stop_loss": "0.80505872",
+        "time": "2025-08-26 22:18:45",
+        "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.7932)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-08-26T22:18:45.244082+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "0.79210000"
     }
 ]
