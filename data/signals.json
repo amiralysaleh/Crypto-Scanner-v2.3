@@ -3064,10 +3064,12 @@
         "time": "2025-08-26 18:25:48",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (853.1740)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-26T18:25:48.471703+03:30",
         "risk_reward_ratio": 2.0000000000000155,
-        "entry_price": "853.17400000"
+        "entry_price": "853.17400000",
+        "closed_price": "860.46503974",
+        "closed_at": "2025-08-26T23:00:00+03:30"
     },
     {
         "symbol": "SOL-USDT",
@@ -3094,10 +3096,12 @@
         "time": "2025-08-26 18:25:58",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.2151)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-26T18:25:58.794388+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.21450000"
+        "entry_price": "0.21450000",
+        "closed_price": "0.2175245",
+        "closed_at": "2025-08-26T22:30:00+03:30"
     },
     {
         "symbol": "SOL-USDT",
@@ -3108,10 +3112,12 @@
         "time": "2025-08-26 21:50:47",
         "reasons": "\u2705 Stoch K < D in overbought (93.91 < 95.35)\n\u2705 Price at/above upper BB\n\u2705 Price near resistance (194.2300)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-26T21:50:47.041438+03:30",
         "risk_reward_ratio": 2.000000000000011,
-        "entry_price": "193.77000000"
+        "entry_price": "193.77000000",
+        "closed_price": "196.37542835",
+        "closed_at": "2025-08-26T22:30:00+03:30"
     },
     {
         "symbol": "BTC-USDT",
@@ -3136,10 +3142,12 @@
         "time": "2025-08-26 22:18:45",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.7932)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend\n\u2705 ADX shows bearish momentum (-DI > +DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-26T22:18:45.244082+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "0.79210000"
+        "entry_price": "0.79210000",
+        "closed_price": "0.80505872",
+        "closed_at": "2025-08-26T23:00:00+03:30"
     },
     {
         "symbol": "TAO-USDT",
@@ -3192,9 +3200,11 @@
         "time": "2025-08-26 23:25:57",
         "reasons": "\u2705 Price at/above upper BB\n\u2705 Price near resistance (0.8044)\n\u2705 Strong Ichimoku bearish (Price < Cloud, TK Cross, Chikou < Price_ago)\n\u2705 Higher TF (4h) is in downtrend",
         "score": 60,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-26T23:25:57.165752+03:30",
         "risk_reward_ratio": 1.9999999999999916,
-        "entry_price": "0.80320000"
+        "entry_price": "0.80320000",
+        "closed_price": "0.81640504",
+        "closed_at": "2025-08-26T23:30:00+03:30"
     }
 ]
