@@ -3228,5 +3228,19 @@
         "created_at": "2025-08-26T23:48:19.418181+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "0.81640000"
+    },
+    {
+        "symbol": "ZEC-USDT",
+        "type": "BUY",
+        "current_price": "41.90000000",
+        "target_price": "42.93565874",
+        "stop_loss": "41.38217063",
+        "time": "2025-08-27 18:27:27",
+        "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (41.9000)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-08-27T18:27:27.880681+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "41.90000000"
     }
 ]
