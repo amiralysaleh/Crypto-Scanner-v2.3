@@ -3240,10 +3240,12 @@
         "time": "2025-08-27 18:27:27",
         "reasons": "\u2705 Price at/below lower BB\n\u2705 Price near support (41.9000)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 Higher TF (4h) is in uptrend\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "target_reached",
         "created_at": "2025-08-27T18:27:27.880681+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "41.90000000"
+        "entry_price": "41.90000000",
+        "closed_price": "42.93565874",
+        "closed_at": "2025-08-28T04:30:00+03:30"
     },
     {
         "symbol": "WAVES-USDT",
