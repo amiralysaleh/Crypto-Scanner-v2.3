@@ -3244,5 +3244,19 @@
         "created_at": "2025-08-27T18:27:27.880681+03:30",
         "risk_reward_ratio": 2.0,
         "entry_price": "41.90000000"
+    },
+    {
+        "symbol": "WAVES-USDT",
+        "type": "BUY",
+        "current_price": "1.20590000",
+        "target_price": "1.23668966",
+        "stop_loss": "1.19050517",
+        "time": "2025-08-28 04:40:17",
+        "reasons": "\u2705 RSI near oversold (26.88)\n\u2705 Price at/below lower BB\n\u2705 Price near support (1.2046)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
+        "score": 64,
+        "status": "active",
+        "created_at": "2025-08-28T04:40:17.889496+03:30",
+        "risk_reward_ratio": 2.0,
+        "entry_price": "1.20590000"
     }
 ]
