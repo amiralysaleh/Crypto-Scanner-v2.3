@@ -3256,9 +3256,11 @@
         "time": "2025-08-28 04:40:17",
         "reasons": "\u2705 RSI near oversold (26.88)\n\u2705 Price at/below lower BB\n\u2705 Price near support (1.2046)\n\u2705 Strong Ichimoku bullish (Price > Cloud, TK Cross, Chikou > Price_ago)\n\u2705 ADX shows bullish momentum (+DI > -DI)",
         "score": 64,
-        "status": "active",
+        "status": "stop_loss",
         "created_at": "2025-08-28T04:40:17.889496+03:30",
         "risk_reward_ratio": 2.0,
-        "entry_price": "1.20590000"
+        "entry_price": "1.20590000",
+        "closed_price": "1.19050517",
+        "closed_at": "2025-08-29T04:00:00+03:30"
     }
 ]
