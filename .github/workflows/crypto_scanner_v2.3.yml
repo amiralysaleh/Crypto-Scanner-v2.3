@@ -2,8 +2,8 @@ name: Crypto Signal Generator
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # هر 30 دقیقه
-    - cron: '0 */4 * * *'   # هر 4 ساعت برای گزارش وضعیت
+    - c '*/10 * * * *'  # هر 30 دقیقه
+    - c: '0 */4 * * *'   # هر 4 ساعت برای گزارش وضعیت
   workflow_dispatch:  # برای اجرای دستی
 
 jobs:
